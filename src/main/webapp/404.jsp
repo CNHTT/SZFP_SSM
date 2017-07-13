@@ -1,0 +1,25 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE= edge">
+    <title>404 Page by FreeHTML5.co</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(
+        hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+        </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+<div class="error_page">
+    <div class="error_logo">
+        <img src="static/images/404.png" />
+        <p> <a  href="/index">Go back to Home</a></p>
+    </div>
+</div>
+</body>
+</html>
