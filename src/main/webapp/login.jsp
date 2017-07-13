@@ -1,3 +1,4 @@
+<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
 <!--<&#45;&#45;-->
   <!--Created by IntelliJ IDEA.-->
   <!--User: 戴尔-->
@@ -17,6 +18,86 @@
     <link rel="stylesheet" href="static/css/animate-custom.css">
     <link rel="stylesheet"  type="text/css" href="static/css/login.css">
     <link rel="stylesheet"  type="text/css" href="static/css/style.css">
+    <script type="text/javascript" src="static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrapValidator.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#tosingin").click(function () {
+                $.ajax({
+                    type:"get",
+                    dataType:"json",
+                    url:"${pageContext.request.contextPath}/singin",
+                    data:$("#signInForm").serialize(),
+                    success:function (data) {
+
+
+                        var code = data.code;
+                        if (code == -1){
+                            $("#loginerror").html(data.msg);
+                        }
+
+                        window.setTimeout(function () {
+                            $("#loginerror").html("");
+                        },2000)
+                    },
+                    error:function (request) {
+
+                    }}
+                )
+            });
+            $('#signInForm')
+                .bootstrapValidator({
+                    message: 'This value is not valid',
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        username: {
+                            message: 'The username is not valid',
+                            validators: {
+                                notEmpty: {
+                                    message: 'The username is required and can\'t be empty'
+                                },
+                                stringLength: {
+                                    min: 6,
+                                    max: 30,
+                                    message: 'The username must be more than 6 and less than 30 characters long'
+                                },
+                                /*remote: {
+                                 url: 'remote.php',
+                                 message: 'The username is not available'
+                                 },*/
+                                regexp: {
+                                    regexp: /^[a-zA-Z0-9_\.]+$/,
+                                    message: 'The username can only consist of alphabetical, number, dot and underscore'
+                                }
+                            }
+                        },
+                        email: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The email address is required and can\'t be empty'
+                                },
+                                emailAddress: {
+                                    message: 'The input is not a valid email address'
+                                }
+                            }
+                        },
+                        password: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The password is required and can\'t be empty'
+                                }
+                            }
+                        }
+                    }
+                })
+        });
+    </script>
     <title>SING IN</title>
 </head>
 <body>
@@ -35,26 +116,27 @@
             <a class="hiddenanchor" id="tologin"></a>
             <div id="wrapper">
                 <div id="login" class="animate form">
-                    <form  action="/extra/singin" autocomplete="on">
+                    <form id="signInForm">
                         <h1>Log in</h1>
+
                         <p>
                             <label for="username" class="uname" data-icon="u" > Your email or username </label>
-                            <input id="username" name="username" required oninvalid="setCustomValidity('Please enter the field')"  oninput="setCustomValidity('')" type="text" placeholder="myusername or mymail@mail.com"/>
+                            <input id="username" name="username" type="text" placeholder="myusername or mymail@mail.com"/>
                         </p>
                         <p>
                             <label for="password" class="youpasswd" data-icon="p"> Your password </label>
-                            <input id="password" name="password"  required oninvalid="setCustomValidity('Please enter the field')"  oninput="setCustomValidity('')"  type="password" placeholder="eg. X8df!90EO" />
+                            <input id="password" name="password" type="password" placeholder="eg. X8df!90EO" />
                         </p>
                         <p class="keeplogin">
                             <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
                             <label for="loginkeeping">Keep me logged in</label>
                         </p>
                         <p class="login button">
-                            <input type="submit" value="Login" />
+                            <input id="tosingin" type="button" value="Login" />
                         </p>
                         <p class="change_link">
                             Not a member yet ?
-                            <a href="#toregister" class="to_register">Join us</a>
+                            <a href="#toregister" class="to_register">Join us</a><div id="loginerror"></div>
                         </p>
                     </form>
                 </div>
@@ -94,5 +176,6 @@
 </div>
 
 
+<%--<script type="text/javascript"  src="static/js/login.js"></script>--%>
 </body>
 </html>

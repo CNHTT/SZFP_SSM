@@ -7,6 +7,7 @@ import com.extra.utils.DataUtils;
 import com.extra.utils.GsonUtils;
 import com.extra.utils.PublicUtil;
 import com.extra.utils.RegexUtils;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +27,7 @@ import java.io.IOException;
 @Controller
 public class LoginController
 {
-
+    private Logger log = Logger.getLogger(UserController.class);
     @Resource
     private LoginService loginService;
 
@@ -35,7 +36,6 @@ public class LoginController
     private String userLogin(@RequestParam String username, @RequestParam String password, HttpServletRequest req){
         User user =null;
         ResponseObj<User> responseObj = new ResponseObj<User>();
-
 
         if (!DataUtils.isNullString(username)&& RegexUtils.isCheckPassWord(password))
             user = loginService.getUserInfo(username,password);
