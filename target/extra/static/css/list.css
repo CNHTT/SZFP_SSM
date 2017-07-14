@@ -1,0 +1,239 @@
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('../fonts/BebasNeue-webfont.eot');
+    src: url('../fonts/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/BebasNeue-webfont.woff') format('woff'),
+    url('../fonts/BebasNeue-webfont.ttf') format('truetype'),
+    url('../fonts/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #fff url(../images/bg.jpg) repeat top left;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.world {
+    -webkit-perspective: 800px;
+    perspective: 800px;
+    width: 100vh;
+    height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.cube {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    -webkit-animation: rotator 4.5s linear infinite;
+    animation: rotator 4.5s linear infinite;
+    outline: 0;
+}
+.cube * {
+    background: #000;
+    box-shadow: 0 0 3vh currentColor;
+    -webkit-transition: background 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    transition: background 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+}
+.cube:hover * {
+    background: currentColor;
+    box-shadow: 0 0 20vh currentColor;
+}
+.cube .cube__front {
+    color: deeppink;
+    -webkit-transform: translateZ(50px);
+    transform: translateZ(50px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.cube .cube__right {
+    color: lightcoral;
+    -webkit-transform: rotateY(90deg) translateZ(50px);
+    transform: rotateY(90deg) translateZ(50px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.cube .cube__left {
+    color: skyblue;
+    -webkit-transform: rotateY(270deg) translateZ(50px);
+    transform: rotateY(270deg) translateZ(50px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.cube .cube__back {
+    color: seagreen;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: rotateY(180deg) translateZ(50px);
+    transform: rotateY(180deg) translateZ(50px);
+}
+.cube .cube__top {
+    color: mediumseagreen;
+    -webkit-transform: rotateX(90deg) translateZ(50px);
+    transform: rotateX(90deg) translateZ(50px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.cube .cube__bottom {
+    color: dodgerblue;
+    -webkit-transform: rotateX(270deg) translateZ(50px);
+    transform: rotateX(270deg) translateZ(50px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@-webkit-keyframes rotator {
+    0% {
+        -webkit-transform: rotateX(0deg) rotateY(0deg);
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+    100% {
+        -webkit-transform: rotateX(360deg) rotateY(360deg);
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+@keyframes rotator {
+    0% {
+        -webkit-transform: rotateX(0deg) rotateY(0deg);
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+    100% {
+        -webkit-transform: rotateX(360deg) rotateY(360deg);
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+h2,h3,h4{
+    font-family: 'Nova Flat';
+
+}
+
+.noti-div h4{
+    padding:10px;
+}
+.noti-div i {
+    display:block;
+    padding:5px;
+}
+.noti-div a,.noti-div a:hover {
+    text-decoration:none;
+}
+section {
+    padding:50px 0px 0px 0px;
+}
+.img-max-width {
+    max-width: 270px;
+}
+
+/* =============================================================
+   HEADER STYLES
+ ============================================================ */
+#head {
+    padding:50px;
+    background:url('../images/binding_dark.png');
+    color:#fff;
+}
+#head span {
+    color:#ff8c00;
+    margin-right:5px;
+}
+#head .header-mid {
+    max-height:65px;
+}
+
+#head h4 {
+    font-size:15px;
+    font-weight:500;
+}
+#head h1{
+     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+     font-size: 35px;
+     line-height: 35px;
+     position: relative;
+     font-weight: 400;
+     color: #fff;
+     text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+     padding: 0px 0px 5px 0px;
+}
+/* =============================================================
+   MAIN SECTION STYLES
+ ============================================================ */
+#main h3 {
+    color:#000;
+    padding:0px 0px 10px 0px;
+    line-height: 40px;
+}
+#main .hr-div hr{
+    padding-bottom:30px;
+
+}
+.logout-link {
+    margin-bottom:40px!important;
+}
+/* =============================================================
+FOOTER STYLES
+============================================================ */
+
+#footer {
+    padding:30px;
+    background:#ffffff;
+    color:#fff;
+    margin-top:100px;
+}
+#footer h4{
+    font-size:15px;
+    font-weight:500;
+}
+#footer h3 {
+    color:#ff8c00;
+}
+#footer span {
+    color:#ff8c00;
+    margin-right:5px;
+}

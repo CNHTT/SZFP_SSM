@@ -90,6 +90,8 @@ a{
     text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
     padding: 0px 0px 5px 0px;
 }
+
+
 .container > header h1 span{
     color: #7cbcd6;
     text-shadow: 0px 1px 1px rgba(255,255,255,0.8);

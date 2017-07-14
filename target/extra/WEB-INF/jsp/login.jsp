@@ -1,4 +1,7 @@
-<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
+<%@ page import="com.extra.utils.DataUtils" %>
+<%@ page import="com.extra.model.response.ResponseObj" %>
+<%@ page import="com.extra.utils.GsonUtils" %>
+<%@ page import="com.sun.org.apache.regexp.internal.RE" %>
 <!--<&#45;&#45;-->
   <!--Created by IntelliJ IDEA.-->
   <!--User: 戴尔-->
@@ -7,6 +10,16 @@
   <!--To change this template use File | Settings | File Templates.-->
 <!--&ndash;&gt;-->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path =request.getContextPath();
+    String result ="";
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    if (!DataUtils.isEmpty(request.getAttribute("error"))){
+        String re = (String) request.getAttribute("error");
+        ResponseObj obj = new GsonUtils().fromJson(re, ResponseObj.class);
+        result= obj.getMsg();
+    }
+%>
 <html>
 <head>
     <meta charset="UTF-8"/>
@@ -15,89 +28,24 @@
     <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
     <meta name="author" content="Codrops" />
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="static/css/animate-custom.css">
-    <link rel="stylesheet"  type="text/css" href="static/css/login.css">
-    <link rel="stylesheet"  type="text/css" href="static/css/style.css">
-    <script type="text/javascript" src="static/js/jquery.min.js"></script>
-    <script type="text/javascript" src="static/js/bootstrapValidator.js"></script>
-    <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
 
-            $("#tosingin").click(function () {
-                $.ajax({
-                    type:"get",
-                    dataType:"json",
-                    url:"${pageContext.request.contextPath}/singin",
-                    data:$("#signInForm").serialize(),
-                    success:function (data) {
-
-
-                        var code = data.code;
-                        if (code == -1){
-                            $("#loginerror").html(data.msg);
-                        }
-
-                        window.setTimeout(function () {
-                            $("#loginerror").html("");
-                        },2000)
-                    },
-                    error:function (request) {
-
-                    }}
-                )
-            });
-            $('#signInForm')
-                .bootstrapValidator({
-                    message: 'This value is not valid',
-                    feedbackIcons: {
-                        valid: 'glyphicon glyphicon-ok',
-                        invalid: 'glyphicon glyphicon-remove',
-                        validating: 'glyphicon glyphicon-refresh'
-                    },
-                    fields: {
-                        username: {
-                            message: 'The username is not valid',
-                            validators: {
-                                notEmpty: {
-                                    message: 'The username is required and can\'t be empty'
-                                },
-                                stringLength: {
-                                    min: 6,
-                                    max: 30,
-                                    message: 'The username must be more than 6 and less than 30 characters long'
-                                },
-                                /*remote: {
-                                 url: 'remote.php',
-                                 message: 'The username is not available'
-                                 },*/
-                                regexp: {
-                                    regexp: /^[a-zA-Z0-9_\.]+$/,
-                                    message: 'The username can only consist of alphabetical, number, dot and underscore'
-                                }
-                            }
-                        },
-                        email: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'The email address is required and can\'t be empty'
-                                },
-                                emailAddress: {
-                                    message: 'The input is not a valid email address'
-                                }
-                            }
-                        },
-                        password: {
-                            validators: {
-                                notEmpty: {
-                                    message: 'The password is required and can\'t be empty'
-                                }
-                            }
-                        }
-                    }
-                })
-        });
-    </script>
+    <style>
+        .loginHint{
+            height:20px;
+            line-height:20px;
+            font-size:14px;
+            color:red;
+            margin-top:5px;margin-bottom:5px;
+            text-align:center;
+            font-family:"Hiragino Sans GB", "Microsoft Yahei";
+            border:1px solid #eee;border-radius:3px;
+        }
+    </style>
+    <link rel="stylesheet" href="<%=path%>/static/css/animate-custom.css">
+    <link rel="stylesheet"  type="text/css" href="<%=path%>/static/css/login.css">
+    <link rel="stylesheet"  type="text/css" href="<%=path%>/static/css/style.css">
+    <script type="text/javascript" src="<%=path%>/static/js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/static/js/login.js"></script>
     <title>SING IN</title>
 </head>
 <body>
@@ -116,27 +64,28 @@
             <a class="hiddenanchor" id="tologin"></a>
             <div id="wrapper">
                 <div id="login" class="animate form">
-                    <form id="signInForm">
+                    <form  action="<%=basePath%>singin.action" autocomplete="on">
                         <h1>Log in</h1>
 
+                        <div class="loginHint" id="loginHint"><%=result%></div>
                         <p>
                             <label for="username" class="uname" data-icon="u" > Your email or username </label>
-                            <input id="username" name="username" type="text" placeholder="myusername or mymail@mail.com"/>
+                            <input id="username" name="username" required oninvalid="setCustomValidity('Please enter the field')"  oninput="setCustomValidity('')" type="text" placeholder="myusername or mymail@mail.com"/>
                         </p>
                         <p>
                             <label for="password" class="youpasswd" data-icon="p"> Your password </label>
-                            <input id="password" name="password" type="password" placeholder="eg. X8df!90EO" />
+                            <input id="password" name="password"  required oninvalid="setCustomValidity('Please enter the field')"  oninput="setCustomValidity('')"  type="password" placeholder="eg. X8df!90EO" />
                         </p>
                         <p class="keeplogin">
                             <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
                             <label for="loginkeeping">Keep me logged in</label>
                         </p>
                         <p class="login button">
-                            <input id="tosingin" type="button" value="Login" />
+                            <input type="submit" value="Login" />
                         </p>
                         <p class="change_link">
                             Not a member yet ?
-                            <a href="#toregister" class="to_register">Join us</a><div id="loginerror"></div>
+                            <a href="#toregister" class="to_register">Join us</a>
                         </p>
                     </form>
                 </div>
@@ -176,6 +125,5 @@
 </div>
 
 
-<%--<script type="text/javascript"  src="static/js/login.js"></script>--%>
 </body>
 </html>

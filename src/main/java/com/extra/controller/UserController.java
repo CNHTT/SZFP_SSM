@@ -38,4 +38,12 @@ public class UserController {
         return name;
     }
 
+    @RequestMapping("/login")
+    public String toIndex(){
+        System.out.println("wangshuo....show_template");
+        log.info("sing in---0011--------");
+        return "login";
+    }
+
+
 }

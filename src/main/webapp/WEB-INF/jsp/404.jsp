@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path =request.getContextPath();
+%>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -12,13 +15,13 @@
         </script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="<%=path%>/static/css/style.css">
 </head>
 <body>
 <div class="error_page">
     <div class="error_logo">
-        <img src="static/images/404.png" />
-        <p> <a  href="/index">Go back to Home</a></p>
+        <img src="<%=path%>/static/images/404.png" />
+        <p> <a  href="login.jsp">Go back to Home</a></p>
     </div>
 </div>
 </body>

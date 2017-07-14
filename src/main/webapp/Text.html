@@ -1,63 +1,206 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
+    <title>Support Admin</title>
+    <!-- BOOTSTRAP CORE STYLE CSS -->
+    <link href="static/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME CSS -->
+    <link href="static/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE CSS -->
+    <link href="static/css/list.css" rel="stylesheet" />
+    <!-- Google	Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Nova+Flat' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css' />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+
 </head>
+
 <body>
-<div class="login_page">
-    <div ng-if="loginState" class="login icon container">
-        <div ng-include="'view/common/log.html'" class="log"></div>
-        <h1>小米帐号登录</h1>
-        <div>
-            <a class="sm"  ng-click="smEnter()"  href="#"></a>
-        </div>
-        <div class="login_form">
-            <form action="#">
-                <div class="tr">
-                    <input class="item_account" autocomplete="off" type="text" ng-model="user.name"
-                           placeholder="邮箱/手机号码/小米帐号">
-                </div>
-                <div class="tr">
-                    <input type="password" placeholder="密码" name="pwd" ng-model="user.pwd">
-                </div>
-                <div class="tr">
-                    <input type="button" ng-click="subLogin()" value="立即登录"/>
-                </div>
-            </form>
-        </div>
-        <div class="login_link">
-            <p>其他方式登录</p>
-            <ul>
-                <li><a href=""><img src="" alt=""/></a></li>
-                <li><a href=""><img src="" alt=""/></a></li>
-                <li><a href=""><img src="" alt=""/></a></li>
-            </ul>
-            <a href="">注册小米帐号</a>
-            <a href="">忘记密码</a>
-        </div>
-    </div>
+<div id="head">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                    <img src="static/images/logo.png"  />
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 text-center" >
+                <h1>Welcome :</h1>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 text-right " >
+                <h4><span>Call:</span> +0755-86276295</h4>
+                <h4><span>E-mail:</span> cnhttt@163.com</h4>
 
-    <div ng-if="!loginState" class="login2 container">
-        <h1 style="color: #ff6700">小米帐号扫码登录</h1>
-        <div style="margin: 0 auto;width: 260px">
-            <small>请使用最新版MIUI中“我的小米”进行扫码登录</small>
-            <img class="imgsm" src="resource/img/icon/login2.png" alt=""/>
-        </div>
-        <div>
-            <a class="sm2"  ng-click="smOuter()"  href="#"></a>
-        </div>
-    </div>
+            </div>
 
-    <div class="login_footer clearfix">
-        <ul>
-            <li><a href="">简体</a></li>
-            <li><a href="">繁体</a></li>
-            <li><a href="">English</a></li>
-            <li><a href="">常见问题</a></li>
-        </ul>
-        <p class="icp">小米公司版权所有-京ICP备10046444-京公网安备11010802020134号-京ICP证110507号</p>
+        </div>
     </div>
 </div>
-</body>
+<section id="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-9 ">
+
+                <h3>All User List <span class="label label-danger"> New : 9</span></h3>
+                <div class="hr-div"> <hr /></div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>USER ID</th>
+                            <th>TYPE</th>
+                            <th>USERNAME</th>
+                            <th>EMAIL ID</th>
+                            <th>REGISTERED</th>
+                            <th>RESET</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>#109</td>
+                            <td> <i class="fa fa-user" ></i> <span class="label label-danger">New</span></td>
+                            <td>Dummy Username</td>
+                            <td><span class="label label-info">demo@gmail.com</span></td>
+                            <td>2nd July 2014</td>
+                            <td><a href="#" class="label label-default">Password </a></td>
+                        </tr>
+                        <tr>
+                            <td>#110</td>
+                            <td> <i class="fa fa-user" ></i> <span class="label label-danger">New</span></td>
+                            <td>Dummy Username</td>
+                            <td><span class="label label-success">demo@gmail.com</span></td>
+                            <td>30th June 2014</td>
+                            <td><a href="#" class="label label-default">Password </a></td>
+                        </tr>
+                        <tr>
+                            <td>#111</td>
+                            <td> <i class="fa fa-user" ></i> <span class="label label-danger">New</span></td>
+                            <td>Dummy Username</td>
+                            <td><span class="label label-danger">demo@gmail.com</span></td>
+                            <td>12 May 2014</td>
+                            <td><a href="#" class="label label-default">Password </a></td>
+                        </tr>
+                        <tr>
+                            <td>#112</td>
+                            <td> <i class="fa fa-user" ></i> <span class="label label-danger">New</span></td>
+                            <td>Dummy Username</td>
+                            <td><span class="label label-info">demo@gmail.com</span></td>
+                            <td>30th June 2014</td>
+                            <td><a href="#" class="label label-default">Password </a></td>
+                        </tr>
+                        <tr>
+                            <td>#113</td>
+                            <td> <i class="fa fa-user" ></i> <span class="label label-danger">New</span></td>
+                            <td>Dummy Username</td>
+                            <td><span class="label label-warning">demo@gmail.com</span></td>
+                            <td>12 May 2014</td>
+                            <td><a href="#" class="label label-default">Password </a></td>
+                        </tr>
+                        <tr>
+                            <td>#114</td>
+                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
+                            <td>Dummy Username</td>
+                            <td><span class="label label-danger">demo@gmail.com</span></td>
+                            <td>30th June 2014</td>
+                            <td><a href="#" class="label label-default">Password </a></td>
+                        </tr>
+                        <tr>
+                            <td>#115</td>
+                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
+                            <td>Dummy Username</td>
+                            <td><span class="label label-success">demo@gmail.com</span></td>
+                            <td>12 May 2014</td>
+                            <td><a href="#" class="label label-default">Password </a></td>
+                        </tr>
+                        <tr>
+                            <td>#116</td>
+                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
+                            <td>Dummy Username</td>
+                            <td><span class="label label-danger">demo@gmail.com</span></td>
+                            <td>30th June 2014</td>
+                            <td><a href="#" class="label label-default">Password </a></td>
+                        </tr>
+                        <tr>
+                            <td>#117</td>
+                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
+                            <td>Dummy Username</td>
+                            <td><span class="label label-warning">demo@gmail.com</span></td>
+                            <td>12 May 2014</td>
+                            <td><a href="#" class="label label-default">Password </a></td>
+                        </tr>
+                        <tr>
+                            <td>#118</td>
+                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
+                            <td>Dummy Username</td>
+                            <td><span class="label label-info">demo@gmail.com</span></td>
+                            <td>30th June 2014</td>
+                            <td><a href="#" class="label label-default">Password </a></td>
+                        </tr>
+                        <tr>
+                            <td>#119</td>
+                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
+                            <td>Dummy Username</td>
+                            <td><span class="label label-danger">demo@gmail.com</span></td>
+                            <td>12 May 2014</td>
+                            <td><a href="#" class="label label-default">Password </a></td>
+                        </tr>
+                        <tr>
+                            <td>#120</td>
+                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
+                            <td>Dummy Username</td>
+                            <td><span class="label label-success">demo@gmail.com</span></td>
+                            <td>30th June 2014</td>
+                            <td><a href="#" class="label label-default">Password </a></td>
+                        </tr>
+                        <tr>
+                            <td>#121</td>
+                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
+                            <td>Dummy Username</td>
+                            <td><span class="label label-warning">demo@gmail.com</span></td>
+                            <td>12 May 2014</td>
+                            <td><a href="#" class="label label-default">Password </a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ul class="pagination">
+                    <li class="disabled"><a href="#">&laquo;</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">&raquo;</a></li>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="alert alert-danger text-center">
+                    <h3>Import Information</h3>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Nulla pretium lectus vel justo iaculis blandit.
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<div id="footer">
+</div>
+<!--  Jquery Core Script -->
+<script src="static/js/jquery-1.9.0.min.js"></script>
+<!--  Core Bootstrap Script -->
+<script src="static/js/bootstrap.js"></script>
+
 </html>

@@ -26,7 +26,7 @@
     
     <select id="selectUserByLogin" resultMap="UserBaseMap">
         SELECT  * FROM  user
-        WHERE USER_NAME = #{nameOrEmail} OR USER_EMAIL = #{nameOrEmail}
+        WHERE (USER_NAME = #{nameOrEmail} OR USER_EMAIL = #{nameOrEmail})
         AND  USER_PWD = #{password}
     </select>
 
