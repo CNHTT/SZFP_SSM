@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by CT on 2017/7/14.
  */
-public abstract   class  BaseEntiy implements Serializable {
+public abstract  class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

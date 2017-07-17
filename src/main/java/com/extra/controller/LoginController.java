@@ -32,7 +32,7 @@ public class LoginController
     @Resource
     private LoginService loginService;
 
-    @RequestMapping(value = "/singin.action" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/singin.action" ,method = RequestMethod.POST)
 //    @ResponseBody
     private String userLogin(@RequestParam String username, ModelMap model, @RequestParam String password, HttpServletRequest req){
         User user =null;
@@ -55,7 +55,7 @@ public class LoginController
             responseObj.setCode(ResponseObj.EMPUTY);
             responseObj.setMsg("The user does not exist! Please check the");
 //            return new GsonUtils().toJson(responseObj);
-            req.setAttribute("error",new GsonUtils().toJson(responseObj));
+//            req.setAttribute("error",new GsonUtils().toJson(responseObj));
             model.addAttribute("error",new GsonUtils().toJson(responseObj));
             return "login";
         }else {

@@ -72,7 +72,7 @@
         <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-9 ">
 
-                <h3>All User List <span class="label label-danger"> New : 9</span></h3>
+                <h3>All User List <span id="listSize" class="label label-danger"> New : 9</span></h3>
                 <div class="hr-div"> <hr /></div>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
@@ -87,124 +87,12 @@
 
                         </tr>
                         </thead>
-                        <tbody>
-
-                        <tr>
-                            <td>#109</td>
-                            <td> <i class="fa fa-user" ></i> <span class="label label-danger">New</span></td>
-                            <td>Dummy Username</td>
-                            <td><span class="label label-info">demo@gmail.com</span></td>
-                            <td>2nd July 2014</td>
-                            <td><a href="#" class="label label-default">Password </a></td>
-                        </tr>
-                        <tr>
-                            <td>#110</td>
-                            <td> <i class="fa fa-user" ></i> <span class="label label-danger">New</span></td>
-                            <td>Dummy Username</td>
-                            <td><span class="label label-success">demo@gmail.com</span></td>
-                            <td>30th June 2014</td>
-                            <td><a href="#" class="label label-default">Password </a></td>
-                        </tr>
-                        <tr>
-                            <td>#111</td>
-                            <td> <i class="fa fa-user" ></i> <span class="label label-danger">New</span></td>
-                            <td>Dummy Username</td>
-                            <td><span class="label label-danger">demo@gmail.com</span></td>
-                            <td>12 May 2014</td>
-                            <td><a href="#" class="label label-default">Password </a></td>
-                        </tr>
-                        <tr>
-                            <td>#112</td>
-                            <td> <i class="fa fa-user" ></i> <span class="label label-danger">New</span></td>
-                            <td>Dummy Username</td>
-                            <td><span class="label label-info">demo@gmail.com</span></td>
-                            <td>30th June 2014</td>
-                            <td><a href="#" class="label label-default">Password </a></td>
-                        </tr>
-                        <tr>
-                            <td>#113</td>
-                            <td> <i class="fa fa-user" ></i> <span class="label label-danger">New</span></td>
-                            <td>Dummy Username</td>
-                            <td><span class="label label-warning">demo@gmail.com</span></td>
-                            <td>12 May 2014</td>
-                            <td><a href="#" class="label label-default">Password </a></td>
-                        </tr>
-                        <tr>
-                            <td>#114</td>
-                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
-                            <td>Dummy Username</td>
-                            <td><span class="label label-danger">demo@gmail.com</span></td>
-                            <td>30th June 2014</td>
-                            <td><a href="#" class="label label-default">Password </a></td>
-                        </tr>
-                        <tr>
-                            <td>#115</td>
-                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
-                            <td>Dummy Username</td>
-                            <td><span class="label label-success">demo@gmail.com</span></td>
-                            <td>12 May 2014</td>
-                            <td><a href="#" class="label label-default">Password </a></td>
-                        </tr>
-                        <tr>
-                            <td>#116</td>
-                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
-                            <td>Dummy Username</td>
-                            <td><span class="label label-danger">demo@gmail.com</span></td>
-                            <td>30th June 2014</td>
-                            <td><a href="#" class="label label-default">Password </a></td>
-                        </tr>
-                        <tr>
-                            <td>#117</td>
-                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
-                            <td>Dummy Username</td>
-                            <td><span class="label label-warning">demo@gmail.com</span></td>
-                            <td>12 May 2014</td>
-                            <td><a href="#" class="label label-default">Password </a></td>
-                        </tr>
-                        <tr>
-                            <td>#118</td>
-                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
-                            <td>Dummy Username</td>
-                            <td><span class="label label-info">demo@gmail.com</span></td>
-                            <td>30th June 2014</td>
-                            <td><a href="#" class="label label-default">Password </a></td>
-                        </tr>
-                        <tr>
-                            <td>#119</td>
-                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
-                            <td>Dummy Username</td>
-                            <td><span class="label label-danger">demo@gmail.com</span></td>
-                            <td>12 May 2014</td>
-                            <td><a href="#" class="label label-default">Password </a></td>
-                        </tr>
-                        <tr>
-                            <td>#120</td>
-                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
-                            <td>Dummy Username</td>
-                            <td><span class="label label-success">demo@gmail.com</span></td>
-                            <td>30th June 2014</td>
-                            <td><a href="#" class="label label-default">Password </a></td>
-                        </tr>
-                        <tr>
-                            <td>#121</td>
-                            <td> <i class="fa fa-user" ></i> <span class="label label-success">Old</span></td>
-                            <td>Dummy Username</td>
-                            <td><span class="label label-warning">demo@gmail.com</span></td>
-                            <td>12 May 2014</td>
-                            <td><a href="#" class="label label-default">Password </a></td>
-                        </tr>
+                        <tbody id="tableBody">
                         </tbody>
                     </table>
                 </div>
-                <ul class="pagination">
-                    <li class="disabled"><a href="#">&laquo;</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
+
+                <ul id="bottomTab"></ul>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3">
                 <div class="alert alert-danger text-center">
@@ -221,7 +109,8 @@
 <script src="<%=path%>/static/js/jquery-1.9.0.min.js"></script>
 <!--  Core Bootstrap Script -->
 <script src="<%=path%>/static/js/bootstrap.js"></script>
-
+<script src="<%=path%>/static/js/bootstrap-paginator.js"></script>
+<script src="<%=path%>/static/js/list.js"></script>
 
 </body>
 </html>

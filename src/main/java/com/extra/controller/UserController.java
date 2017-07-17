@@ -1,11 +1,13 @@
 package com.extra.controller;
 
 import com.extra.model.User;
+import com.extra.model.response.ResponsePage;
 import com.extra.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,8 +20,9 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
     private Logger log = Logger.getLogger(UserController.class);
+
     @Resource
     private UserService userService;
 
@@ -43,6 +46,18 @@ public class UserController {
         System.out.println("wangshuo....show_template");
         log.info("sing in---0011--------");
         return "login";
+    }
+    @RequestMapping(value = "/list.do",method = RequestMethod.GET)
+    @ResponseBody
+    public String list(Integer pageNumber,Integer pageSize){
+//
+        log.info("分页查询用户信息"+pageNumber +" , "+pageSize);
+        try {
+            ResponsePage<User> responsePage = userService.queryByPage(pageNumber,pageSize);
+            return responseResult(responsePage);
+        } catch (Exception e) {
+            return responseFail(e.toString());
+        }
     }
 
 

@@ -12,8 +12,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path =request.getContextPath();
-    String result ="";
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String result ="";
     if (!DataUtils.isEmpty(request.getAttribute("error"))){
         String re = (String) request.getAttribute("error");
         ResponseObj obj = new GsonUtils().fromJson(re, ResponseObj.class);
@@ -64,7 +64,7 @@
             <a class="hiddenanchor" id="tologin"></a>
             <div id="wrapper">
                 <div id="login" class="animate form">
-                    <form  action="<%=basePath%>singin.action" autocomplete="on">
+                    <form  action="<%=basePath%>singin.action" METHOD="post" autocomplete="on">
                         <h1>Log in</h1>
 
                         <div class="loginHint" id="loginHint"><%=result%></div>

@@ -9,7 +9,7 @@ public class ResponseObj<T> {
     public final static int OK = 1, FAILED = 0, EMPUTY = -1;
     public final static String OK_STR = "success", FAILED_STR = "faild", EMPUTY_STR = "empty";
 
-    private int code; // 状态码,0成功;1空数据;-1请求失败
+    private int code;
     private String msg;
     private Object data;
 
