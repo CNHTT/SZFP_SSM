@@ -14,10 +14,15 @@
     String path =request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     String result ="";
+    String userName = "";
+    String pwd= "";
     if (!DataUtils.isEmpty(request.getAttribute("error"))){
         String re = (String) request.getAttribute("error");
+        userName = (String) request.getAttribute("username");
+        pwd= (String) request.getAttribute("pwd");
         ResponseObj obj = new GsonUtils().fromJson(re, ResponseObj.class);
         result= obj.getMsg();
+
     }
 %>
 <html>
@@ -70,11 +75,11 @@
                         <div class="loginHint" id="loginHint"><%=result%></div>
                         <p>
                             <label for="username" class="uname" data-icon="u" > Your email or username </label>
-                            <input id="username" name="username" required oninvalid="setCustomValidity('Please enter the field')"  oninput="setCustomValidity('')" type="text" placeholder="myusername or mymail@mail.com"/>
+                            <input id="username" name="username" value="<%= userName%>" required oninvalid="setCustomValidity('Please enter the field')"  oninput="setCustomValidity('')" type="text" placeholder="myusername or mymail@mail.com"/>
                         </p>
                         <p>
                             <label for="password" class="youpasswd" data-icon="p"> Your password </label>
-                            <input id="password" name="password"  required oninvalid="setCustomValidity('Please enter the field')"  oninput="setCustomValidity('')"  type="password" placeholder="eg. X8df!90EO" />
+                            <input id="password" name="password" value="<%=pwd%>"  required oninvalid="setCustomValidity('Please enter the field')"  oninput="setCustomValidity('')"  type="password" placeholder="eg. X8df!90EO" />
                         </p>
                         <p class="keeplogin">
                             <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />

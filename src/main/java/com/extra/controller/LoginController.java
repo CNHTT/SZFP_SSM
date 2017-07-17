@@ -56,6 +56,8 @@ public class LoginController
             responseObj.setMsg("The user does not exist! Please check the");
 //            return new GsonUtils().toJson(responseObj);
 //            req.setAttribute("error",new GsonUtils().toJson(responseObj));
+            model.addAttribute("username",username);
+            model.addAttribute("pwd",password);
             model.addAttribute("error",new GsonUtils().toJson(responseObj));
             return "login";
         }else {

@@ -1,6 +1,9 @@
 package com.extra.model;
 
 
+import com.extra.utils.TimeUtils;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -13,8 +16,20 @@ public class User {
     private String userEmail;
     private String userPwd;
     private String pwdSalt;
+    private String cookie;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date createTime;
     private Date modifyTime;
+    private String strTime;
+
+    public String getStrTime() {
+        return TimeUtils.date2String(createTime);
+    }
+
+    public void setStrTime(String strTime) {
+        this.strTime = strTime;
+    }
+
     private Short isDelete;
 
     public Long getId() {

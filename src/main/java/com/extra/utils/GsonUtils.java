@@ -1,6 +1,4 @@
 package com.extra.utils;
-
-
 import com.google.gson.*;
 import com.google.gson.internal.ConstructorConstructor;
 import com.google.gson.internal.bind.CollectionTypeAdapterFactory;

@@ -78,7 +78,7 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>USER ID</th>
+                            <th >USER ID</th>
                             <th>TYPE</th>
                             <th>USERNAME</th>
                             <th>EMAIL ID</th>
