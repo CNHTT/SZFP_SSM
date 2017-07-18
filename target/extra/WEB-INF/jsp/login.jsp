@@ -50,6 +50,7 @@
     <link rel="stylesheet"  type="text/css" href="<%=path%>/static/css/login.css">
     <link rel="stylesheet"  type="text/css" href="<%=path%>/static/css/style.css">
     <script type="text/javascript" src="<%=path%>/static/js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/static/js/jquery.tips.js"></script>
     <script type="text/javascript" src="<%=path%>/static/js/login.js"></script>
     <title>SING IN</title>
 </head>
@@ -69,7 +70,7 @@
             <a class="hiddenanchor" id="tologin"></a>
             <div id="wrapper">
                 <div id="login" class="animate form">
-                    <form  action="<%=basePath%>singin.action" METHOD="post" autocomplete="on">
+                    <form  action="<%=basePath%>singin.action" METHOD="post" onsubmit="return checkLogin()" autocomplete="on">
                         <h1>Log in</h1>
 
                         <div class="loginHint" id="loginHint"><%=result%></div>

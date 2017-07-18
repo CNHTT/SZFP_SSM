@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +31,12 @@ public class UserController extends BaseController{
     public String showUser(HttpServletRequest request, Model model){
         log.info("All the user information query ");
         List<User> userList  =userService.getAllUser();
+        List<Integer> a=new ArrayList<Integer>();
+        for (int i = 0; i <1000 ; i++) {
+            a.add(i);
+        }
         model.addAttribute("userList",userList);
+        model.addAttribute("aaaa",a);
         return "showUser";
     }
 

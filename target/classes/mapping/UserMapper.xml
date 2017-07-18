@@ -9,8 +9,9 @@
         <result column="USER_EMAIL" property="userEmail" jdbcType="VARCHAR"/>
         <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR"/>
         <result column="PWD_SALT" property="pwdSalt" jdbcType="VARCHAR"/>
-        <result column="CREATE_TIME" property="createTime" jdbcType="DATE"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="MODIFY_TIME" property="modifyTime" jdbcType="DATE"/>
+        <result column="SESSION_COOKIE" property="cookie" jdbcType="VARCHAR"/>
         <result column="IS_DELETE" property="isDelete" jdbcType="SMALLINT"/>
     </resultMap>
 
@@ -31,7 +32,7 @@
     </select>
 
     <select id="selectAllUser" resultMap="UserBaseMap">
-        SELECT * FROM user
+        SELECT  ID,USER_NAME,USER_EMAIL,IS_DELETE , CREATE_TIME FROM  user
     </select>
 
 </mapper>
