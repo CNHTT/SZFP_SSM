@@ -33,6 +33,24 @@ public class BaseController {
         log.info("system.out: "+new GsonUtils().toJson(resp));
         return new GsonUtils().toJson(resp);
     }
+    /**
+     * 返回数据
+     * @param obj
+     * @return json
+     */
+    public String responseResult(Object obj,String str){
+        ResponseObj<Object>  resp = new ResponseObj<Object>();
+        if (DataUtils.isEmpty(obj)){
+            resp.setCode(ResponseObj.EMPUTY);
+            resp.setMsg(ResponseObj.EMPUTY_STR);
+        }else {
+            resp.setCode(ResponseObj.OK);
+            resp.setMsg(str);
+            resp.setData(obj);
+        }
+        log.info("system.out: "+new GsonUtils().toJson(resp));
+        return new GsonUtils().toJson(resp);
+    }
 
 
     public String responseFail(String error){

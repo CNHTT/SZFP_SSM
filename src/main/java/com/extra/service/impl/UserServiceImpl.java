@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 戴尔 on 2017/7/12.
@@ -22,6 +23,10 @@ public class UserServiceImpl implements UserService{
 
     @Resource
     private UserDao userDao;
+
+    public void insertUsers(Map<String, Object> param) {
+
+    }
 
     public List<User> getAllUser() {
         return userDao.selectAllUser();

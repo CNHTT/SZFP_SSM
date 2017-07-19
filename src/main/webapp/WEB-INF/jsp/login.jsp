@@ -49,8 +49,10 @@
     <link rel="stylesheet" href="<%=path%>/static/css/animate-custom.css">
     <link rel="stylesheet"  type="text/css" href="<%=path%>/static/css/login.css">
     <link rel="stylesheet"  type="text/css" href="<%=path%>/static/css/style.css">
+    <link rel="stylesheet"  type="text/css" href="<%=path%>/static/css/dialog.css">
     <script type="text/javascript" src="<%=path%>/static/js/jquery-1.9.0.min.js"></script>
     <script type="text/javascript" src="<%=path%>/static/js/jquery.tips.js"></script>
+    <script type="text/javascript" src="<%=path%>/static/js/dialog.js"></script>
     <script type="text/javascript" src="<%=path%>/static/js/login.js"></script>
     <title>SING IN</title>
 </head>
@@ -70,7 +72,7 @@
             <a class="hiddenanchor" id="tologin"></a>
             <div id="wrapper">
                 <div id="login" class="animate form">
-                    <form  action="<%=basePath%>singin.action" METHOD="post" onsubmit="return checkLogin()" autocomplete="on">
+                    <form  action="singin.html" METHOD="post" onsubmit="return checkLogin()" autocomplete="on">
                         <h1>Log in</h1>
 
                         <div class="loginHint" id="loginHint"><%=result%></div>
@@ -101,19 +103,19 @@
                         <h1> Sign up </h1>
                         <p>
                             <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
-                            <input id="usernamesignup" name="usernamesignup" required oninvalid="setCustomValidity('Please enter the field')"  oninput="setCustomValidity('')" type="text" placeholder="mysuperusername690" />
+                            <input id="usernamesignup" name="usernamesignup" type="text" placeholder="mysuperusername690" />
                         </p>
                         <p>
                             <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
-                            <input id="emailsignup" name="emailsignup" required oninvalid="setCustomValidity('Please enter the field')"  oninput="setCustomValidity('')" type="email" placeholder="mysupermail@mail.com"/>
+                            <input id="emailsignup" name="emailsignup" type="email" placeholder="mysupermail@mail.com"/>
                         </p>
                         <p>
                             <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
-                            <input id="passwordsignup" name="passwordsignup"   required oninvalid="setCustomValidity('Please enter the field')"  oninput="setCustomValidity('')" type="password" placeholder="eg. X8df!90EO"/>
+                            <input id="passwordsignup" name="passwordsignup"   type="password" placeholder="eg. X8df!90EO"/>
                         </p>
                         <p>
                             <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
-                            <input id="passwordsignup_confirm" name="passwordsignup_confirm"  required oninvalid="setCustomValidity('Please enter the field')"  oninput="setCustomValidity('')"  type="password" placeholder="eg. X8df!90EO"/>
+                            <input id="passwordsignup_confirm" name="passwordsignup_confirm"    type="password" placeholder="eg. X8df!90EO"/>
                         </p>
                         <p class="signin button">
                             <input type="button" onclick="userReg()" value="Sign up"/>

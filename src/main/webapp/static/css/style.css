@@ -422,3 +422,29 @@ p.change_link{
     height: 90px;
     background: transparent;
 }
+
+
+.fl{ display: inline; float: left;}
+.fr{ display: inline; float: right;}
+
+/* 让非ie浏览器默认也显示垂直滚动条，防止因滚动条引起的闪烁 */
+/*html { overflow-y: scroll; }*/
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+    font-size:0;
+}
+.clearfix { *zoom:1;}
+
+.noc,.noc a{
+    -webkit-user-select: none; /* Chrome all / Safari all */
+    -moz-user-select: none; /* Firefox all */
+    -ms-user-select: none; /* IE 10+ */ /* No support for these yet, use at own risk */
+    -o-user-select: none;
+    user-select: none;
+}

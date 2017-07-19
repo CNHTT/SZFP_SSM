@@ -27,6 +27,7 @@ import java.io.IOException;
  */
 
 @Controller
+@RequestMapping("/")
 public class LoginController
 {
 
@@ -34,9 +35,14 @@ public class LoginController
     @Resource
     private LoginService loginService;
 
-    @RequestMapping(value = "/singin.action" ,method = RequestMethod.POST)
+    @RequestMapping("login")
+    private  String login(){
+        return "login";
+    }
+
+    @RequestMapping(value = "singin" )
 //    @ResponseBody
-    private String userLogin(@RequestParam String username, ModelMap model, @RequestParam String password, HttpServletRequest req){
+    private String userLogin( String username, ModelMap model,  String password, HttpServletRequest req){
         User user =null;
         ResponseObj<User> responseObj = new ResponseObj<User>();
 
@@ -51,7 +57,7 @@ public class LoginController
             responseObj.setMsg("Please input UserNameOrEmail  PassWord!");
 //            return new GsonUtils().toJson(responseObj);
             model.addAttribute("data",new GsonUtils().toJson(responseObj));
-            return "login";
+            return "logins";
         }
 
         if (DataUtils.isEmpty(user)){
@@ -62,7 +68,7 @@ public class LoginController
             model.addAttribute("username",username);
             model.addAttribute("pwd",password);
             model.addAttribute("error",new GsonUtils().toJson(responseObj));
-            return "login";
+            return "logins";
         }else {
 
 

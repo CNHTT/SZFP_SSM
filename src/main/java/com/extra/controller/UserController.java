@@ -3,6 +3,8 @@ package com.extra.controller;
 import com.extra.model.User;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.UserService;
+import com.extra.utils.DataUtils;
+import com.extra.utils.MD5Util;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import static com.extra.utils.DataUtils.isNullString;
 
 /**
  * Created by 戴尔 on 2017/7/12.
@@ -66,5 +71,37 @@ public class UserController extends BaseController{
         }
     }
 
+
+    /**
+     * 用户注册
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "register" ,method = RequestMethod.POST)
+    @ResponseBody
+    public  String userRegister(HttpServletRequest request){
+        log.info("用户信息注册      ip:" + request.getRemoteAddr());
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String pwd  = request.getParameter("pwd");
+        log.info("name："+name+"          email: "+email+"        passWord: "+pwd);
+
+        if (isNullString(name)||isNullString(email)||isNullString(pwd)){
+            return  responseFail("信息不能为空");
+        }
+        System.out.println("原始：" + pwd);
+        System.out.println("MD5后：" + MD5Util.string2MD5(pwd));
+        System.out.println("加密的：" + MD5Util.convertMD5(pwd));
+        System.out.println("解密的：" + MD5Util.convertMD5(MD5Util.convertMD5(pwd)));
+
+        HashMap<String ,String> users = new HashMap<String, String>();
+        users.put("username",name);
+        users.put("email",email);
+        users.put("pwd", MD5Util.string2MD5(pwd));
+
+        userService.insertUsers(users);
+
+        return responseFail("name");
+    }
 
 }
