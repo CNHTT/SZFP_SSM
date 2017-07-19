@@ -90,7 +90,7 @@ public class UserController extends BaseController{
             return  responseFail("信息不能为空");
         }
         System.out.println("原始：" + pwd);
-        System.out.println("MD5后：" + MD5Util.string2MD5(pwd));
+        System.out.println("MD5后：" + MD5Util.string2MD5(pwd).length());
         System.out.println("加密的：" + MD5Util.convertMD5(pwd));
         System.out.println("解密的：" + MD5Util.convertMD5(MD5Util.convertMD5(pwd)));
 

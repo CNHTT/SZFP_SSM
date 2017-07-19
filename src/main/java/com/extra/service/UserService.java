@@ -14,7 +14,7 @@ public interface UserService {
      * 添加用户信息
      * @param param
      */
-    public void insertUsers(Map<String, String> param);
+    public boolean insertUsers(Map<String, String> param);
     List<User> getAllUser();
     User getUserByPhoneOrEmail(String  emailOrPone,Short state);
     User getUserById(Long userId);

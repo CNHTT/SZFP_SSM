@@ -15,15 +15,24 @@
         <result column="IS_DELETE" property="isDelete" jdbcType="SMALLINT"/>
     </resultMap>
 
+
+    <insert id="insertUser" parameterType="Map"  >
+        <selectKey  keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+            SELECT  LAST_INSERT_ID() AS ID
+        </selectKey>
+        INSERT INTO user ( USER_NAME, USER_PWD, USER_EMAIL) VALUES (#{username}, #{pwd}, #{email});
+    </insert>
+
+
     <select id="selectUserById" parameterType="java.lang.Long" resultMap="UserBaseMap">
         SELECT * FROM user WHERE ID = #{userId}
-</select>
+    </select>
 
     <select id="selectUserByPhoneOrEmail" resultMap="UserBaseMap">
         SELECT * FROM user
         WHERE USER_EMAIL = #{emailOrPhone} OR USER_PHONE = #{emailOrPhone}
         AND  IS_DELETE= #{state}
-</select>
+    </select>
     
     <select id="selectUserByLogin" resultMap="UserBaseMap">
         SELECT  * FROM  user

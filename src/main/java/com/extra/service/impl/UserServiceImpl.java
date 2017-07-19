@@ -24,8 +24,15 @@ public class UserServiceImpl implements UserService{
     @Resource
     private UserDao userDao;
 
-    public void insertUsers(Map<String, Object> param) {
 
+
+    public boolean insertUsers(Map<String, String> param) {
+
+       int a= userDao.insertUser(param);
+       if (a ==0){
+
+       }
+        return true;
     }
 
     public List<User> getAllUser() {
