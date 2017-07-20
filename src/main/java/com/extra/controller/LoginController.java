@@ -3,10 +3,7 @@ package com.extra.controller;
 import com.extra.model.User;
 import com.extra.model.response.ResponseObj;
 import com.extra.service.LoginService;
-import com.extra.utils.DataUtils;
-import com.extra.utils.GsonUtils;
-import com.extra.utils.PublicUtil;
-import com.extra.utils.RegexUtils;
+import com.extra.utils.*;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -42,22 +40,25 @@ public class LoginController
 
     @RequestMapping(value = "singin" )
 //    @ResponseBody
-    private String userLogin( String username, ModelMap model,  String password, HttpServletRequest req){
+    private String userLogin(String username, ModelMap model, String password, HttpServletRequest req, HttpSession sessions){
         User user =null;
         ResponseObj<User> responseObj = new ResponseObj<User>();
 
-        log.info("pwd: " + password +"name: "+username);
+        String cookies = req.getCookies()[0].getValue();
+
+
+        log.info(cookies  +"              ");
 
         if (!DataUtils.isNullString(username)&& RegexUtils.isCheckPassWord(password))
-            user = loginService.getUserInfo(username,password);
+            user = loginService.getUserInfo(username, MD5Util.string2MD5(password));
 
         else {
             responseObj.setCode(ResponseObj.FAILED);
             responseObj.setMsg(ResponseObj.FAILED_STR);
             responseObj.setMsg("Please input UserNameOrEmail  PassWord!");
 //            return new GsonUtils().toJson(responseObj);
-            model.addAttribute("data",new GsonUtils().toJson(responseObj));
-            return "logins";
+            req.setAttribute("data",new GsonUtils().toJson(responseObj));
+            return "forward:login.jsp";
         }
 
         if (DataUtils.isEmpty(user)){
@@ -65,10 +66,10 @@ public class LoginController
             responseObj.setMsg("The user does not exist! Please check the");
 //            return new GsonUtils().toJson(responseObj);
 //            req.setAttribute("error",new GsonUtils().toJson(responseObj));
-            model.addAttribute("username",username);
-            model.addAttribute("pwd",password);
-            model.addAttribute("error",new GsonUtils().toJson(responseObj));
-            return "logins";
+            req.setAttribute("username",username);
+            req.setAttribute("pwd",password);
+            req.setAttribute("error",new GsonUtils().toJson(responseObj));
+            return "forward:login";
         }else {
 
 
@@ -76,7 +77,7 @@ public class LoginController
             responseObj.setData(user);
             responseObj.setCode(ResponseObj.OK);
             responseObj.setMsg("登录成功");
-
+            req.setAttribute("user",user.getUserName());
             model.addAttribute("data",new GsonUtils().toJson(responseObj));
             return "showAllList";
 //            return new GsonUtils().toJson(responseObj);

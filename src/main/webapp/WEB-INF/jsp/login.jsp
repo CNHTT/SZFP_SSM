@@ -72,7 +72,7 @@
             <a class="hiddenanchor" id="tologin"></a>
             <div id="wrapper">
                 <div id="login" class="animate form">
-                    <form  action="singin.html" METHOD="post" onsubmit="return checkLogin()" autocomplete="on">
+                    <form  action="singin" METHOD="post" onsubmit="return checkLogin()" autocomplete="on">
                         <h1>Log in</h1>
 
                         <div class="loginHint" id="loginHint"><%=result%></div>

@@ -22,6 +22,7 @@ public class User {
     private Date modifyTime;
     private String strTime;
 
+
     public String getStrTime() {
         return TimeUtils.date2String(createTime);
     }
@@ -102,5 +103,22 @@ public class User {
 
     public void setIsDelete(Short isDelete) {
         this.isDelete = isDelete;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userPwd='" + userPwd + '\'' +
+                ", pwdSalt='" + pwdSalt + '\'' +
+                ", cookie='" + cookie + '\'' +
+                ", createTime=" + createTime +
+                ", modifyTime=" + modifyTime +
+                ", strTime='" + strTime + '\'' +
+                ", isDelete=" + isDelete +
+                '}';
     }
 }

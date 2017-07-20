@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService{
 
        int a= userDao.insertUser(param);
        if (a ==0){
-
+           return false;
        }
         return true;
     }

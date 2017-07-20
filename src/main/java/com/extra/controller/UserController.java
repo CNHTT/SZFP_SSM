@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +37,7 @@ public class UserController extends BaseController{
     public String showUser(HttpServletRequest request, Model model){
         log.info("All the user information query ");
         List<User> userList  =userService.getAllUser();
+        log.info(userList.toString());
         List<Integer> a=new ArrayList<Integer>();
         for (int i = 0; i <1000 ; i++) {
             a.add(i);
@@ -60,8 +62,7 @@ public class UserController extends BaseController{
     }
     @RequestMapping(value = "/list.do",method = RequestMethod.GET)
     @ResponseBody
-    public String list(Integer pageNumber,Integer pageSize){
-//
+    public String list(Integer pageNumber, Integer pageSize, HttpSession session){
         log.info("分页查询用户信息"+pageNumber +" , "+pageSize);
         try {
             ResponsePage<User> responsePage = userService.queryByPage(pageNumber,pageSize);
@@ -89,19 +90,22 @@ public class UserController extends BaseController{
         if (isNullString(name)||isNullString(email)||isNullString(pwd)){
             return  responseFail("信息不能为空");
         }
-        System.out.println("原始：" + pwd);
-        System.out.println("MD5后：" + MD5Util.string2MD5(pwd).length());
-        System.out.println("加密的：" + MD5Util.convertMD5(pwd));
-        System.out.println("解密的：" + MD5Util.convertMD5(MD5Util.convertMD5(pwd)));
 
         HashMap<String ,String> users = new HashMap<String, String>();
         users.put("username",name);
         users.put("email",email);
         users.put("pwd", MD5Util.string2MD5(pwd));
 
-        userService.insertUsers(users);
+        try {
+            if (userService.insertUsers(users)){
+                return  responseSuccess("注册成功");
+            }else {
+                return  responseFail("注册失败");
+            }
+        }catch (Exception e){
+            return responseFail(e.toString());
+        }
 
-        return responseFail("name");
     }
 
 }

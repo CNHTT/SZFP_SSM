@@ -22,7 +22,6 @@
      -->
     <mvc:resources mapping="/css/**" location="/static/css/"/>
     <mvc:resources mapping="/images/**" location="/static/images/"/>
-    <mvc:resources mapping="/view/**" location="/static/view/"/>
     <mvc:resources mapping="/js/**" location="/static/js/"/>
     <mvc:resources mapping="/fonts/**" location="/static/fonts/"/>
     <mvc:default-servlet-handler/>
@@ -33,6 +32,16 @@
     <!--<mvc:mapping path="/**/**"/>-->
     <!--<bean class="cn.acheng1314.intercepter.LoginHandlerInterceptor"/>-->
     <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<mvc:mapping path="/singin"/>-->
+            <!--<mvc:mapping path="/user/**"/>-->
+            <!--<mvc:mapping path="/user/login"/>-->
+            <!--<mvc:mapping path="/**/**"/>-->
+            <!--<bean class="com.extra.interceptor.CommonInterceptor"/>-->
+        <!--</mvc:interceptor>-->
     <!--</mvc:interceptors>-->
     <!-- 处理静态资源 -->
     <mvc:default-servlet-handler/>

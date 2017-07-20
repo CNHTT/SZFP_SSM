@@ -10,69 +10,68 @@
     <schema id="4" parent="1" name="mysql"/>
     <schema id="5" parent="1" name="performance_schema"/>
     <schema id="6" parent="1" name="sys"/>
-    <schema id="7" parent="1" name="sakila"/>
-    <schema id="8" parent="1" name="ssm"/>
-    <schema id="9" parent="1" name="world"/>
-    <table id="10" parent="2" name="user">
-      <Comment>用户信息表</Comment>
+    <table id="7" parent="2" name="user">
+      <Comment>用户登录表</Comment>
     </table>
-    <column id="11" parent="10" name="ID">
+    <column id="8" parent="7" name="ID">
       <Position>1</Position>
-      <DataType>int(10)|0</DataType>
+      <DataType>bigint(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="12" parent="10" name="USER_NAME">
+    <column id="9" parent="7" name="USER_NAME">
       <Position>2</Position>
-      <Comment>用户名</Comment>
+      <Comment>用户姓名</Comment>
       <DataType>varchar(255)|0</DataType>
-      <NotNull>1</NotNull>
     </column>
-    <column id="13" parent="10" name="USER_PWD">
+    <column id="10" parent="7" name="USER_PHONE">
       <Position>3</Position>
-      <Comment>用户密码</Comment>
-      <DataType>varchar(255)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="14" parent="10" name="USER_EMAIL">
-      <Position>4</Position>
-      <Comment>用户邮箱</Comment>
-      <DataType>varchar(255)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="15" parent="10" name="CREATE_TIME">
-      <Position>5</Position>
-      <Comment>注册时间</Comment>
-      <DataType>datetime|0</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-    </column>
-    <column id="16" parent="10" name="MODIFY_TIME">
-      <Position>6</Position>
-      <Comment>注册时间</Comment>
-      <DataType>datetime|0</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-    </column>
-    <column id="17" parent="10" name="USER_PHONE">
-      <Position>7</Position>
-      <Comment>昵称</Comment>
+      <Comment>手机号</Comment>
       <DataType>varchar(20)|0</DataType>
     </column>
-    <column id="18" parent="10" name="IS_DELETE">
-      <Position>8</Position>
-      <Comment>账户状态</Comment>
-      <DataType>tinyint(1)|0</DataType>
+    <column id="11" parent="7" name="USER_EMAIL">
+      <Position>4</Position>
+      <Comment>邮箱地址</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="12" parent="7" name="USER_PWD">
+      <Position>5</Position>
+      <Comment>加密后的密码</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="13" parent="7" name="PWD_SALT">
+      <Position>6</Position>
+      <Comment>加密口令</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="14" parent="7" name="CREATE_TIME">
+      <Position>7</Position>
+      <Comment>创建时间</Comment>
+      <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="15" parent="7" name="MODIFY_TIME">
+      <Position>8</Position>
+      <Comment>最后修改时间</Comment>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="16" parent="7" name="IS_DELETE">
+      <Position>9</Position>
+      <Comment>是否删除  0-未删除 1-已删除</Comment>
+      <DataType>tinyint(4)|0</DataType>
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
-    <index id="19" parent="10" name="id">
+    <column id="17" parent="7" name="SESSION_COOKIE">
+      <Position>10</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="18" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <key id="20" parent="10" name="id">
-      <ColNames>ID</ColNames>
-      <UnderlyingIndexName>id</UnderlyingIndexName>
+      <Primary>1</Primary>
     </key>
   </database-model>
 </dataSource>

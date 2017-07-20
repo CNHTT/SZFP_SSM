@@ -38,7 +38,7 @@ public class BaseController {
      * @param obj
      * @return json
      */
-    public String responseResult(Object obj,String str){
+    public String responseSuccess(Object obj,String str){
         ResponseObj<Object>  resp = new ResponseObj<Object>();
         if (DataUtils.isEmpty(obj)){
             resp.setCode(ResponseObj.EMPUTY);
@@ -48,6 +48,18 @@ public class BaseController {
             resp.setMsg(str);
             resp.setData(obj);
         }
+        log.info("system.out: "+new GsonUtils().toJson(resp));
+        return new GsonUtils().toJson(resp);
+    }
+
+    /**
+     * 返回数据
+     * @return json
+     */
+    public String responseSuccess(String str){
+        ResponseObj<Object>  resp = new ResponseObj<Object>();
+            resp.setCode(ResponseObj.OK);
+            resp.setMsg(str);
         log.info("system.out: "+new GsonUtils().toJson(resp));
         return new GsonUtils().toJson(resp);
     }
