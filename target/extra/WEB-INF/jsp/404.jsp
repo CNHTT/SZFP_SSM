@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path =request.getContextPath();
@@ -18,10 +19,13 @@
     <link rel="stylesheet" href="<%=path%>/static/css/style.css">
 </head>
 <body>
+<%
+    request.setAttribute("layout","mian.js");
+%>
 <div class="error_page">
     <div class="error_logo">
         <img src="<%=path%>/static/images/404.png" />
-        <p> <a  href="login.jsp">Go back to Home</a></p>
+        <p> <a  href="<%=path%>/login">Go back to Home</a></p>
     </div>
 </div>
 </body>
