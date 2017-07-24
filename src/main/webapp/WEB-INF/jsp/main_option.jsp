@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: CT
-  Date: 2017/7/23
-  Time: 19:19
+  User: 戴尔
+  Date: 2017/7/24
+  Time: 16:45
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -27,7 +27,7 @@
                 <small>Control panel</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Option</a></li>
                 <li class="active">Dashboard</li>
             </ol>
         </section>

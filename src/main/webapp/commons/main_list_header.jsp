@@ -1,12 +1,12 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.extra.model.User" %>
 <%@ page import="com.extra.utils.GsonUtils" %>
 <%@ page import="com.extra.utils.SessionUtils" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
-  User: CT
-  Date: 2017/7/23
-  Time: 11:38
+  User: 戴尔
+  Date: 2017/7/24
+  Time: 18:15
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -49,18 +49,18 @@
                         </li>
                         <!-- Menu Body -->
                         <%--<li class="user-body">--%>
-                            <%--<div class="row">--%>
-                                <%--<div class="col-xs-4 text-center">--%>
-                                    <%--<a href="#">Followers</a>--%>
-                                <%--</div>--%>
-                                <%--<div class="col-xs-4 text-center">--%>
-                                    <%--<a href="#">Sales</a>--%>
-                                <%--</div>--%>
-                                <%--<div class="col-xs-4 text-center">--%>
-                                    <%--<a href="#">Friends</a>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                            <!-- /.row -->
+                        <%--<div class="row">--%>
+                        <%--<div class="col-xs-4 text-center">--%>
+                        <%--<a href="#">Followers</a>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-xs-4 text-center">--%>
+                        <%--<a href="#">Sales</a>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-xs-4 text-center">--%>
+                        <%--<a href="#">Friends</a>--%>
+                        <%--</div>--%>
+                        <%--</div>--%>
+                        <!-- /.row -->
                         <%--</li>--%>
                         <!-- Menu Footer-->
                         <li class="user-footer">
@@ -109,7 +109,7 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
 
-            <li  class="active">
+            <li >
                 <a href="<%=path%>/admin/main">
                     <i class="fa fa-dashboard"></i> <span>Home</span>
                     <span class="pull-right-container">
@@ -119,7 +119,7 @@
             </li>
 
 
-            <li>
+            <li class="active">
                 <a href="<%=path%>/admin/showALlList">
                     <i class="fa fa-th"></i> <span>Widgets</span>
                     <span class="pull-right-container">

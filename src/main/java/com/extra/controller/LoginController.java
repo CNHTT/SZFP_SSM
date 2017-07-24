@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.security.auth.Subject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -25,7 +26,6 @@ import java.io.IOException;
  */
 
 @Controller
-@RequestMapping("/")
 public class LoginController
 {
 
@@ -33,20 +33,25 @@ public class LoginController
     @Resource
     private LoginService loginService;
 
-    @RequestMapping("login")
+    @RequestMapping("/login")
     private  String login(){
         return "login";
     }
 
-    @RequestMapping(value = "singin" )
+    @RequestMapping("/singout")
+    private  String singOut(HttpSession session){
+        session.setAttribute(SessionUtils.SESSION_ADMIN_USER,null);
+        return "redirect:login";
+    }
+
+
+    @RequestMapping(value = "/singin" )
 //    @ResponseBody
     private String userLogin(String username, ModelMap model, String password, HttpServletRequest req, HttpSession sessions){
         User user =null;
         ResponseObj<User> responseObj = new ResponseObj<User>();
 
         String cookies = req.getCookies()[0].getValue();
-
-
         log.info(cookies  +"              ");
 
         if (!DataUtils.isNullString(username)&& RegexUtils.isCheckPassWord(password))
@@ -58,7 +63,7 @@ public class LoginController
             responseObj.setMsg("Please input UserNameOrEmail  PassWord!");
 //            return new GsonUtils().toJson(responseObj);
             req.setAttribute("data",new GsonUtils().toJson(responseObj));
-            return "forward:login.jsp";
+            return "forward:login";
         }
 
         if (DataUtils.isEmpty(user)){
@@ -78,8 +83,9 @@ public class LoginController
             responseObj.setCode(ResponseObj.OK);
             responseObj.setMsg("登录成功");
             req.setAttribute("user",user.getUserName());
-            model.addAttribute("data",new GsonUtils().toJson(responseObj));
-            return "showAllList";
+           sessions.setAttribute(SessionUtils.SESSION_ADMIN_USER,new GsonUtils().toJson(user));
+//            model.addAttribute("user",new GsonUtils().toJson(user));
+            return "redirect:admin/main";
 //            return new GsonUtils().toJson(responseObj);
         }
     }

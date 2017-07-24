@@ -1,6 +1,7 @@
 package com.extra.interceptor;
 
 import com.extra.controller.UserController;
+import com.extra.utils.SessionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CommonInterceptor extends HandlerInterceptorAdapter {
     private Logger log = Logger.getLogger(CommonInterceptor.class);
     private boolean flag=false;
-    private static final String[] IGNORE_URI={"/login","/user/login"};
+    private static final String[] IGNORE_URI={"/login","/singin"};
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("==============执行顺序: 1、preHandle================");
@@ -42,9 +43,9 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
         log.info("requestUri:"+requestUri);
         log.info("contextPath:"+contextPath);
         log.info("url:"+url);
-        String username = (String) request.getSession().getAttribute("user");
+        String username = (String) request.getSession().getAttribute(SessionUtils.SESSION_ADMIN_USER);
         if(username == null){
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            response.sendRedirect("/login");
             return false;
         }else
             return true;

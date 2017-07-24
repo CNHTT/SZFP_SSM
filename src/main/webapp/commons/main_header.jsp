@@ -1,3 +1,6 @@
+<%@ page import="com.extra.model.User" %>
+<%@ page import="com.extra.utils.GsonUtils" %>
+<%@ page import="com.extra.utils.SessionUtils" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -7,11 +10,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%
     String  path = request.getContextPath();
+    User user = new GsonUtils().fromJson((String) request.getSession().getAttribute(SessionUtils.SESSION_ADMIN_USER),User.class);
 %>
-
 <header class="main-header">
     <!-- Logo -->
     <a class="logo">
@@ -33,7 +35,7 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="../../static/images/user_160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <span class="hidden-xs"><%=user.getUserName()%></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -41,32 +43,32 @@
                             <img src="../../static/images/user_160x160.jpg" class="img-circle" alt="User Image">
 
                             <p>
-                                <a id="username">Alexander Pierce - Web Developer</a>
-                                <small id="createTime">Member since Nov. 2012</small>
+                                <a id="username">Extra - Web Developer</a>
+                                <small id="createTime"><%=user.getCreateTime()%></small>
                             </p>
                         </li>
                         <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="row">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </div>
+                        <%--<li class="user-body">--%>
+                            <%--<div class="row">--%>
+                                <%--<div class="col-xs-4 text-center">--%>
+                                    <%--<a href="#">Followers</a>--%>
+                                <%--</div>--%>
+                                <%--<div class="col-xs-4 text-center">--%>
+                                    <%--<a href="#">Sales</a>--%>
+                                <%--</div>--%>
+                                <%--<div class="col-xs-4 text-center">--%>
+                                    <%--<a href="#">Friends</a>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
                             <!-- /.row -->
-                        </li>
+                        <%--</li>--%>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="<%=path%>/singout" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>
@@ -89,8 +91,7 @@
                 <img src="../../static/images/user_160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <p><%=user.getUserName()%></p>
             </div>
         </div>
         <!-- search form -->
@@ -107,18 +108,19 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Gráfico de Barras</span>
-.                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+
+            <li  class="active">
+                <a href="<%=path%>/admin/main">
+                    <i class="fa fa-dashboard"></i> <span>Home</span>
+                    <span class="pull-right-container">
+              <small class="label pull-right bg-green">chart</small>
             </span>
                 </a>
             </li>
 
 
             <li>
-                <a href="<%=path%>/home/showALlList">
+                <a href="<%=path%>/admin/showALlList">
                     <i class="fa fa-th"></i> <span>Widgets</span>
                     <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
@@ -129,23 +131,47 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
-                    <span>Opção</span>
+                    <span>Option</span>
                     <span class="pull-right-container">
               <span class="label label-primary pull-right">10</span>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href='
-'><i class="fa fa-circle-o"></i> 1</a></li>
-                    <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>2</a></li>
-                    <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> 3</a></li>
-                    <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> 4</a></li>
-                    <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> 5</a></li>
-                    <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> 6</a></li>
-                    <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> 7</a></li>
-                    <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> 8</a></li>
-                    <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> 9</a></li>
-                    <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> 10</a></li>
+                    <li>
+                        <a href="<c:url value="/admin/option"><c:param name="option" value="1"/> </c:url>">
+                            <i class="fa fa-circle-o"></i>
+                            Mllhar</a>
+                    </li>
+
+                    <li>
+                        <a href="<c:url value="/admin/option"><c:param name="option" value="2"/> </c:url>">
+                            <i class="fa fa-circle-o"></i>
+                            Centena</a>
+                    </li>
+                    <li>
+                        <a href="<c:url value="/admin/option"><c:param name="option" value="3"/> </c:url>">
+                            <i class="fa fa-circle-o"></i> Dezena</a></li>
+                    <li>
+                        <a href="<c:url value="/admin/option"><c:param name="option" value="4"/> </c:url>">
+                            <i class="fa fa-circle-o"></i> Mllhar 1/5</a></li>
+                    <li>
+                        <a href="<c:url value="/admin/option"><c:param name="option" value="5"/> </c:url>">
+                            <i class="fa fa-circle-o"></i> Centena 1/5</a></li>
+                    <li>
+                        <a href="<c:url value="/admin/option"><c:param name="option" value="6"/> </c:url>">
+                            <i class="fa fa-circle-o"></i> Dezena 1/5</a></li>
+                    <li>
+                        <a href="<c:url value="/admin/option"><c:param name="option" value="7"/> </c:url>">
+                            <i class="fa fa-circle-o"></i> Terno Dezena</a></li>
+                    <li>
+                        <a href="<c:url value="/admin/option"><c:param name="option" value="8"/> </c:url>">
+                            <i class="fa fa-circle-o"></i> Duque de Dezena</a></li>
+                    <li>
+                        <a href="<c:url value="/admin/option"><c:param name="option" value="9"/> </c:url>">
+                            <i class="fa fa-circle-o"></i> Grupo</a></li>
+                    <li>
+                        <a href="<c:url value="/admin/option"><c:param name="option" value="10"/> </c:url>">
+                            <i class="fa fa-circle-o"></i> SurpresInha</a></li>
                 </ul>
             </li>
         </ul>
