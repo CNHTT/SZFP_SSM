@@ -1,7 +1,6 @@
 <%@ page import="com.extra.utils.DataUtils" %>
 <%@ page import="com.extra.model.response.ResponseObj" %>
 <%@ page import="com.extra.utils.GsonUtils" %>
-<%@ page import="com.sun.org.apache.regexp.internal.RE" %>
 <!--<&#45;&#45;-->
   <!--Created by IntelliJ IDEA.-->
   <!--User: 戴尔-->
@@ -25,7 +24,6 @@
 
     }
 %>
-<html>
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -132,6 +130,4 @@
     </section>
 </div>
 
-
 </body>
-</html>

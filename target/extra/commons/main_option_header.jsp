@@ -137,8 +137,12 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li <c:if test="${OPTION_ID ==1}"> class="active" </c:if>
-                        <a href="<c:url value="/admin/option"><c:param name="option" value="1"/> </c:url>">
+                    <li>
+                    <%--<c:if test="${OPTION_ID ==1}"> --%>
+                            <%--class="active"--%>
+                    <%--</c:if>--%>
+                        <a href="<c:url value="/admin/option">
+                            <c:param name="option" value="1"/></c:url>">
                             <i class="fa fa-circle-o"></i>
                             Mllhar</a>
                     </li>

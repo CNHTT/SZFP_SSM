@@ -15,7 +15,7 @@
 <div class="wrapper">
 
 
-    <jsp:include page="/commons/main_header.jsp"/>
+    <jsp:include page="/commons/main_list_header.jsp"/>
 
 
     <!-- Content Wrapper. Contains page content -->
