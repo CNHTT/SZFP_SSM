@@ -137,43 +137,72 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li>
-                    <%--<c:if test="${OPTION_ID ==1}"> --%>
-                            <%--class="active"--%>
-                    <%--</c:if>--%>
+                    <li
+                    <c:if test="${OPTION_ID ==1}">
+                            class="active"
+                    </c:if>>
                         <a href="<c:url value="/admin/option">
                             <c:param name="option" value="1"/></c:url>">
                             <i class="fa fa-circle-o"></i>
                             Mllhar</a>
                     </li>
 
-                    <li>
+                    <li
+                            <c:if test="${OPTION_ID ==2}">
+                                class="active"
+                            </c:if>>
                         <a href="<c:url value="/admin/option"><c:param name="option" value="2"/> </c:url>">
                             <i class="fa fa-circle-o"></i>
                             Centena</a>
                     </li>
-                    <li>
+
+                    <li
+                            <c:if test="${OPTION_ID ==3}">
+                                class="active"
+                            </c:if>>
                         <a href="<c:url value="/admin/option"><c:param name="option" value="3"/> </c:url>">
                             <i class="fa fa-circle-o"></i> Dezena</a></li>
-                    <li>
+
+                    <li
+                            <c:if test="${OPTION_ID ==4}">
+                                class="active"
+                            </c:if>>
                         <a href="<c:url value="/admin/option"><c:param name="option" value="4"/> </c:url>">
                             <i class="fa fa-circle-o"></i> Mllhar 1/5</a></li>
-                    <li>
+                    <li
+                            <c:if test="${OPTION_ID ==5}">
+                                class="active"
+                            </c:if>>
                         <a href="<c:url value="/admin/option"><c:param name="option" value="5"/> </c:url>">
                             <i class="fa fa-circle-o"></i> Centena 1/5</a></li>
-                    <li>
+                    <li
+                            <c:if test="${OPTION_ID ==6}">
+                                class="active"
+                            </c:if>>
                         <a href="<c:url value="/admin/option"><c:param name="option" value="6"/> </c:url>">
                             <i class="fa fa-circle-o"></i> Dezena 1/5</a></li>
-                    <li>
+                    <li
+                            <c:if test="${OPTION_ID ==7}">
+                                class="active"
+                            </c:if>>
                         <a href="<c:url value="/admin/option"><c:param name="option" value="7"/> </c:url>">
                             <i class="fa fa-circle-o"></i> Terno Dezena</a></li>
-                    <li>
+                    <li
+                            <c:if test="${OPTION_ID ==8}">
+                                class="active"
+                            </c:if>>
                         <a href="<c:url value="/admin/option"><c:param name="option" value="8"/> </c:url>">
                             <i class="fa fa-circle-o"></i> Duque de Dezena</a></li>
-                    <li>
+                    <li
+                            <c:if test="${OPTION_ID ==9}">
+                                class="active"
+                            </c:if>>
                         <a href="<c:url value="/admin/option"><c:param name="option" value="9"/> </c:url>">
                             <i class="fa fa-circle-o"></i> Grupo</a></li>
-                    <li>
+                    <li
+                            <c:if test="${OPTION_ID ==10}">
+                                class="active"
+                            </c:if>>
                         <a href="<c:url value="/admin/option"><c:param name="option" value="10"/> </c:url>">
                             <i class="fa fa-circle-o"></i> SurpresInha</a></li>
                 </ul>
