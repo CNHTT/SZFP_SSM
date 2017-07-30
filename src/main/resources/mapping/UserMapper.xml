@@ -25,17 +25,17 @@
 
 
     <select id="selectUserById" parameterType="java.lang.Long" resultMap="UserBaseMap">
-        SELECT * FROM user WHERE ID = #{userId}
+        SELECT ID,USER_NAME ,USER_EMAIL,CREATE_TIME FROM user WHERE ID = #{userId}
     </select>
 
     <select id="selectUserByPhoneOrEmail" resultMap="UserBaseMap">
-        SELECT * FROM user
+        SELECT ID,USER_NAME ,USER_EMAIL,CREATE_TIME FROM user
         WHERE USER_EMAIL = #{emailOrPhone} OR USER_PHONE = #{emailOrPhone}
         AND  IS_DELETE= #{state}
     </select>
     
     <select id="selectUserByLogin" resultMap="UserBaseMap">
-        SELECT  * FROM  user
+        SELECT  ID,USER_NAME ,USER_EMAIL,CREATE_TIME FROM  user
         WHERE (USER_NAME = #{nameOrEmail} OR USER_EMAIL = #{nameOrEmail})
         AND  USER_PWD = #{password} AND IS_DELETE=1
     </select>

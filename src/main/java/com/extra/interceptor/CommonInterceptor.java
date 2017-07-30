@@ -20,7 +20,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
     private static final String[] IGNORE_URI={"/login","/singin"};
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info("==============执行顺序: 1、preHandle================");
+
         if ("GET".equalsIgnoreCase(request.getMethod())){
             log.info(" RequestUtil.saveRequest();  ");
 
@@ -45,6 +45,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
         log.info("url:"+url);
         String username = (String) request.getSession().getAttribute(SessionUtils.SESSION_ADMIN_USER);
         if(username == null){
+            log.info("==============执行顺序: 1、preHandle================");
             response.sendRedirect("/login");
             return false;
         }else
