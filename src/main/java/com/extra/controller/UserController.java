@@ -56,7 +56,6 @@ public class UserController extends BaseController{
 
     @RequestMapping("/login")
     public String toIndex(){
-        System.out.println("wangshuo....show_template");
         log.info("sing in---0011--------");
         return "login";
     }
@@ -71,6 +70,8 @@ public class UserController extends BaseController{
             return responseFail(e.toString());
         }
     }
+
+
 
 
     /**

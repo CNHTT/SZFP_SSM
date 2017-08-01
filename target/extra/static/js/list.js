@@ -39,6 +39,7 @@ function displayPage(curtpage,tpage) {
 var urlRootContext=(function () {
     var strPath = window.document.location.pathname;
     var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1);
+    postPath = "192.168.0.126:8080"
     return postPath;
 })();
 
@@ -49,7 +50,7 @@ var urlRootContext=(function () {
  * @param b
  */
 function buildTable(userName, a, b) {
-    var   url = urlRootContext +"/user/list.do"
+    var   url = "/user/list.do"
     console.log('url',url)
     var   reqParmes = {'pageNumber':a,'pageSize':b}
     $(function () {

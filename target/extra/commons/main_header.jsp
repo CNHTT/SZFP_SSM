@@ -120,7 +120,7 @@
 
 
             <li>
-                <a href="<%=path%>/admin/showALlList">
+                <a href="<%=path%>/admin/list">
                     <i class="fa fa-th"></i> <span>Widgets</span>
                     <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>

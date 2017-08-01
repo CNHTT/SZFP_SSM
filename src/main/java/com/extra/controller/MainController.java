@@ -1,5 +1,6 @@
 package com.extra.controller;
 
+import com.extra.service.UserService;
 import com.extra.utils.SessionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -17,6 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/admin")
 public class MainController {
     private Logger log = Logger.getLogger(UserController.class);
+
+    @Resource
+    private UserService userService;
 
 
     @RequestMapping("/main")
@@ -31,9 +36,15 @@ public class MainController {
         return  "main_option";
     }
 
-    @RequestMapping("/showALlList")
+    @RequestMapping("/list")
     public String showMainData(){
+
         return "main_data";
+    }
+    @RequestMapping("/showAllList")
+    public String showAllList(){
+
+        return "showAllList";
     }
 
 }
