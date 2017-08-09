@@ -31,3 +31,99 @@
 非正浮点数（负浮点数 + 0） ^((-\d+(\.\d+)?)|(0+(\.0+)?))$
 负浮点数 ^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$
 浮点数 ^(-?\d+)(\.\d+)?$
+
+SELECT  * FROM  user;
+
+create table user
+(
+  ID int(10) auto_increment,
+  USER_NAME varchar(255) not null comment '用户名',
+  USER_PWD varchar(255) not null comment '用户密码',
+  USER_EMAIL varchar(255) not null comment '用户邮箱',
+  CREATE_TIME TIMESTAMP default CURRENT_TIMESTAMP not null comment '注册时间',
+  MODIFY_TIME TIMESTAMP  not null comment '注册时间',
+  USER_PHONE varchar(255) null comment '昵称',
+  IS_DELETE tinyint(1) default '1' not null comment '账户状态',
+  constraint id
+  unique (ID)
+)
+  comment '用户信息表'
+;
+
+
+
+
+create table operator
+(
+  ID int(10) auto_increment
+    primary key,
+  ADMIN_ID int(10) null,
+  OPERTOR_NAME varchar(255) not null comment '操作人员名字',
+  OPERTOR_EMAIL varchar(255) not null comment '邮件',
+  OPERTOR_PHONE varchar(255) not null comment '电话号码',
+  OPERTOR_PWD varchar(255) not null comment '密码',
+  CREATE_TIME timestamp default CURRENT_TIMESTAMP not null comment '创建时间',
+  IS_DELETE tinyint(1) default '1' not null comment '账户状态',
+  OPERTOR_NUMBER varchar(255) not null comment '20170201001-001',
+  constraint operator_ibfk_1
+  foreign key (ADMIN_ID) references szfp.user (ID)
+)
+  comment '用户信息表'
+;
+
+create index ADMIN_ID
+  on operator (ADMIN_ID)
+;
+
+
+CREATE  TABLE report_history(
+  ID INT(10) AUTO_INCREMENT PRIMARY KEY ,
+  ADMIN_ID INT(10),
+  OPERTOR_ID  INT(10),
+  AWARD_TIME  VARCHAR(255) NOT NULL ,
+  CREATE_TIME TIMESTAMP default CURRENT_TIMESTAMP not null comment '购买时间',
+  TerminalID  VARCHAR(255) NOT NULL  COMMENT '终端ID',
+  TICKET_ID   VARCHAR(255)  NOT NULL  COMMENT '彩票ID(票号)',
+  TOTAL       VARCHAR(255)NOT NULL ,
+  CONSTRAINT  pk_1 FOREIGN KEY (ADMIN_ID) REFERENCES user(ID),
+  CONSTRAINT  pk_2 FOREIGN KEY (OPERTOR_ID) REFERENCES  operator(ID)
+)COMMENT  '记录报表';
+
+
+CREATE  TABLE game_class(
+  ID INT(10) AUTO_INCREMENT PRIMARY KEY ,
+  GAME_KEY   VARCHAR(255) NOT NULL,
+  GAME_VAULE   VARCHAR(255) NOT NULL,
+  GAME_VAULE_L   VARCHAR(255) NOT NULL
+) COMMENT  '游戏分类';
+
+
+
+CREATE  TABLE item_game_class(
+  ID INT(10) AUTO_INCREMENT PRIMARY KEY ,
+  ADMIN_ID INT(10),
+  OPERTOR_ID INT(10),
+  REPORT_HISTORY_ID INT(10),
+  ITEM_GAME    VARCHAR(255) NOT NULL ,
+  SECO_VAULE   VARCHAR(255) DEFAULT '1' NOT NULL ,
+  ITEM_GAME_VAULE VARCHAR(255),
+  CONSTRAINT  pk_4 FOREIGN KEY (ADMIN_ID) REFERENCES user(ID),
+  CONSTRAINT  pk_5 FOREIGN KEY (OPERTOR_ID) REFERENCES  operator(ID),
+  CONSTRAINT  pk_6 FOREIGN KEY (REPORT_HISTORY_ID) REFERENCES report_history(ID)
+)COMMENT 'item_class'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
