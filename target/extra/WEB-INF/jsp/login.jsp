@@ -108,6 +108,10 @@
                             <input id="emailsignup" name="emailsignup" type="email" placeholder="mysupermail@mail.com"/>
                         </p>
                         <p>
+                            <label for="sitesignup" class="yousite" data-icon="L" > Please enter address</label>
+                            <input id="sitesignup" name="sitesignup" type="site" placeholder="Eastern district, guan long"/>
+                        </p>
+                        <p>
                             <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
                             <input id="passwordsignup" name="passwordsignup"   type="password" placeholder="eg. X8df!90EO"/>
                         </p>

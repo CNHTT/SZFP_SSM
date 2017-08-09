@@ -55,7 +55,7 @@ function buildTable(userName, a, b) {
     var   reqParmes = {'pageNumber':a,'pageSize':b}
     $(function () {
         $.ajax({
-            type:"get",
+            type:"post",
             url:url,
             data:reqParmes,
             async:true,
