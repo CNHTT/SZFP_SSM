@@ -35,6 +35,12 @@
       FROM operator ,user
       WHERE  ( OPERTOR_NAME = #{operatorName} OR OPERTOR_EMAIL = #{operatorName})
       AND  operator.OPERTOR_PWD = #{operatorPwd} AND operator.IS_DELETE=1
+    </select>
 
+    <select id="selectOperatorList" resultType="com.extra.model.Operator">
+        SELECT ID as id,ADMIN_ID as adminID ,OPERTOR_EMAIL as operatorEmail,
+        OPERTOR_NUMBER as operatorNumber ,OPERTOR_NAME as operatorName ,IS_DELETE as isDelete
+        FROM operator
+        WHERE ADMIN_ID =#{adminID}
     </select>
 </mapper>

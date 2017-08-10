@@ -2,7 +2,10 @@ package com.extra.service.impl;
 
 import com.extra.dao.OperatorDao;
 import com.extra.model.Operator;
+import com.extra.model.response.ResponsePage;
 import com.extra.service.OperatorService;
+import com.extra.utils.BeanUtils;
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,5 +40,12 @@ public class OperatorServiceImpl implements OperatorService {
 
     public Operator loginMP(Operator operator) {
         return operatorDao.loginOperator(operator);
+    }
+
+    public ResponsePage<Operator> queryByPage(Integer pageNo, Integer pageSize, Long adminID) {
+        pageNo      = pageNo ==null?1:pageNo;
+        pageSize    = pageSize ==null?1 :pageSize;
+        PageHelper.startPage(pageNo,pageSize);
+        return BeanUtils.toResponseResult(operatorDao.selectOperatorList(adminID));
     }
 }

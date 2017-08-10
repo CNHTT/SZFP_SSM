@@ -1,6 +1,8 @@
 package com.extra.controller;
 
+import com.extra.model.ItemGames;
 import com.extra.model.Operator;
+import com.extra.model.ReportHistory;
 import com.extra.model.User;
 import com.extra.model.response.ResponseObj;
 import com.extra.model.response.ResponsePage;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.extra.utils.DataUtils.isNullString;
@@ -63,19 +66,52 @@ public class OperatorController extends BaseController {
     }
 
 
-    @RequestMapping(value = "getAllOperator",method = RequestMethod.POST)
+    /**
+     *
+     * @param adminID
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping(value = "getOperatorList.mp",method = RequestMethod.GET)
     @ResponseBody
-    public  String   getALlOperator(Long adminID,Integer pageNumber, Integer pageSize, ){
+    public  String   getALlOperator(Long adminID,Integer pageNumber, Integer pageSize){
         log.info("分页查询Operator信息"+pageNumber +" , "+pageSize);
         try {
             ResponsePage<Operator> responsePage = operatorService.queryByPage(pageNumber,pageSize,adminID);
             return responseResult(responsePage);
         }catch (Exception e){
-            responseFail(e.toString());
+           return   responseFail(e.toString());
         }
+    }
 
-    };
 
 
+    @RequestMapping(value = "postHistory.mp",method = RequestMethod.POST)
+    @ResponseBody
+    public String   putReportHistory(){
+        ReportHistory reportHistory = new ReportHistory();
+
+        reportHistory.setAdminID((long) 11);
+        reportHistory.setOperatorID((long) 1);
+        reportHistory.setAWARD_TIME("12H");
+        reportHistory.setTerminalID("0001");
+        reportHistory.setTicketID("010101401");
+        reportHistory.setTotal("sss");
+        List<ItemGames> list  =  new ArrayList<ItemGames>();
+        ItemGames itemGames =  new ItemGames();
+        itemGames.setAdminID(reportHistory.getAdminID());
+        itemGames.setOperatorID(reportHistory.getOperatorID());
+        itemGames.setItemGame("A");
+        itemGames.setSecoValue("00X00");
+        itemGames.setSecoValue("0.25");
+        itemGames.setGameKey("1");
+        list.add(itemGames);
+        reportHistory.setItemGames(list);
+
+
+        return responseResult(reportHistory);
+    }
 
 }
+
