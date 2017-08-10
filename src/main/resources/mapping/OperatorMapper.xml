@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.extra.dao.OperatorDao">
+    <resultMap id="OperatorBaseMap" type="com.extra.model.Operator">
+        <id column="ID" property="ID" jdbcType="BIGINT"/>
+        <result column="ADMIN_ID" property="adminID" jdbcType="BIGINT"/>
+        <result column="OPERTOR_NAME" property="operatorName" jdbcType="VARCHAR"/>
+        <result column="OPERTOR_EMAIL" property="operatorEmail" jdbcType="VARCHAR"/>
+        <result column="OPERTOR_PHONE" property="operatorPhone" jdbcType="VARCHAR"/>
+        <result column="OPERTOR_PWD" property="operatorPwd" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="operatorCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="IS_DELETE" property="isDelete" jdbcType="SMALLINT"/>
+        <result column="OPERTOR_NUMBER" property="operatorNumber" jdbcType="VARCHAR"/>
+        <collection property="otherInfo" ofType="com.extra.model.OtherInformation">
+            <result property="site" column="SITE"/>
+        </collection>
+    </resultMap>
+
+    <insert id="insertOperator" parameterType="com.extra.model.Operator">
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT  LAST_INSERT_ID()
+        </selectKey>
+        INSERT  INTO  operator(ADMIN_ID,OPERTOR_NAME,OPERTOR_EMAIL,OPERTOR_PWD,OPERTOR_NUMBER)
+        VALUES (#{adminID},#{operatorName},#{operatorEmail},#{operatorPwd},#{operatorNumber})
+    </insert>
+
+
+    <select id="selectCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        SELECT  count(*) FROM  operator WHERE  ADMIN_ID =#{adminID}
+    </select>
+
+
+    <select id="loginOperator"  resultMap="OperatorBaseMap">
+      SELECT  operator.ID,ADMIN_ID,OPERTOR_EMAIL,OPERTOR_NAME,OPERTOR_NUMBER,SITE
+      FROM operator ,user
+      WHERE  ( OPERTOR_NAME = #{operatorName} OR OPERTOR_EMAIL = #{operatorName})
+      AND  operator.OPERTOR_PWD = #{operatorPwd} AND operator.IS_DELETE=1
+
+    </select>
+</mapper>

@@ -16,12 +16,22 @@ public class User {
     private String userEmail;
     private String userPwd;
     private String pwdSalt;
+    private String site;
     private String cookie;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date createTime;
     private Date modifyTime;
     private String strTime;
+    private String uniqueNumber;
 
+
+    public String getUniqueNumber() {
+        return uniqueNumber;
+    }
+
+    public void setUniqueNumber(String uniqueNumber) {
+        this.uniqueNumber = uniqueNumber;
+    }
 
     public String getStrTime() {
         return TimeUtils.date2String(createTime);
@@ -103,6 +113,22 @@ public class User {
 
     public void setIsDelete(Short isDelete) {
         this.isDelete = isDelete;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+    public String getCookie() {
+        return cookie;
+    }
+
+    public void setCookie(String cookie) {
+        this.cookie = cookie;
     }
 
     @Override

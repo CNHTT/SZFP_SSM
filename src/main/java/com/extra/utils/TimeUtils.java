@@ -33,6 +33,10 @@ public class TimeUtils {
      * 天与毫秒的倍数
      */
     public static final int DAY = 86400000;
+
+
+
+
     public enum TimeUnit {
         MSEC,
         SEC,
@@ -198,6 +202,7 @@ public class TimeUtils {
      */
     public static final SimpleDateFormat DEFAULT_SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     public static final SimpleDateFormat DEFAULT_YMD = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat DEFAULT_MDY = new SimpleDateFormat("MMddyy");
 
 
     /**
@@ -222,7 +227,21 @@ public class TimeUtils {
     public static String milliseconds2String(long milliseconds, SimpleDateFormat format) {
         return format.format(new Date(milliseconds));
     }
+    public static String getUniqueNumber(int uID) {
+        String  result = date2String(new Date(),DEFAULT_MDY);
+        int length = 4;
+        String codeFormat ="%0"+String.valueOf(length)+"d";
+        String UID = String.format(codeFormat,(uID+1));
+        return result+UID;
+    }
 
+
+    public static String getOperatorNumber(String uniqueNumber, int opNum) {
+        int length = 4;
+        String codeFormat ="%0"+String.valueOf(length)+"d";
+        String UID = String.format(codeFormat,(opNum+1));
+        return uniqueNumber+"_"+UID;
+    }
     /**
      * 将时间字符串转为时间戳
      * <p>格式为yyyy-MM-dd HH:mm:ss</p>

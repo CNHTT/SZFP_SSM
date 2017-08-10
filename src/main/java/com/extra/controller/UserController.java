@@ -1,23 +1,23 @@
 package com.extra.controller;
 
+import com.extra.model.Operator;
 import com.extra.model.User;
 import com.extra.model.response.ResponsePage;
+import com.extra.service.OperatorService;
 import com.extra.service.UserService;
-import com.extra.utils.DataUtils;
 import com.extra.utils.MD5Util;
+import com.extra.utils.TimeUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static com.extra.utils.DataUtils.isNullString;
@@ -32,6 +32,8 @@ public class UserController extends BaseController{
 
     @Resource
     private UserService userService;
+    @Resource
+    private OperatorService operatorService;
 
     @RequestMapping("/showUser")
     public String showUser(HttpServletRequest request, Model model){
@@ -86,22 +88,42 @@ public class UserController extends BaseController{
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String pwd  = request.getParameter("pwd");
+        String  site = request.getParameter("site");
         log.info("name："+name+"          email: "+email+"        passWord: "+pwd);
 
-        if (isNullString(name)||isNullString(email)||isNullString(pwd)){
-            return  responseFail("信息不能为空");
+        if (isNullString(name)||isNullString(email)||isNullString(pwd)||isNullString(site)){
+            return  responseFail("Information cannot be empty");
         }
 
-        HashMap<String ,String> users = new HashMap<String, String>();
-        users.put("username",name);
-        users.put("email",email);
-        users.put("pwd", MD5Util.string2MD5(pwd));
+
+
+        int  uID = userService.getUid();
+        String uniqueNumber  = TimeUtils.getUniqueNumber(uID);
+        User  user = new User();
+        user.setUserName(name);
+        user.setUserEmail(email);
+        user.setUserPwd(MD5Util.string2MD5(pwd));
+        user.setSite(site);
+        user.setUniqueNumber(uniqueNumber);
 
         try {
-            if (userService.insertUsers(users)){
-                return  responseSuccess("注册成功");
+            if (userService.insertUsers(user)){
+
+                int opNum = operatorService.getOpNum(user.getId());
+                Operator operator = new Operator();
+                operator.setAdminID(user.getId());
+                operator.setOperatorEmail(user.getUserEmail());
+                operator.setOperatorName(user.getUserName());
+                operator.setOperatorPwd(user.getUserPwd());
+                operator.setOperatorNumber(TimeUtils.getOperatorNumber(user.getUniqueNumber(),opNum));
+
+                if (operatorService.insertOperator(operator)){
+                    return  responseSuccess("registered successfully");
+                }else {
+                    return  responseFail("Admin registered successfully But Operator   registration failed");
+                }
             }else {
-                return  responseFail("注册失败");
+                return  responseFail("registration failed");
             }
         }catch (Exception e){
             return responseFail(e.toString());

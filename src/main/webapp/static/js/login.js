@@ -44,6 +44,14 @@ function  userReg() {
            time:3
        });
        return false;
+   }  if ($("#sitesignup").val() == ""){
+       $("#sitesignup").focus();
+       $("#sitesignup").tips({
+           sida:1,
+           msg:"地址不能为空",
+           time:3
+       });
+       return false;
    }
 
 
@@ -85,8 +93,8 @@ function  userReg() {
     var  regName = $("#usernamesignup").val();
    var  regEmail = $("#emailsignup").val();
    var  regPwd = $("#passwordsignup").val();
-
-   var  reqParmes = {'name':regName,'email':regEmail,"pwd":regPwd}
+   var  site =  $("#sitesignup").val();
+   var  reqParmes = {'name':regName,'email':regEmail,"pwd":regPwd,"site":site}
     $.ajax({
        type:"POST" ,
         url :'/user/register',

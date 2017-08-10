@@ -12,9 +12,11 @@ import java.util.Map;
  */
 @Repository
 public interface UserDao {
-    int     insertUser(Map<String, String> map);
+    int     insertUser(User user);
     User selectUserById(@Param("userId")Long userID);
     User selectUserByPhoneOrEmail(@Param("emailOrPhone") String emailOrPhone, @Param("state") Short state);
     List<User> selectAllUser();
     User selectUserByLogin(@Param("nameOrEmail")String nameOrEmail,@Param("password")String pass);
+    int   selectCount();
+    int   insertOperator(Map<String,String> map);
 }

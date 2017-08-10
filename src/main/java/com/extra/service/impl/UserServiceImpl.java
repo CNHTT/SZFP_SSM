@@ -26,14 +26,15 @@ public class UserServiceImpl implements UserService{
 
 
 
-    public boolean insertUsers(Map<String, String> param) {
+    public boolean insertUsers(User user) {
 
-       int a= userDao.insertUser(param);
+       int a= userDao.insertUser(user);
        if (a ==0){
            return false;
        }
         return true;
     }
+
 
     public List<User> getAllUser() {
         return userDao.selectAllUser();
@@ -52,6 +53,10 @@ public class UserServiceImpl implements UserService{
         pageSize    = pageSize ==null?1 :pageSize;
         PageHelper.startPage(pageNo,pageSize);
         return BeanUtils.toResponseResult((ArrayList<User>) userDao.selectAllUser());
+    }
+
+    public int getUid() {
+        return userDao.selectCount();
     }
 
 }

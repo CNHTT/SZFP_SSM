@@ -12,11 +12,12 @@ import java.util.Map;
 public interface UserService {
     /**
      * 添加用户信息
-     * @param param
+     * @param user
      */
-    public boolean insertUsers(Map<String, String> param);
+    public boolean insertUsers(User user);
     List<User> getAllUser();
     User getUserByPhoneOrEmail(String  emailOrPone,Short state);
     User getUserById(Long userId);
     ResponsePage<User> queryByPage(Integer pageNo,Integer pageSize);
+    int    getUid();
 }

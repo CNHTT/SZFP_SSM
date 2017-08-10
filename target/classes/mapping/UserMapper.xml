@@ -9,6 +9,8 @@
         <result column="USER_EMAIL" property="userEmail" jdbcType="VARCHAR"/>
         <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR"/>
         <result column="PWD_SALT" property="pwdSalt" jdbcType="VARCHAR"/>
+        <result column="SITE" property="site" jdbcType="VARCHAR"/>
+        <result column="UNIQUE_NUMBER" property="uniqueNumber" jdbcType="VARCHAR"/>
         <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP"/>
         <result column="SESSION_COOKIE" property="cookie" jdbcType="VARCHAR"/>
@@ -16,17 +18,24 @@
     </resultMap>
 
 
-    <insert id="insertUser" parameterType="Map"  >
-        <selectKey  keyProperty="id" resultType="java.lang.Integer" order="AFTER">
-            SELECT  LAST_INSERT_ID() AS ID
+    <insert id="insertUser" parameterType="com.extra.model.User"  >
+        <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT  LAST_INSERT_ID()
         </selectKey>
-        INSERT INTO user ( USER_NAME, USER_PWD, USER_EMAIL) VALUES (#{username}, #{pwd}, #{email});
+        INSERT INTO user ( USER_NAME, USER_PWD, USER_EMAIL,SITE,UNIQUE_NUMBER) VALUES (#{userName}, #{userPwd}, #{userEmail},#{site},#{uniqueNumber});
     </insert>
+
+    
 
 
     <select id="selectUserById" parameterType="java.lang.Long" resultMap="UserBaseMap">
         SELECT ID,USER_NAME ,USER_EMAIL,CREATE_TIME FROM user WHERE ID = #{userId}
     </select>
+
+    <select id="selectCount" parameterType="java.lang.Long" resultType="java.lang.Integer" >
+      SELECT count(*) FROM  user
+    </select>
+
 
     <select id="selectUserByPhoneOrEmail" resultMap="UserBaseMap">
         SELECT ID,USER_NAME ,USER_EMAIL,CREATE_TIME FROM user
