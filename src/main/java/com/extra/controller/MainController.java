@@ -39,6 +39,7 @@ public class MainController {
     @RequestMapping("/list")
     public String showMainData(){
 
+
         return "main_data";
     }
     @RequestMapping("/showAllList")

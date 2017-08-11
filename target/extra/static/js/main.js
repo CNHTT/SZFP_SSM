@@ -347,3 +347,23 @@ $(function () {
 
   $('[data-toggle="tooltip"]').tooltip()
 })
+
+
+function  postdata() {
+
+    var   a = "{\"adminID\":17,\"operatorID\":5,\"AWARD_TIME\":\"12H\",\"terminalID\":\"0001\",\"ticketID\":\"010101401\",\"total\":\"0.75\",\"itemGames\":[{\"adminID\":17,\"operatorID\":5,\"itemGame\":\"A\",\"secoValue\":\"1\",\"gameKey\":\"1\",\"itemGameValue\":\"0.25\"},{\"adminID\":17,\"operatorID\":5,\"itemGame\":\"B\",\"secoValue\":\"1/5\",\"gameKey\":\"2\",\"itemGameValue\":\"0.25\"},{\"adminID\":17,\"operatorID\":5,\"itemGame\":\"C\",\"secoValue\":\"1/10\",\"gameKey\":\"3\",\"itemGameValue\":\"0.25\"}]}";
+    var   json_str = {
+    "data" :a
+}
+    $.ajax({
+        type:"POST" ,
+        url :'/operator/postHistory.mp',
+        data: json_str,
+        dataType:'json',
+        async:true,
+        success:function (data) {
+            alert(data.msg)
+        }
+    });
+
+}

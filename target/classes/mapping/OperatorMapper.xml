@@ -43,4 +43,34 @@
         FROM operator
         WHERE ADMIN_ID =#{adminID}
     </select>
+
+    <insert id="insertReport" parameterType="com.extra.model.ReportHistory">
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO  report_history(ADMIN_ID,OPERTOR_ID,AWARD_TIME,TerminalID,TICKET_ID,TOTAL)
+        VALUES  (#{adminID},#{operatorID},#{AWARD_TIME},#{terminalID},#{ticketID},#{total})
+    </insert>
+
+
+    <insert id="inertItemGames" parameterType="java.util.List">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT  INTO
+        item_game_class(
+        ADMIN_ID,
+        OPERTOR_ID,
+        REPORT_HISTORY_ID,
+        ITEM_GAME,
+        SECO_VAULE,
+        ITEM_GAME_VAULE,
+        GAME_KEY)
+        VALUES 
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.adminID},#{item.operatorID},#{item.reportHistoryID},#{item.itemGame},#{item.secoValue},#{item.itemGameValue},#{item.gameKey})
+        </foreach>
+
+    </insert>
 </mapper>

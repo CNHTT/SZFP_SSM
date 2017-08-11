@@ -2,13 +2,15 @@ package com.extra.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Transient;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by CT on 2017/8/10.
  */
-public class ReportHistory {
+public class ReportHistory implements Serializable {
 
     private Long id;
     private Long adminID;
@@ -19,8 +21,14 @@ public class ReportHistory {
     private String terminalID;
     private String ticketID;
     private String total;
+    @Transient
     private List<ItemGames> itemGames;
 
+
+    /**
+     *
+     */
+    private String operatorName;
 
     public Long getId() {
         return id;

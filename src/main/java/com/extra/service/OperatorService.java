@@ -1,7 +1,11 @@
 package com.extra.service;
 
+import com.extra.model.ItemGames;
 import com.extra.model.Operator;
+import com.extra.model.ReportHistory;
 import com.extra.model.response.ResponsePage;
+
+import java.util.List;
 
 /**
  * Created by Extra on 2017/8/10.
@@ -13,4 +17,7 @@ public interface OperatorService {
     int  getOpNum(Long adminID);
     Operator loginMP(Operator operator);
     ResponsePage<Operator> queryByPage(Integer pageNumber, Integer pageSize, Long adminID);
+    boolean insertReport(ReportHistory  reportHistory);
+
+    boolean insertItemGames(List<ItemGames> gamesList);
 }

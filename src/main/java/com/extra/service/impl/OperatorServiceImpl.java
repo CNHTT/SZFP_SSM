@@ -1,7 +1,9 @@
 package com.extra.service.impl;
 
 import com.extra.dao.OperatorDao;
+import com.extra.model.ItemGames;
 import com.extra.model.Operator;
+import com.extra.model.ReportHistory;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.OperatorService;
 import com.extra.utils.BeanUtils;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by Extra on 2017/8/10.
@@ -47,5 +50,25 @@ public class OperatorServiceImpl implements OperatorService {
         pageSize    = pageSize ==null?1 :pageSize;
         PageHelper.startPage(pageNo,pageSize);
         return BeanUtils.toResponseResult(operatorDao.selectOperatorList(adminID));
+    }
+
+    /**
+     *
+     * @param reportHistory
+     * @return
+     */
+    public boolean insertReport(ReportHistory reportHistory) {
+        if (operatorDao.insertReport(reportHistory) ==0)return false;
+        return true;
+    }
+
+    /**
+     *
+     * @param gamesList
+     * @return
+     */
+    public boolean insertItemGames(List<ItemGames> gamesList) {
+        if (operatorDao.inertItemGames(gamesList)==0) return false;
+        return true;
     }
 }

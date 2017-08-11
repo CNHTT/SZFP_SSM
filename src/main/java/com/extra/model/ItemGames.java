@@ -1,9 +1,11 @@
 package com.extra.model;
 
+import java.io.Serializable;
+
 /**
  * Created by CT on 2017/8/10.
  */
-public class ItemGames {
+public class ItemGames implements Serializable {
     private Long idl;
     private Long adminID;
     private Long operatorID;
