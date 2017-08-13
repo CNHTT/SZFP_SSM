@@ -81,7 +81,7 @@
     <div class="control-sidebar-bg"></div>
 </div>
 
-<jsp:include page="/commons/main_end.jsp"/>
+<jsp:include page="/commons/main_data_end.jsp"/>
 
 
 </body>

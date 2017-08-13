@@ -40,13 +40,13 @@ public class LoginController
 
     @RequestMapping("/singout")
     private  String singOut(HttpSession session){
+        session.setAttribute("id",null);
         session.setAttribute(SessionUtils.SESSION_ADMIN_USER,null);
         return "redirect:login";
     }
 
 
     @RequestMapping(value = "/singin" )
-//    @ResponseBody
     private String userLogin(String username, ModelMap model, String password, HttpServletRequest req, HttpSession sessions){
         User user =null;
         ResponseObj<User> responseObj = new ResponseObj<User>();
@@ -61,7 +61,6 @@ public class LoginController
             responseObj.setCode(ResponseObj.FAILED);
             responseObj.setMsg(ResponseObj.FAILED_STR);
             responseObj.setMsg("Please input UserNameOrEmail  PassWord!");
-//            return new GsonUtils().toJson(responseObj);
             req.setAttribute("data",new GsonUtils().toJson(responseObj));
             return "forward:login";
         }
@@ -69,24 +68,20 @@ public class LoginController
         if (DataUtils.isEmpty(user)){
             responseObj.setCode(ResponseObj.EMPUTY);
             responseObj.setMsg("The user does not exist! Please check the");
-//            return new GsonUtils().toJson(responseObj);
-//            req.setAttribute("error",new GsonUtils().toJson(responseObj));
             req.setAttribute("username",username);
             req.setAttribute("pwd",password);
             req.setAttribute("error",new GsonUtils().toJson(responseObj));
             return "forward:login";
         }else {
 
-
             user.setUserPwd(req.getSession().getId());
             responseObj.setData(user);
             responseObj.setCode(ResponseObj.OK);
             responseObj.setMsg("登录成功");
             req.setAttribute("user",user.getUserName());
-           sessions.setAttribute(SessionUtils.SESSION_ADMIN_USER,new GsonUtils().toJson(user));
-//            model.addAttribute("user",new GsonUtils().toJson(user));
+            sessions.setAttribute("id",user.getId());
+            sessions.setAttribute(SessionUtils.SESSION_ADMIN_USER,new GsonUtils().toJson(user));
             return "redirect:admin/main";
-//            return new GsonUtils().toJson(responseObj);
         }
     }
 }

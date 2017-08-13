@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: CT
-  Date: 2017/7/23
-  Time: 18:55
+  Date: 2017/8/13
+  Time: 17:03
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -49,7 +49,5 @@
 <script src="../../static/js/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="../../static/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../../static/js/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../static/js/main.js"></script>

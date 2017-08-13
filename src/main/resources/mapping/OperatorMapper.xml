@@ -15,7 +15,23 @@
             <result property="site" column="SITE"/>
         </collection>
     </resultMap>
+    <resultMap id="ReportList" type="com.extra.model.ReportHistory">
+        <id column="ID" property="id"/>
+        <result column="OPERTOR_NAME" property="operatorName"/>
+        <result column="AWARD_TIME" property="AWARD_TIME"/>
+        <result column="CREATE_TIME"  property="operatorCreateTime"/>
+        <result column="TerminalID" property="terminalID"/>
+        <result column="TICKET_ID" property="ticketID"/>
+        <result column="TOTAL" property="total"/>
+        <collection property="itemGames" ofType="com.extra.model.ItemGames">
+            <result property="id" column="IID"/>
+            <result property="gameName" column="GAME_VAULE"/>
+            <result property="itemGame" column="ITEM_GAME"/>
+            <result property="secoValue" column="SECO_VAULE"/>
+            <result property="itemGameValue" column="ITEM_GAME_VAULE"/>
+        </collection>
 
+    </resultMap>
     <insert id="insertOperator" parameterType="com.extra.model.Operator">
         <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
             SELECT  LAST_INSERT_ID()
@@ -24,11 +40,9 @@
         VALUES (#{adminID},#{operatorName},#{operatorEmail},#{operatorPwd},#{operatorNumber})
     </insert>
 
-
     <select id="selectCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
         SELECT  count(*) FROM  operator WHERE  ADMIN_ID =#{adminID}
     </select>
-
 
     <select id="loginOperator"  resultMap="OperatorBaseMap">
       SELECT  operator.ID,ADMIN_ID,OPERTOR_EMAIL,OPERTOR_NAME,OPERTOR_NUMBER,SITE
@@ -52,7 +66,6 @@
         VALUES  (#{adminID},#{operatorID},#{AWARD_TIME},#{terminalID},#{ticketID},#{total})
     </insert>
 
-
     <insert id="inertItemGames" parameterType="java.util.List">
         <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
             SELECT
@@ -73,4 +86,54 @@
         </foreach>
 
     </insert>
+
+
+
+    
+
+
+    <select id="selectReportList" resultMap="ReportList">
+        SELECT  report_history.ID,AWARD_TIME,report_history.CREATE_TIME,TerminalID,TICKET_ID,TOTAL,
+                operator.OPERTOR_NAME,
+                item_game_class.ID as IID,ITEM_GAME,SECO_VAULE,ITEM_GAME_VAULE,game_class.GAME_VAULE
+        FROM    report_history
+        LEFT  OUTER  JOIN  operator  on report_history.OPERTOR_ID = operator.ID
+        LEFT  OUTER  JOIN  item_game_class ON report_history.ID=item_game_class.REPORT_HISTORY_ID
+        LEFT  OUTER  JOIN  game_class  ON item_game_class.GAME_KEY = game_class.GAME_KEY
+        WHERE  report_history.ADMIN_ID =#{adminID}
+    </select>
+
+
+    <select id="selectReportItemList" resultType="com.extra.model.ReportHistory">
+        SELECT
+        R.ID as id,
+        R.AWARD_TIME AS AWARD_TIME,
+        R.CREATE_TIME AS operatorCreateTime,
+        R.TerminalID AS terminalID,
+        R.TICKET_ID AS  ticketID,
+        R.TOTAL AS  total,
+        O.OPERTOR_NAME as operatorName,
+        (SELECT  count(*) FROM item_game_class WHERE R.ID =item_game_class.REPORT_HISTORY_ID) AS gameSize
+        FROM  report_history R
+        LEFT OUTER JOIN operator O ON  R.OPERTOR_ID =O.ID
+        WHERE  R.ADMIN_ID =#{adminID}
+    </select>
+
+
+    <select id="selectItemGameList" resultType="com.extra.model.ItemGames">
+        SELECT
+        I.ID as id,
+        I.OPERTOR_ID as operatorID ,
+        I.REPORT_HISTORY_ID as reportHistoryID ,
+        I.ITEM_GAME as itemGame ,
+        I.SECO_VAULE AS secoValue,
+        I.ITEM_GAME_VAULE AS itemGameValue,
+        I.GAME_KEY AS gameKey,
+        O.OPERTOR_NAME as operatorName,
+        G.GAME_VAULE  as gameName
+        FROM item_game_class I
+        LEFT OUTER JOIN  operator O ON  I.OPERTOR_ID = O.ID
+        LEFT OUTER JOIN  game_class G  ON  I.GAME_KEY = G.GAME_KEY
+        WHERE I.ADMIN_ID = #{id} AND  I.GAME_KEY = #{type}
+    </select>
 </mapper>

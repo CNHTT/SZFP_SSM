@@ -39,11 +39,10 @@
 <!-- Bootstrap WYSIHTML5 -->
 <script src="../../static/js/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
-
+<script src="../../static/js/bootstrap-paginator.js"/>
 
 <!-- DataTables -->
 <script src="../../static/js/jquery.dataTables.min.js"></script>
-<script src="../../static/js/dataTables.bootstrap.min.js"></script>
 
 <script src="../../static/js/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->

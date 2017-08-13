@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by CT on 2017/8/10.
  */
 public class ItemGames implements Serializable {
-    private Long idl;
+    private Long id;
     private Long adminID;
     private Long operatorID;
     private Long reportHistoryID;
@@ -15,12 +15,31 @@ public class ItemGames implements Serializable {
     private String itemGameValue;
     private String gameKey;
 
+    private String  operatorName;
+    private String  gameName;
+
+    public String getOperatorName() {
+        return operatorName;
+    }
+
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
+    }
+
     public Long getIdl() {
-        return idl;
+        return id;
     }
 
     public void setIdl(Long idl) {
-        this.idl = idl;
+        this.id = idl;
     }
 
     public Long getAdminID() {

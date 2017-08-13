@@ -20,4 +20,10 @@ public interface OperatorService {
     boolean insertReport(ReportHistory  reportHistory);
 
     boolean insertItemGames(List<ItemGames> gamesList);
+
+    ResponsePage<ReportHistory> queryByReportPage(Integer pageNumber, Integer pageSize, Long adminID);
+
+    ResponsePage<ItemGames> queryByItemGameList(Integer pageNumber, Integer pageSize, Long adminID, String type);
+
+    ResponsePage<ReportHistory> queryByReportLiPage(Integer pageNumber, Integer pageSize, Long adminID);
 }

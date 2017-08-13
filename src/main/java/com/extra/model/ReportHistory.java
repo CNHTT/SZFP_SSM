@@ -24,11 +24,30 @@ public class ReportHistory implements Serializable {
     @Transient
     private List<ItemGames> itemGames;
 
+    private String gameSize;
+
 
     /**
      *
      */
     private String operatorName;
+
+
+    public String getGameSize() {
+        return gameSize;
+    }
+
+    public void setGameSize(String gameSize) {
+        this.gameSize = gameSize;
+    }
+
+    public String getOperatorName() {
+        return operatorName;
+    }
+
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName;
+    }
 
     public Long getId() {
         return id;

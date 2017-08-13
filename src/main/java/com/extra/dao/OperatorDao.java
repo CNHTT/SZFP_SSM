@@ -24,4 +24,10 @@ public interface OperatorDao {
     int insertReport(ReportHistory reportHistory);
 
     int inertItemGames(List<ItemGames> list);
+
+    ArrayList<ReportHistory> selectReportList(Long adminID);
+
+    ArrayList<ItemGames> selectItemGameList(@Param("id") Long id, @Param("type") String type);
+
+    ArrayList<ReportHistory> selectReportItemList(Long adminID);
 }

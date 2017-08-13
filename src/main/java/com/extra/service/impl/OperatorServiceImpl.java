@@ -71,4 +71,40 @@ public class OperatorServiceImpl implements OperatorService {
         if (operatorDao.inertItemGames(gamesList)==0) return false;
         return true;
     }
+
+    public ResponsePage<ReportHistory> queryByReportPage(Integer pageNo, Integer pageSize, Long adminID) {
+        pageNo      = pageNo ==null?1:pageNo;
+        pageSize    = pageSize ==null?10 :pageSize;
+        PageHelper.startPage(pageNo,pageSize);
+        return BeanUtils.toResponseResult(operatorDao.selectReportList(adminID));
+    }
+
+    /**
+     *
+     * @param pageNo
+     * @param pageSize
+     * @param adminID
+     * @param type
+     * @return
+     */
+    public ResponsePage<ItemGames> queryByItemGameList(Integer pageNo, Integer pageSize, Long adminID, String type) {
+        pageNo      = pageNo ==null?1:pageNo;
+        pageSize    = pageSize ==null?10 :pageSize;
+        PageHelper.startPage(pageNo,pageSize);
+        return BeanUtils.toResponseResult(operatorDao.selectItemGameList(adminID,type));
+    }
+
+    /**
+     *
+     * @param pageNo
+     * @param pageSize
+     * @param adminID
+     * @return
+     */
+    public ResponsePage<ReportHistory> queryByReportLiPage(Integer pageNo, Integer pageSize, Long adminID) {
+        pageNo      = pageNo ==null?1:pageNo;
+        pageSize    = pageSize ==null?10 :pageSize;
+        PageHelper.startPage(pageNo,pageSize);
+        return BeanUtils.toResponseResult(operatorDao.selectReportItemList(adminID));
+    }
 }

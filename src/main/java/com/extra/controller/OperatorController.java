@@ -9,6 +9,7 @@ import com.extra.model.response.ResponsePage;
 import com.extra.service.OperatorService;
 import com.extra.utils.GsonUtils;
 import com.extra.utils.MD5Util;
+import javafx.geometry.Pos;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -133,15 +134,48 @@ public class OperatorController extends BaseController {
 
     @RequestMapping(value = "reportList.mp",method = RequestMethod.POST)
     @ResponseBody
-    public String getRepoortList(Long adminID,Integer pageNumber, Integer pageSize){
-        log.info("分页查询Operator信息"+pageNumber +" , "+pageSize);
+    public String getReportList(Long adminID,Integer pageNumber, Integer pageSize){
+        log.info("分页查询Report信息"+adminID+","+pageNumber +" , "+pageSize);
+
         try {
-            ResponsePage<Operator> responsePage = operatorService.queryByPage(pageNumber,pageSize,adminID);
+            ResponsePage<ReportHistory> responsePage = operatorService.queryByReportPage(pageNumber,pageSize,adminID);
             return responseResult(responsePage);
         }catch (Exception e){
             return   responseFail(e.toString());
         }
     }
 
+    /**
+     *
+     * @param adminID
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping(value ="reportLl.mp",method = RequestMethod.POST)
+    @ResponseBody
+    public String getReportItemList(Long adminID,Integer pageNumber, Integer pageSize){
+        log.info("分页查询Report信息"+adminID+","+pageNumber +" , "+pageSize);
+
+        try {
+            ResponsePage<ReportHistory> responsePage = operatorService.queryByReportLiPage(pageNumber,pageSize,adminID);
+            return responseResult(responsePage);
+        }catch (Exception e){
+            return   responseFail(e.toString());
+        }
+    }
+
+
+    @RequestMapping(value = "itemGameList.mp",method = RequestMethod.POST)
+    @ResponseBody
+    public String getItemGameList(Long adminID,String type,Integer pageNumber, Integer pageSize){
+        log.info("分页查询Report信息"+pageNumber +" , "+pageSize);
+        try {
+            ResponsePage<ItemGames> responsePage = operatorService.queryByItemGameList(pageNumber,pageSize,adminID,type);
+            return responseResult(responsePage);
+        }catch (Exception e){
+            return   responseFail(e.toString());
+        }
+    }
 }
 
