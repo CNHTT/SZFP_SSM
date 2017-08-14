@@ -154,17 +154,37 @@ public class OperatorController extends BaseController {
      */
     @RequestMapping(value ="reportLl.mp",method = RequestMethod.POST)
     @ResponseBody
-    public String getReportItemList(Long adminID,Integer pageNumber, Integer pageSize){
+    public String getReportItemList(Long adminID,Integer pageNumber, Integer pageSize,String time){
         log.info("分页查询Report信息"+adminID+","+pageNumber +" , "+pageSize);
 
         try {
-            ResponsePage<ReportHistory> responsePage = operatorService.queryByReportLiPage(pageNumber,pageSize,adminID);
+            ResponsePage<ReportHistory> responsePage = operatorService.queryByReportLiPage(pageNumber,pageSize,adminID,time);
             return responseResult(responsePage);
         }catch (Exception e){
             return   responseFail(e.toString());
         }
     }
 
+    /**
+     *
+     * @param adminID
+     * @param rID
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping(value = "reportLlItem.mp" ,method = RequestMethod.POST)
+    @ResponseBody
+    public String getReportItemGameList(Long adminID,Long rID,Integer pageNumber, Integer pageSize){
+        log.info("分页查询ReportItem信息"+adminID+","+pageNumber +" , "+pageSize);
+
+        try {
+            ResponsePage<ItemGames> responsePage = operatorService.queryByReportLiItemPage(pageNumber,rID,pageSize,adminID);
+            return responseResult(responsePage);
+        }catch (Exception e){
+            return   responseFail(e.toString());
+        }
+    }
 
     @RequestMapping(value = "itemGameList.mp",method = RequestMethod.POST)
     @ResponseBody

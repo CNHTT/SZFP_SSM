@@ -38,6 +38,11 @@
                     <div class="box">
                         <div class="box-header">
                             <h3 class="box-title">Hover Data Table</h3>
+                            <small>
+                                Showing 1 to 10
+                            </small>
+                            <input class="text-right" type="text"  id="datetimepicker">
+                            <button class=" ion-android-search" onclick="searchByTime()"></button>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -72,20 +77,10 @@
                                 </tr>
                                 </tfoot>
                             </table>
-
                             <section class="content-header">
-                                <div class="col-sm-7">
-                                    <div class="dataTables_paginate" role="status" aria-live="polite">
-                                        Showing 1 to 10 of 57 entries
-                                    </div>
-                                </div>
-                                <div class="col-sm-7">
-                                    <div class="dataTables_paginate">
-                                        <ul id="bottomTab"></ul>
-                                    </div>
-                                </div>
-                            </section>
 
+                                <ul id="bottomTab"></ul>
+                            </section>
 
                         </div>
                         <!-- /.box-body -->
@@ -94,22 +89,44 @@
                 <!-- /.col -->
             </div>
             <!-- /.row -->
-            <div class="md-modal md-effect-1" id="modal-1">
-                <div class="md-content">
-                    <h3>Modal Dialog</h3>
-                    <div>
-                        <p>This is a modal window. You can do the following things with it:</p>
-                        <ul>
-                            <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
-                            <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
-                            <li><strong>Close:</strong> click on the button below to close the modal.</li>
-                        </ul>
-                        <button class="md-close">Close me!</button>
+
+            <!-- solid sales graph -->
+
+            <div id="item">
+                <div class="box box-solid bg-teal-gradient">
+                    <div class="box-header">
+                        <i class="fa fa-th"></i>
+
+                        <h3 class="box-title">Data Item</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i id="itemWindow" class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer no-border">
+                        <table id="example" class="table table-bordered table-table-striped">
+                            <thead>
+                            <tr>
+                                <th>NUMBER</th>
+                                <th>GAME NAME</th>
+                                <th>GAME</th>
+                                <th>SECO GAME</th>
+                                <th>GAME VALUE</th>
+                            </tr>
+                            </thead>
+                            <tbody id="itemTableBody">
+                            <tr><th colspan ="5"><center>Loading.....</center></th></tr>
+                            </tbody>
+                        </table>
+                        <ul id="itemBottomTab"></ul>
                     </div>
                 </div>
             </div>
+
+            <!-- /.box -->
         </section>
-        <div class="md-overlay"></div>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -140,9 +157,7 @@
     <!-- /.control-sidebar -->
     <!-- Add the sidebar's background. This div must be placed
          immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
 </div>
-http://blog.csdn.net/angelvyvyan/article/details/51783272
 <jsp:include page="/commons/main_data_end.jsp"/>
 
 <!-- page script -->
@@ -178,13 +193,35 @@ http://blog.csdn.net/angelvyvyan/article/details/51783272
                 }
             },onPageClicked:function (e,originalEvent,type,page) {
                 console.log("1    "+type+ "  " +page)
-                buildTable(<%=session.getAttribute("id")%>,page,pagesize);//默认显示
+                buildTable(null,page,pagesize);//默认显示
             }
         };
         $("#bottomTab").bootstrapPaginator(newoptions);
     }
 
 
+
+    var  myDate  = new Date();
+
+    $("#datetimepicker").datepicker({
+        orientation: "bottom auto",
+        keyboardNavigation: false,
+        forceParse: false,
+        toggleActive: true,
+        defaultViewDate: { year: myDate.getFullYear(), month: myDate.getMonth(), day: myDate.getDate() }
+    });
+
+
+    function searchByTime() {
+        var  time = $("#datetimepicker").val();
+
+        if(time == ""){
+        buildTable(null,1,10)
+        }else {
+            buildTable(time,1,10);
+        }
+
+    }
     /**
      * 生成表格
      * @param c
@@ -192,138 +229,180 @@ http://blog.csdn.net/angelvyvyan/article/details/51783272
      * @param b
      */
     function buildTable(c, a, b) {
-        var   url = "/operator/reportLl.mp"
-        console.log('url',url)
-        var   reqParmes = {"adminID":adminID,'pageNumber':a,'pageSize':b}
+        var url = "/operator/reportLl.mp"
+        console.log('url', url)
+        var reqParmes = {"adminID": adminID, 'pageNumber': a, 'pageSize': b,"time":c}
         $(function () {
             $.ajax({
-                type:"post",
-                url:url,
-                data:reqParmes,
-                async:true,
-                dataType:"json",
-                success:function (data) {
+                type: "post",
+                url: url,
+                data: reqParmes,
+                async: true,
+                dataType: "json",
+                success: function (data) {
                     if (data.code == 1) {
 
                         /**
                          * 分页
                          */
-                        displayPage(data.data.pageNo,data.data.pages)
 
-                        var datalist=data.data.dataList;
+
+                        var datalist = data.data.dataList;
                         $("#listSize").val(datalist.length);
+                        $("#itemBottomTab").empty();
                         $("#tableBody").empty();
-                        if (datalist.length>0){
-                            var  id =0;
+                        if (datalist.length > 0) {
+                            displayPage(data.data.pageNo, data.data.pages)
+                            var id = 1;
                             $(datalist).each(function () {
                                 var d = new Date(this.createTime);
-                                var    youWant=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                                var youWant = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
                                 var userId = this.id;
                                 var html =
-                                    '<tr> '+
-                                    '<td>'+(id+1)+'</td>'+
-                                    '<td> <i class="fa fa-user" ></i> <span class="label label-danger">'+this.operatorName+'</span></td>' +
-                                    '<td>'+this.AWARD_TIME+'</td>'+
-                                    '<td>'+this.operatorCreateTime+'</td>'+
-                                    '<td>'+this.terminalID+'</td>'+
-                                    '<td>'+this.ticketID+'</td>'+
-                                    '<td><span class="label label-info">'+this.total+'</span></td>'+
-                                    '<td><span class="label label-info">'+this.gameSize+'</span></td>'+
-                                    '<td><button class="label label-default md-trigge" data-modal="modal-1" onclick="showInfo('+this.id+')">More </button></td>'+
+                                    '<tr> ' +
+                                    '<td>' + (id++) + '</td>' +
+                                    '<td> <i class="fa fa-user" ></i> <span class="label label-danger">' + this.operatorName + '</span></td>' +
+                                    '<td>' + this.AWARD_TIME + '</td>' +
+                                    '<td>' + this.operatorCreateTime + '</td>' +
+                                    '<td>' + this.terminalID + '</td>' +
+                                    '<td>' + this.ticketID + '</td>' +
+                                    '<td><span class="label label-info">' + this.total + '</span></td>' +
+                                    '<td><span class="label label-info">' + this.gameSize + '</span></td>' +
+                                    '<td><button class="label label-default" onclick="showItemInfo(' + this.id + ')">More </button></td>' +
                                     '</tr>';
                                 $("#tableBody").append(html);
                             });
-                        }else {
-                            $("#tableBody").append('<tr><th colspan ="6"><center>查询无数据</center></th></tr>');
+                        } else {
+                            $("#tableBody").append('<tr><th colspan ="9"><center>ＮＯ　ＤＡＴＡ</center></th></tr>');
                         }
 
-                    }else {
+                    } else {
                         alert(data.msg)
                     }
                 },
-                error:function (e) {
-                    alert("查询失败1："+e);
+                error: function (e) {
+                    alert("查询失败1：" + e);
                 }
             });
         });
     }
+        /**
+         * Click to view details
+         * @param id
+         */
+        $(function () {	//生成底部分页栏
+            buildTable("", 1, pagesize);//默认空白查全部
+            //创建结算规则
+            $("#queryButton").bind("click", function () {
+                buildTable(null, 1, pagesize);
+            });
+        });
 
 
     /**
      * Click to view details
-     * @param id
+     * @param rid
      */
-    $(function () {	//生成底部分页栏
-        buildTable("",1,pagesize);//默认空白查全部
-        //创建结算规则
-        $("#queryButton").bind("click",function(){
-            buildTable(adminID,1,pagesize);
+    function  showItemInfo(rid) {
+        function displayItemPage(curtpage,tpage) {
+            //分页
+            var newoption = {
+                //当前页数
+                currentPage: curtpage,
+                //总页数
+                totalPages:tpage,
+                size: "normal",
+                alignment: "center",
+                bootstrapMajorVersion:3,
+                itemTexts: function (type, page, current) {
+                    switch (type) {
+                        case "first":
+                            return "<<";
+                        case "prev":
+                            return "<";
+                        case "next":
+                            return ">";
+                        case "last":
+                            return ">>";
+                        case "page":
+                            return page;
+                    }
+                },onPageClicked:function (e,originalEvent,type,page) {
+                    console.log("1    "+type+ "  " +page)
+                    buildItemTable(<%=session.getAttribute("id")%>,page,pagesize);//默认显示
+                }
+            };
+            $("#itemBottomTab").bootstrapPaginator(newoption);
+        }
+
+
+        /**
+         * 生成表格
+         * @param c
+         * @param a
+         * @param b
+         */
+        function buildItemTable(c, a, b) {
+            var url = "/operator/reportLlItem.mp"
+            console.log('url', url)
+            var reqParme= {"adminID": adminID, 'pageNumber': a, 'pageSize': b,"rID":rid}
+            $(function () {
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    data: reqParme,
+                    async: true,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.code == 1) {
+
+                            /**
+                             * 分页
+                             */
+                            displayItemPage(data.data.pageNo, data.data.pages)
+
+                            var datalist = data.data.dataList;
+                            $("#listSize").val(datalist.length);
+                            $("#itemTableBody").empty();
+                            if (datalist.length > 0) {
+                                var id = 0;
+                                $(datalist).each(function () {
+                                    var d = new Date(this.createTime);
+                                    var html =
+                                        '<tr> ' +
+                                        '<td>' + (id + 1) + '</td>' +
+                                        '<td>' + this.gameName + '</td>' +
+                                        '<td>' + this.itemGame + '</td>' +
+                                        '<td>' + this.secoValue + '</td>' +
+                                        '<td>' + this.itemGameValue + '</td>' +
+                                        '</tr>';
+                                    $("#itemTableBody").append(html);
+                                });
+                            } else {
+                                $("#itemTableBody").append('<tr><th colspan ="6"><center>查询无数据</center></th></tr>');
+                            }
+
+                        } else {
+                            alert(data.msg)
+                        }
+                    },
+                    error: function (e) {
+                        alert("查询失败1：" + e);
+                    }
+                });
+            });
+        }
+        /**
+         * Click to view details
+         * @param id
+         */
+        $(function () {	//生成底部分页栏
+            buildItemTable("", 1, pagesize);//默认空白查全部
         });
-    });
-    function toggleClass( elem, c ) {
-        var fn = hasClass( elem, c ) ? removeClass : addClass;
-        fn( elem, c );
-    }
 
 
-    var classie = {
-        // full names
-        hasClass: hasClass,
-        addClass: addClass,
-        removeClass: removeClass,
-        toggleClass: toggleClass,
-        // short names
-        has: hasClass,
-        add: addClass,
-        remove: removeClass,
-        toggle: toggleClass
-    };
-
-
-
-    function init() {
-
-        var overlay = document.querySelector( '.md-overlay' );
-
-        [].slice.call( document.querySelectorAll( '.md-trigger' ) ).forEach( function( el, i ) {
-
-            var modal = document.querySelector( '#' + el.getAttribute( 'data-modal' ) ),
-                close = modal.querySelector( '.md-close' );
-
-            function removeModal( hasPerspective ) {
-                classie.remove( modal, 'md-show' );
-
-                if( hasPerspective ) {
-                    classie.remove( document.documentElement, 'md-perspective' );
-                }
-            }
-
-            function removeModalHandler() {
-                removeModal( classie.has( el, 'md-setperspective' ) );
-            }
-
-            el.addEventListener( 'click', function( ev ) {
-                classie.add( modal, 'md-show' );
-                overlay.removeEventListener( 'click', removeModalHandler );
-                overlay.addEventListener( 'click', removeModalHandler );
-
-                if( classie.has( el, 'md-setperspective' ) ) {
-                    setTimeout( function() {
-                        classie.add( document.documentElement, 'md-perspective' );
-                    }, 25 );
-                }
-            });
-
-            close.addEventListener( 'click', function( ev ) {
-                ev.stopPropagation();
-                removeModalHandler();
-            });
-
-        } );
 
     }
-
-    init();
 
 </script>
 </body>

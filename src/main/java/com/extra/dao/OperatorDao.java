@@ -29,5 +29,11 @@ public interface OperatorDao {
 
     ArrayList<ItemGames> selectItemGameList(@Param("id") Long id, @Param("type") String type);
 
-    ArrayList<ReportHistory> selectReportItemList(Long adminID);
+    ArrayList<ReportHistory> selectReportItemList(@Param("adminID") Long adminID);
+
+    ArrayList<ItemGames> selectReportLiItemList(@Param("adminID") Long adminID,@Param("RID") Long rID);
+
+    String selectGameName(String key);
+
+    ArrayList<ReportHistory> selectReportItemListFromTime(@Param("adminID") Long adminID, @Param("time") String time);
 }

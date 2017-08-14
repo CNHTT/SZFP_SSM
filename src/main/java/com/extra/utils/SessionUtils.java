@@ -8,4 +8,5 @@ package com.extra.utils;
 public class SessionUtils {
     public static final String SESSION_ADMIN_USER = "adminUser";
     public static final String OPTION_ID = "OPTION_ID";
+    public static final String GAME_NAME = "GAME_NAME";
 }

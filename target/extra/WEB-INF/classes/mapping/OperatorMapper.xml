@@ -116,7 +116,22 @@
         (SELECT  count(*) FROM item_game_class WHERE R.ID =item_game_class.REPORT_HISTORY_ID) AS gameSize
         FROM  report_history R
         LEFT OUTER JOIN operator O ON  R.OPERTOR_ID =O.ID
+        WHERE  R.ADMIN_ID =#{adminID} ORDER BY ID DESC
+    </select>
+    <select id="selectReportItemListFromTime" resultType="com.extra.model.ReportHistory">
+        SELECT
+        R.ID as id,
+        R.AWARD_TIME AS AWARD_TIME,
+        R.CREATE_TIME AS operatorCreateTime,
+        R.TerminalID AS terminalID,
+        R.TICKET_ID AS  ticketID,
+        R.TOTAL AS  total,
+        O.OPERTOR_NAME as operatorName,
+        (SELECT  count(*) FROM item_game_class WHERE R.ID =item_game_class.REPORT_HISTORY_ID) AS gameSize
+        FROM  report_history R
+        LEFT OUTER JOIN operator O ON  R.OPERTOR_ID =O.ID
         WHERE  R.ADMIN_ID =#{adminID}
+        AND date_format(R.CREATE_TIME,'%m/%d/%Y')=#{time}
     </select>
 
 
@@ -130,10 +145,35 @@
         I.ITEM_GAME_VAULE AS itemGameValue,
         I.GAME_KEY AS gameKey,
         O.OPERTOR_NAME as operatorName,
+        R.CREATE_TIME AS ceateTime,
+        G.GAME_VAULE  as gameName
+        FROM item_game_class I
+        LEFT OUTER JOIN  operator O ON  I.OPERTOR_ID = O.ID
+        LEFT OUTER JOIN  report_history R ON  I.REPORT_HISTORY_ID = R.ID
+        LEFT OUTER JOIN  game_class G  ON  I.GAME_KEY = G.GAME_KEY
+        WHERE I.ADMIN_ID = #{id} AND  I.GAME_KEY = #{type}
+    </select>
+
+
+    <select id="selectReportLiItemList" resultType="com.extra.model.ItemGames">
+        SELECT
+        I.ID as id,
+        I.OPERTOR_ID as operatorID ,
+        I.REPORT_HISTORY_ID as reportHistoryID ,
+        I.ITEM_GAME as itemGame ,
+        I.SECO_VAULE AS secoValue,
+        I.ITEM_GAME_VAULE AS itemGameValue,
+        I.GAME_KEY AS gameKey,
+        O.OPERTOR_NAME as operatorName,
         G.GAME_VAULE  as gameName
         FROM item_game_class I
         LEFT OUTER JOIN  operator O ON  I.OPERTOR_ID = O.ID
         LEFT OUTER JOIN  game_class G  ON  I.GAME_KEY = G.GAME_KEY
-        WHERE I.ADMIN_ID = #{id} AND  I.GAME_KEY = #{type}
+        WHERE I.ADMIN_ID = #{adminID}
+         AND  I.REPORT_HISTORY_ID = #{RID}
+    </select>
+
+    <select id="selectGameName" resultType="java.lang.String">
+        SELECT  GAME_VAULE FROM  game_class WHERE  GAME_KEY = #{key}
     </select>
 </mapper>

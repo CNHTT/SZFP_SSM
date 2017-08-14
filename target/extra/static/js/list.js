@@ -110,6 +110,7 @@ function buildTable(userName, a, b) {
  * @param id
  */
 function  showInfo(id) {
+    alert(id);
 
 }
 

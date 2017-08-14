@@ -1,6 +1,9 @@
 package com.extra.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by CT on 2017/8/10.
@@ -17,6 +20,18 @@ public class ItemGames implements Serializable {
 
     private String  operatorName;
     private String  gameName;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
+    private Date ceateTime;
+
+
+    public Date getCeateTime() {
+        return ceateTime;
+    }
+
+    public void setCeateTime(Date ceateTime) {
+        this.ceateTime = ceateTime;
+    }
 
     public String getOperatorName() {
         return operatorName;

@@ -160,7 +160,7 @@
                             <c:if test="${OPTION_ID ==3}">
                                 class="active"
                             </c:if>>
-                        <a href="<c:url value="/admin/option"><c:param name="option" value="3"/> </c:url>">
+                        <a  href="<c:url value="/admin/option"><c:param name="option" value="3"/> </c:url>">
                             <i class="fa fa-circle-o"></i> Dezena</a></li>
 
                     <li

@@ -1,5 +1,6 @@
 package com.extra.controller;
 
+import com.extra.service.OperatorService;
 import com.extra.service.UserService;
 import com.extra.utils.SessionUtils;
 import org.apache.log4j.Logger;
@@ -22,6 +23,8 @@ public class MainController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private OperatorService operatorService;
 
 
     @RequestMapping("/main")
@@ -33,6 +36,8 @@ public class MainController {
     @RequestMapping("/option")
     public String showOption(int option, Model model){
         model.addAttribute(SessionUtils.OPTION_ID,option);
+        model.addAttribute(SessionUtils.GAME_NAME,operatorService.getGameName(option));
+
         return  "main_option";
     }
 

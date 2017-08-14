@@ -25,5 +25,9 @@ public interface OperatorService {
 
     ResponsePage<ItemGames> queryByItemGameList(Integer pageNumber, Integer pageSize, Long adminID, String type);
 
-    ResponsePage<ReportHistory> queryByReportLiPage(Integer pageNumber, Integer pageSize, Long adminID);
+    ResponsePage<ReportHistory> queryByReportLiPage(Integer pageNumber, Integer pageSize, Long adminID, String time);
+
+    ResponsePage<ItemGames> queryByReportLiItemPage(Integer pageNumber, Long rID, Integer pageSize, Long adminID);
+
+    String getGameName(int option);
 }

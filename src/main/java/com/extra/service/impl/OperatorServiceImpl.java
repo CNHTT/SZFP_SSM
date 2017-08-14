@@ -7,6 +7,7 @@ import com.extra.model.ReportHistory;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.OperatorService;
 import com.extra.utils.BeanUtils;
+import com.extra.utils.DataUtils;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -99,12 +100,31 @@ public class OperatorServiceImpl implements OperatorService {
      * @param pageNo
      * @param pageSize
      * @param adminID
+     * @param time
      * @return
      */
-    public ResponsePage<ReportHistory> queryByReportLiPage(Integer pageNo, Integer pageSize, Long adminID) {
+    public ResponsePage<ReportHistory> queryByReportLiPage(Integer pageNo, Integer pageSize, Long adminID, String time) {
         pageNo      = pageNo ==null?1:pageNo;
         pageSize    = pageSize ==null?10 :pageSize;
         PageHelper.startPage(pageNo,pageSize);
-        return BeanUtils.toResponseResult(operatorDao.selectReportItemList(adminID));
+        if (DataUtils.isNullString(time)){
+            return BeanUtils.toResponseResult(operatorDao.selectReportItemList(adminID));
+        }else {
+            time = time;
+            return BeanUtils.toResponseResult(operatorDao.selectReportItemListFromTime(adminID,time));
+        }
+
+
+    }
+
+    public ResponsePage<ItemGames> queryByReportLiItemPage(Integer pageNo, Long rID, Integer pageSize, Long adminID) {
+        pageNo      = pageNo ==null?1:pageNo;
+        pageSize    = 5;
+        PageHelper.startPage(pageNo,pageSize);
+        return BeanUtils.toResponseResult(operatorDao.selectReportLiItemList(adminID,rID));
+    }
+
+    public String getGameName(int option) {
+        return operatorDao.selectGameName(String.valueOf(option));
     }
 }
