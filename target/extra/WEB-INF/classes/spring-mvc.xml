@@ -40,6 +40,7 @@
             <mvc:exclude-mapping path="/user/register"/>
             <mvc:exclude-mapping path="/user/*.do"/>
             <mvc:exclude-mapping path="/operator/*.mp"/>
+            <mvc:exclude-mapping path="/order/*"/>
             <bean class="com.extra.interceptor.CommonInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

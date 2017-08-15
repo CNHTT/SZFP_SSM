@@ -1,5 +1,6 @@
 package com.extra.interceptor;
 
+import com.extra.controller.BaseController;
 import com.extra.model.Message;
 import com.extra.utils.GsonUtils;
 import com.extra.utils.WsPool;
@@ -55,7 +56,7 @@ public class WeServer extends WebSocketServer {
         System.out.println(message);
         Message msg = new Message();
         if (message==null)
-        {conn.send("Please send the correct data");}
+        {conn.send(new BaseController().responseFail("Please send the correct data"));}
         else {
             try {
                     msg = new GsonUtils().toBean(message,Message.class);
@@ -74,7 +75,7 @@ public class WeServer extends WebSocketServer {
                         break;
                 }
             }catch (Exception e){
-                conn.send("Please send the correct data");
+                conn.send(new BaseController().responseFail("Please send the correct data"));
             }
         }
     }
