@@ -23,4 +23,5 @@ public class LoginServiceImpl implements LoginService {
     public User getUserInfo(String usernameOrEmail, String pwd) {
         return  userDao.selectUserByLogin(usernameOrEmail,pwd);
     }
+
 }
