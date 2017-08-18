@@ -24,6 +24,15 @@ public class User {
     private String strTime;
     private String uniqueNumber;
 
+    private String UUID;
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
 
     public String getUniqueNumber() {
         return uniqueNumber;

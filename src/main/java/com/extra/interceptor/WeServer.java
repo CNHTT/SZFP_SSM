@@ -17,6 +17,8 @@ import java.net.InetSocketAddress;
  */
 public class WeServer extends WebSocketServer {
 
+
+
     public WeServer(int port){
         super(new InetSocketAddress(port));
     }
@@ -31,7 +33,7 @@ public class WeServer extends WebSocketServer {
      * @param clientHandshake
      */
     public void onOpen(WebSocket webSocket, ClientHandshake clientHandshake) {
-
+        webSocket.send("[END]");
     }
 
     /**
@@ -60,18 +62,23 @@ public class WeServer extends WebSocketServer {
         else {
             try {
                     msg = new GsonUtils().toBean(message,Message.class);
-                switch (msg.getMsgType()) {
+                switch (msg.getType()) {
                     case "1":   //心跳包
-                        conn.send("OK");
+                        conn.send(new BaseController().responseSuccess("OK"));
                         break;
                     case "2":// adminLogo
-                        Long adminID = msg.getAdminID();
+                        String adminID = msg.getType();
                         userJoin(conn, adminID);
-                        conn.send("land successfully");
+                        conn.send(new BaseController().responseSuccess("land successfully"));
                         break;
-                    case "3":
+                    case "3":// Operator_Logo
+                        String operatorUUID = msg.getType();
+                        userJoin(conn, "MMMMM");
+                        conn.send("[END]");
+                        break;
+                    case "5":
                         userLeave(conn);
-                        System.out.print(msg.getAdminID() + "     :   close");
+                        System.out.print(msg.getData() + "     :   close");
                         break;
                 }
             }catch (Exception e){
@@ -97,7 +104,7 @@ public class WeServer extends WebSocketServer {
      * @param conn
      * @param adminID
      */
-    private void userJoin(WebSocket conn,Long adminID){
+    private void userJoin(WebSocket conn,String adminID){
         WsPool.addUser(adminID, conn);
     }
 }

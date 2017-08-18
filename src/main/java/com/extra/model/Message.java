@@ -6,33 +6,24 @@ package com.extra.model;
  * Work to SZFP
  */
 public class Message <T>{
-    private  long  adminID;
-    private  String userName;
-    private  String msgType;
+    private  long  id;
+    private  String type;
     private  T data;
 
-    public long getAdminID() {
-        return adminID;
+    public long getId() {
+        return id;
     }
 
-    public void setAdminID(long adminID) {
-        this.adminID = adminID;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getType() {
+        return type;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getMsgType() {
-        return msgType;
-    }
-
-    public void setMsgType(String msgType) {
-        this.msgType = msgType;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public T getData() {

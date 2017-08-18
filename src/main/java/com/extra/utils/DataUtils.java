@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -20,6 +21,12 @@ import static com.extra.utils.ConstUtils.*;
  * Work to SZFP
  */
 public class DataUtils {
+    public static String getUUID() {
+        String uuid = UUID.randomUUID().toString();
+        //去掉“-”符号
+        return uuid.replaceAll("-", "");
+    }
+
     private char[] getChar(int position) {
         String str = String.valueOf(position);
         if (str.length() == 1) {

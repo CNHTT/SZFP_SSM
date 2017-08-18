@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.extra.dao.OrderDao">
+    <resultMap id="FoodGroupsALL" type="com.extra.model.FoodGroups">
+        <id column="ID" property="id"/>
+        <result column="CLASSNAME" property="className"/>
+        <collection property="items" ofType="com.extra.model.FoodItem">
+            <result property="id" column="IID"/>
+            <result property="foodName" column="FOODNAME"/>
+            <result property="foodPrice" column="FOODPRICE"/>
+            <result property="foodInfo" column="FOODINFO"/>
+        </collection>
+    </resultMap>
+
+    <select id="getAllFoodGroups" resultType="com.extra.model.FoodGroups">
+        SELECT  ID AS id,CLASSNAME AS className FROM food_groups
+        WHERE  ADMIN_ID = #{adminID}
+    </select>
+
+    <select id="getAllFood" resultMap="FoodGroupsALL">
+        SELECT G.ID,G.CLASSNAME,I.ID as IID,I.FOODINFO,I.FOODNAME,I.FOODPRICE
+        FROM  food_groups G
+        LEFT OUTER  JOIN  food_item I ON  G.ID=I.FOODGROUPSID
+        WHERE G.ADMIN_ID = #{adminID}
+    </select>
+
+    <select id="getFoodItemForGroups" resultType="com.extra.model.FoodItem">
+        SELECT  ID AS  id,
+        FOODGROUPSID as foodGroupsID ,
+        FOODNAME AS foodName,
+        FOODPRICE as foodPrice ,
+        FOODINFO AS foodInfo
+        FROM food_item
+        WHERE  FOODGROUPSID =#{groupID}
+    </select>
+
+    <select id="getShopItem" resultType="com.extra.model.FoodItem">
+        SELECT
+          I.ID AS  id,
+          FOODGROUPSID AS  foodGroupsID,
+          FOODNAME AS  foodName,
+          FOODPRICE AS foodPrice,
+          FOODINFO AS foodInfo,
+          CLASSNAME as className
+           FROM  food_item I LEFT  OUTER JOIN  food_groups G ON I.FOODGROUPSID=G.ID
+           WHERE  I.ADMIN_ID=#{adminID}
+
+    </select>
+
+</mapper>

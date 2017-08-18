@@ -7,6 +7,7 @@
         <result column="OPERTOR_NAME" property="operatorName" jdbcType="VARCHAR"/>
         <result column="OPERTOR_EMAIL" property="operatorEmail" jdbcType="VARCHAR"/>
         <result column="OPERTOR_PHONE" property="operatorPhone" jdbcType="VARCHAR"/>
+        <result column="OUUID" property="UUID"/>
         <result column="OPERTOR_PWD" property="operatorPwd" jdbcType="VARCHAR"/>
         <result column="CREATE_TIME" property="operatorCreateTime" jdbcType="TIMESTAMP"/>
         <result column="IS_DELETE" property="isDelete" jdbcType="SMALLINT"/>
@@ -36,8 +37,8 @@
         <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
             SELECT  LAST_INSERT_ID()
         </selectKey>
-        INSERT  INTO  operator(ADMIN_ID,OPERTOR_NAME,OPERTOR_EMAIL,OPERTOR_PWD,OPERTOR_NUMBER)
-        VALUES (#{adminID},#{operatorName},#{operatorEmail},#{operatorPwd},#{operatorNumber})
+        INSERT  INTO  operator(ADMIN_ID,OPERTOR_NAME,OPERTOR_EMAIL,OPERTOR_PWD,OPERTOR_NUMBER,UUID)
+        VALUES (#{adminID},#{operatorName},#{operatorEmail},#{operatorPwd},#{operatorNumber},#{UUID})
     </insert>
 
     <select id="selectCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
@@ -45,8 +46,8 @@
     </select>
 
     <select id="loginOperator"  resultMap="OperatorBaseMap">
-      SELECT  operator.ID,ADMIN_ID,OPERTOR_EMAIL,OPERTOR_NAME,OPERTOR_NUMBER,SITE
-      FROM operator ,user
+      SELECT  operator.ID,ADMIN_ID,OPERTOR_EMAIL,operator.UUID as OUUID,OPERTOR_NAME,OPERTOR_NUMBER,SITE
+      FROM operator LEFT  OUTER JOIN  user  ON  operator.ADMIN_ID=user.ID
       WHERE  ( OPERTOR_NAME = #{operatorName} OR OPERTOR_EMAIL = #{operatorName})
       AND  operator.OPERTOR_PWD = #{operatorPwd} AND operator.IS_DELETE=1
     </select>

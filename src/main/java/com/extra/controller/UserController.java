@@ -5,6 +5,7 @@ import com.extra.model.User;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.OperatorService;
 import com.extra.service.UserService;
+import com.extra.utils.DataUtils;
 import com.extra.utils.MD5Util;
 import com.extra.utils.TimeUtils;
 import org.apache.log4j.Logger;
@@ -105,6 +106,7 @@ public class UserController extends BaseController{
         user.setUserPwd(MD5Util.string2MD5(pwd));
         user.setSite(site);
         user.setUniqueNumber(uniqueNumber);
+        user.setUUID(DataUtils.getUUID());
 
         try {
             if (userService.insertUsers(user)){
@@ -116,7 +118,7 @@ public class UserController extends BaseController{
                 operator.setOperatorName(user.getUserName());
                 operator.setOperatorPwd(user.getUserPwd());
                 operator.setOperatorNumber(TimeUtils.getOperatorNumber(user.getUniqueNumber(),opNum));
-
+                operator.setUUID(DataUtils.getUUID());
                 if (operatorService.insertOperator(operator)){
                     return  responseSuccess("registered successfully");
                 }else {

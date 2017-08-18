@@ -22,7 +22,7 @@
         <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
             SELECT  LAST_INSERT_ID()
         </selectKey>
-        INSERT INTO user ( USER_NAME, USER_PWD, USER_EMAIL,SITE,UNIQUE_NUMBER) VALUES (#{userName}, #{userPwd}, #{userEmail},#{site},#{uniqueNumber});
+        INSERT INTO user ( USER_NAME, USER_PWD, USER_EMAIL,SITE,UNIQUE_NUMBER,UUID) VALUES (#{userName}, #{userPwd}, #{userEmail},#{site},#{uniqueNumber},#{UUID});
     </insert>
 
     
@@ -44,7 +44,7 @@
     </select>
     
     <select id="selectUserByLogin" resultMap="UserBaseMap">
-        SELECT  ID,USER_NAME ,USER_EMAIL,CREATE_TIME FROM  user
+        SELECT  ID,USER_NAME ,USER_EMAIL,CREATE_TIME ,UUID FROM  user
         WHERE (USER_NAME = #{nameOrEmail} OR USER_EMAIL = #{nameOrEmail})
         AND  USER_PWD = #{password} AND IS_DELETE=1
     </select>
@@ -52,5 +52,6 @@
     <select id="selectAllUser" resultMap="UserBaseMap">
         SELECT  ID,USER_NAME,USER_EMAIL,IS_DELETE , CREATE_TIME FROM  user
     </select>
+
 
 </mapper>

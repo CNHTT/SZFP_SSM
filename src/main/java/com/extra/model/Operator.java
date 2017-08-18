@@ -20,6 +20,15 @@ public class Operator {
     private Date operatorCreateTime;
     private String  isDelete;
     private String  operatorNumber;
+    private String UUID;
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
 
     private OtherInformation  otherInfo;
 

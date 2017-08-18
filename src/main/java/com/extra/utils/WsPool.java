@@ -10,7 +10,7 @@ import java.util.*;
  * Work to SZFP
  */
 public class WsPool {
-    private static final Map<WebSocket, Long> wsUserMap = new HashMap<WebSocket, Long>();
+    private static final Map<WebSocket, String> wsUserMap = new HashMap<WebSocket, String>();
 
     /**
      * 通过websocket连接获取其对应的用户
@@ -18,7 +18,7 @@ public class WsPool {
      * @param conn
      * @return
      */
-    public static Long getUserByWs(WebSocket conn) {
+    public static String getUserByWs(WebSocket conn) {
         return wsUserMap.get(conn);
     }
 
@@ -28,11 +28,11 @@ public class WsPool {
      *
      * @param adminID
      */
-    public static WebSocket getWsByUser(Long adminID) {
+    public static WebSocket getWsByUser(String adminID) {
         Set<WebSocket> keySet = wsUserMap.keySet();
         synchronized (keySet) {
             for (WebSocket conn : keySet) {
-                Long cuser = wsUserMap.get(conn);
+                String cuser = wsUserMap.get(conn);
                 if (cuser==adminID) {
                     return conn;
                 }
@@ -46,7 +46,7 @@ public class WsPool {
      * @param adminID
      * @param conn
      */
-    public static void addUser(Long adminID, WebSocket conn) {
+    public static void addUser(String adminID, WebSocket conn) {
         wsUserMap.put(conn, adminID); // 添加连接
     }
 
@@ -55,10 +55,10 @@ public class WsPool {
      * 获取所有连接池中的用户，因为set是不允许重复的，所以可以得到无重复的user数组
      * @return
      */
-    public static Collection<Long> getOnlineUser() {
-        List<Long> setUsers = new ArrayList<Long>();
-        Collection<Long> setUser = wsUserMap.values();
-        for (Long u : setUser) {
+    public static Collection<String> getOnlineUser() {
+        List<String> setUsers = new ArrayList<String>();
+        Collection<String> setUser = wsUserMap.values();
+        for (String u : setUser) {
             setUsers.add(u);
         }
         return setUsers;
@@ -100,7 +100,7 @@ public class WsPool {
         Set<WebSocket> keySet = wsUserMap.keySet();
         synchronized (keySet) {
             for (WebSocket conn : keySet) {
-                Long user = wsUserMap.get(conn);
+                String user = wsUserMap.get(conn);
                 if (user != null) {
                     conn.send(message);
                 }

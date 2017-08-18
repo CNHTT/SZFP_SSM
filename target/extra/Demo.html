@@ -17,9 +17,10 @@
 <script>
     function postOrder() {
 
-        var  url = "http://localhost:8080/order/submit";
+        var  url = "http://39.108.61.105/order/submit";
+//        var  url = "http://192.168.1.118:8080/order/submit";
 
-var reqParmes ={"data" :"{adminID:17,msgType:1}"}
+var reqParmes ={"data" :"{type:1,id:5}"}
 
         $.ajax({
             type:"post",
