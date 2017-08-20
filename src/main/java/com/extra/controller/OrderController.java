@@ -5,12 +5,10 @@ import com.extra.interceptor.WeServer;
 import com.extra.model.*;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.OrderService;
-import com.extra.utils.GsonUtils;
-import com.extra.utils.ServerThread;
-import com.extra.utils.SocketPool;
-import com.extra.utils.WsPool;
+import com.extra.utils.*;
 import org.java_websocket.WebSocket;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -87,57 +85,91 @@ public class OrderController extends BaseController {
 
     OrderInfo orderInfo;
     @RequestMapping("/submit")
-    @ResponseBody
-    public String submitOrder(String data){
-        Message message = new Message();
+    public String submitOrder(String datas,
+                              String customerName,
+                              String customerAddress,
+                              String  customerPhone,
+                              String remark,
+                              String total,
+                              Model  model){
+//        Message message = new Message();
         try {
-            message = new  GsonUtils().toBean(data,Message.class);
-            WebSocket socket ;
 
+//            message = new  GsonUtils().toBean(data,Message.class);
             Socket socket1 = SocketPool.getWsByUser("MMMM");
+            WebSocket webSocket = WsPool.getWsByUser("MMMMM");
+            List<OrderItemInfo> items = (List<OrderItemInfo>) new GsonUtils().toBean(datas, List.class);
 
+            if (socket1!=null||webSocket!=null){
+                orderInfo = new OrderInfo();
+                orderInfo.setOrderType("2");
+                orderInfo.setOrderNo("No"+TimeUtils.generateSequenceNo());
+                orderInfo.setDeliveryChg("0");
+                orderInfo.setCCHandelingFees("0");
+                orderInfo.setTotal(total);
+                orderInfo.setCustomerType("5");
+                orderInfo.setCustomerName(customerName);
+                orderInfo.setCustomerAddress(customerAddress);
+                orderInfo.setPreviousNumberoforders("0");
+                orderInfo.setPaymentStatus("7");
+                orderInfo.setPaymentCardNo("000000000000");
+                orderInfo.setCustomerPhone(customerPhone);
+                orderInfo.setRemark(remark);
+                orderInfo.setDatas(items);
 
-            switch (message.getType()){
-                case "1":   //数据提交
-                    socket = WsPool.getWsByUser("MMMMM");
-                if (socket ==null)
-                    return  responseFail("商家不在线");
-                    orderInfo = new OrderInfo();
-                    orderInfo.setOrderType("2");
-                    orderInfo.setOrderNo("000000000000001");
-                    orderInfo.setDeliveryChg("10RMB");
-                    orderInfo.setCCHandelingFees("12RMB");
-                    orderInfo.setTotal("52RMB");
-                    orderInfo.setCustomerType("5");
-                    orderInfo.setCustomerName("SZFP");
-                    orderInfo.setCustomerAddress("SHEN ZHEN   TO GUANGZHOU ");
-                    orderInfo.setPreviousNumberoforders("0");
-                    orderInfo.setPaymentStatus("7");
-                    orderInfo.setPaymentCardNo("8880000001");
-                    orderInfo.setCustomerPhone("755-8659731");
-                    orderInfo.setCustomerComments("GOOD NICE ");
-                    orderInfo.setEquestedFor("Faster delivery");
-                    List<OrderItemInfo> list = new ArrayList<>();
-                     for (int i = 0; i <4 ; i++) {
-                        OrderItemInfo orderItemInfo=  new OrderItemInfo();
-                        orderItemInfo.setFood("Strawberry" +i);
-                        orderItemInfo.setQuantity("AAA");
-                        orderItemInfo.setAmount("10");
-                        list.add(orderItemInfo);
-                    }
-                    orderInfo.setDatas(list);
+                model.addAttribute("no",orderInfo.getOrderNo());
+                if (socket1!=null)SocketPool.sendMessageToAll(responsePostResult(orderInfo));
+                if (webSocket!=null)WsPool.sendMessageToUser(webSocket,responseResult(orderInfo));
 
-
-
-                WsPool.sendMessageToUser(socket,responseResult(orderInfo));
-                if (socket!=null) SocketPool.sendMessageToAll(responsePostResult(orderInfo));
-                return responseSuccess(responseResult(orderInfo));
-                default:    //admin注册
-                    return responseFail("请输入正确的参数");
+                return "order_success";
+            }else {
+                model.addAttribute("error","Businesses are not online");
+                return  "order_error";
             }
 
+
+//            switch (message.getType()){
+//                case "1":   //数据提交
+//                    socket = WsPool.getWsByUser("MMMMM");
+//                if (socket ==null)
+//                    return  responseFail("商家不在线");
+//                    orderInfo = new OrderInfo();
+//                    orderInfo.setOrderType("2");
+//                    orderInfo.setOrderNo("000000000000001");
+//                    orderInfo.setDeliveryChg("10RMB");
+//                    orderInfo.setCCHandelingFees("12RMB");
+//                    orderInfo.setTotal("52RMB");
+//                    orderInfo.setCustomerType("5");
+//                    orderInfo.setCustomerName("SZFP");
+//                    orderInfo.setCustomerAddress("SHEN ZHEN   TO GUANGZHOU ");
+//                    orderInfo.setPreviousNumberoforders("0");
+//                    orderInfo.setPaymentStatus("7");
+//                    orderInfo.setPaymentCardNo("8880000001");
+//                    orderInfo.setCustomerPhone("755-8659731");
+//                    orderInfo.setCustomerComments("GOOD NICE ");
+//                    orderInfo.setEquestedFor("Faster delivery");
+//                    List<OrderItemInfo> list = new ArrayList<>();
+//                     for (int i = 0; i <4 ; i++) {
+//                        OrderItemInfo orderItemInfo=  new OrderItemInfo();
+//                        orderItemInfo.setFood("Strawberry" +i);
+//                        orderItemInfo.setQuantity("AAA");
+//                        orderItemInfo.setAmount("10");
+//                        list.add(orderItemInfo);
+//                    }
+//                    orderInfo.setDatas(list);
+//
+//
+//
+//                WsPool.sendMessageToUser(socket,responseResult(orderInfo));
+//                if (socket!=null) SocketPool.sendMessageToAll(responsePostResult(orderInfo));
+//                return responseSuccess(responseResult(orderInfo));
+//                default:    //admin注册
+//                    return responseFail("请输入正确的参数");
+//            }
+
         }catch (Exception e){
-            return  responseFail(e.toString());
+            model.addAttribute("error","Please enter the correct data");
+            return  "order_error";
         }
     }
 

@@ -97,8 +97,8 @@ public class SocketPool {
         wsUserMap.put(conn, adminID); // 添加连接
     }
     /**
-     * 根据userName获取WebSocket,这是一个list,此处取第一个
-     * 因为有可能多个websocket对应一个userName（但一般是只有一个，因为在close方法中，我们将失效的websocket连接去除了）
+     * 根据userName获取Socket,这是一个list,此处取第一个
+     * 因为有可能多个socket对应一个userName（但一般是只有一个，因为在close方法中，我们将失效的socket连接去除了）
      *
      * @param adminID
      */
@@ -113,6 +113,21 @@ public class SocketPool {
             }
         }
         return null;
+    }
+
+
+    /**
+     * 移除连接池中的连接
+     * @param conn
+     * @return
+     */
+    public static boolean removeUser(Socket conn) {
+        if (wsUserMap.containsKey(conn)) {
+            wsUserMap.remove(conn); // 移除连接
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

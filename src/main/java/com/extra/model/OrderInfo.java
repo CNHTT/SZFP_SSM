@@ -45,8 +45,9 @@ public class OrderInfo {
         private  String CCHandelingFees;
         private String total;
         private String customerType;
-        private String CustomerName;
-        private String CustomerAddress;
+        private String customerName;
+        private String customerAddress;
+        private String remark;
         private String equestedFor;
         private String previousNumberoforders;
         private String  paymentStatus;
@@ -95,6 +96,13 @@ public class OrderInfo {
         this.deliveryChg = deliveryChg;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public String getCCHandelingFees() {
         return CCHandelingFees;
@@ -121,19 +129,19 @@ public class OrderInfo {
     }
 
     public String getCustomerName() {
-        return CustomerName;
+        return customerName;
     }
 
     public void setCustomerName(String customerName) {
-        CustomerName = customerName;
+        customerName = customerName;
     }
 
     public String getCustomerAddress() {
-        return CustomerAddress;
+        return customerAddress;
     }
 
     public void setCustomerAddress(String customerAddress) {
-        CustomerAddress = customerAddress;
+        customerAddress = customerAddress;
     }
 
     public String getEquestedFor() {
@@ -192,9 +200,10 @@ public class OrderInfo {
                 "[ deliveryChg]" + deliveryChg + "[ deliveryChg]"+"\n"+
                 "[ CCHandelingFees]" + CCHandelingFees + "[ CCHandelingFees]" +"\n"+
                 "[ total]" + total +"[ total]"+"\n"+
+                "[ remark]" + remark +"[ total]"+"\n"+
                  "[ customerType]" + customerType + "[ customerType]" +"\n"+
-                "[ CustomerName]" + CustomerName + "[ CustomerName]"+"\n"+
-                 "[ CustomerAddress]" + CustomerAddress + "[ CustomerAddress]"+"\n"+
+                "[ CustomerName]" + customerName + "[ CustomerName]"+"\n"+
+                 "[ CustomerAddress]" + customerAddress + "[ CustomerAddress]"+"\n"+
                 "[ equestedFor]" + equestedFor + "[ equestedFor]" + "\n"+
                         "[ previousNumberoforders]" + previousNumberoforders + "[ previousNumberoforders]"+"\n"+
                 "[ paymentStatus]" + paymentStatus +"[ paymentStatus]"+ "\n"+

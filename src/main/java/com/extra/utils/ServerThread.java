@@ -76,10 +76,12 @@ public class ServerThread extends Thread {
                     }
                     System.out.println("读取到客户端发送的来数据：" + data);
                     out.write(sssss.getBytes());
-                } else {
+                    } else {
                     is=false;
                     System.out.println("数据读取完毕！");
                     s.close();
+                    //socket断开之后移除本地保存的socket
+                    SocketPool.removeUser(s);
                     //ss.close();
                 }
             }

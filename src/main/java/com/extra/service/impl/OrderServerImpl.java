@@ -63,7 +63,7 @@ public class OrderServerImpl implements OrderService {
     @Override
     public ResponsePage<FoodItem> queryByPage(Integer pageNo, Integer pageSize, Long adminID) {
         pageNo      = pageNo ==null?1:pageNo;
-        pageSize    = pageSize ==null?10 :pageSize;
+        pageSize    = pageSize ==null?5 :pageSize;
         PageHelper.startPage(pageNo,pageSize);
         return BeanUtils.toResponseResult(orderDao.getShopItem(adminID));
     }
