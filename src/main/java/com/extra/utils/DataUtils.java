@@ -6,10 +6,9 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.Collection;
-import java.util.Locale;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -79,6 +78,41 @@ public class DataUtils {
         }
         return buffer.toString();
     }
+
+    public static Map<String, String> toMap(String str){
+        StringBuilder stringBuilder = new StringBuilder(str);
+//        int i8080 = stringBuilder.indexOf("8080");
+        Matcher slashMastcher = Pattern.compile("\\/").matcher(str);
+
+        int mldx =0;
+        while (slashMastcher.find()){
+            mldx++;
+            if (mldx==3){
+                break;
+            }
+        }
+        int i8080 = slashMastcher.start();
+
+
+        int i = stringBuilder.indexOf("?");
+        Map<String ,String> texts = new HashMap<>();
+
+
+        if (stringBuilder.length()<i+2){
+            texts.put("type",stringBuilder.substring(i8080,i));
+        }else {
+            texts.put("type",stringBuilder.substring(i8080,i));
+            String s = stringBuilder.substring(i+1, stringBuilder.length());
+            String[] ss = s.split("&");
+            for (int j = 0; j < ss.length; j++) {
+                String[] text = ss[j].split("\\=");
+                texts.put(text[0],text[1]);
+            }
+        }
+
+        return texts;
+    }
+
 
     public static String toHexString1(byte b) {
         String s = Integer.toHexString(b & 0xFF);

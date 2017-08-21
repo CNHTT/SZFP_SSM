@@ -72,9 +72,9 @@ public class WeServer extends WebSocketServer {
                         conn.send(new BaseController().responseSuccess("land successfully"));
                         break;
                     case "3":// Operator_Logo
-                        String operatorUUID = msg.getType();
-                        userJoin(conn, "MMMMM");
-                        conn.send("[END]");
+                        String operatorUUID = (String) msg.getData();
+                        userJoin(conn, "MMMMMMM");
+                        conn.send("[OK]");
                         break;
                     case "5":
                         userLeave(conn);

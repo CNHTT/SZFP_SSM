@@ -41,6 +41,7 @@
             <mvc:exclude-mapping path="/user/*.do"/>
             <mvc:exclude-mapping path="/operator/*.mp"/>
             <mvc:exclude-mapping path="/order/*"/>
+            <mvc:exclude-mapping path="/printer/*"/>
             <bean class="com.extra.interceptor.CommonInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

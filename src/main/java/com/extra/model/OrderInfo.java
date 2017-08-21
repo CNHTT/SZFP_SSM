@@ -1,5 +1,8 @@
 package com.extra.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,9 +48,12 @@ public class OrderInfo {
         private  String CCHandelingFees;
         private String total;
         private String customerType;
+        private String  rise ="Online Order WebSite";
+        private String sellerAddress="bread  Guangzhou shenzhen 123 South Road";
         private String customerName;
         private String customerAddress;
         private String remark;
+        private String Discount="1";
         private String equestedFor;
         private String previousNumberoforders;
         private String  paymentStatus;
@@ -55,6 +61,43 @@ public class OrderInfo {
         private String  customerPhone;
         private String  customerComments;
 
+
+    public String getDiscount() {
+        return Discount;
+    }
+
+    public void setDiscount(String discount) {
+        Discount = discount;
+    }
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
+        private Date time ;
+
+
+    public Date getTime() {
+        return time;
+    }
+
+
+    public String getRise() {
+        return rise;
+    }
+
+    public void setRise(String rise) {
+        this.rise = rise;
+    }
+
+    public String getSellerAddress() {
+        return sellerAddress;
+    }
+
+    public void setSellerAddress(String sellerAddress) {
+        this.sellerAddress = sellerAddress;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
 
     public String getId() {
         return id;
@@ -132,8 +175,9 @@ public class OrderInfo {
         return customerName;
     }
 
+
     public void setCustomerName(String customerName) {
-        customerName = customerName;
+        this.customerName = customerName;
     }
 
     public String getCustomerAddress() {
@@ -141,7 +185,7 @@ public class OrderInfo {
     }
 
     public void setCustomerAddress(String customerAddress) {
-        customerAddress = customerAddress;
+        this.customerAddress = customerAddress;
     }
 
     public String getEquestedFor() {
@@ -193,9 +237,13 @@ public class OrderInfo {
 
     @Override
     public String toString() {
+//        StringBuffer stringBuffer = new StringBuffer();
+//        stringBuffer.append("order number:" +orderNo+"\n")
+
+
         return
-                "[orderType]" + orderType +  "[orderType]"  +"\n"+
-                "[ orderNo]" + orderNo + "[ orderNo]" +"\n"+
+                "orderType:" + orderType  +"\n"+
+                "orderNo:" + orderNo +"\n"+
                 "[ datas]" + datas + "[ datas]" +"\n"+
                 "[ deliveryChg]" + deliveryChg + "[ deliveryChg]"+"\n"+
                 "[ CCHandelingFees]" + CCHandelingFees + "[ CCHandelingFees]" +"\n"+
@@ -204,11 +252,10 @@ public class OrderInfo {
                  "[ customerType]" + customerType + "[ customerType]" +"\n"+
                 "[ CustomerName]" + customerName + "[ CustomerName]"+"\n"+
                  "[ CustomerAddress]" + customerAddress + "[ CustomerAddress]"+"\n"+
-                "[ equestedFor]" + equestedFor + "[ equestedFor]" + "\n"+
+                "[ equestedFor]" + remark + "[ equestedFor]" + "\n"+
                         "[ previousNumberoforders]" + previousNumberoforders + "[ previousNumberoforders]"+"\n"+
                 "[ paymentStatus]" + paymentStatus +"[ paymentStatus]"+ "\n"+
                         "[ paymentCardNo]" + paymentCardNo +"\n"+
-                "[ customerPhone]" + customerPhone + "[ customerPhone]" +"\n"+
-                "[ customerComments]" + customerComments + "[ customerComments]"+"\n";
+                "[ customerPhone]" + customerPhone + "[ customerPhone]" +"\n";
     }
 }

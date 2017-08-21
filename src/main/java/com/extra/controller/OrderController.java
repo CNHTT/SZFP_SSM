@@ -47,9 +47,7 @@ public class OrderController extends BaseController {
            while(true)     //服务器端一直监听这个端口，等待客户端的连接
            {
                sk = ss.accept();  //当有客户端连接时，产生阻塞
-               SocketPool.addUser("MMMM",sk);
                System.out.println("get a socket object...");
-
                new ServerThread(sk).start();//新建一个socketThread处理这个客户端的socket连接
            }
 
@@ -85,12 +83,12 @@ public class OrderController extends BaseController {
 
     OrderInfo orderInfo;
     @RequestMapping("/submit")
+    @ResponseBody
     public String submitOrder(String datas,
                               String customerName,
                               String customerAddress,
                               String  customerPhone,
                               String remark,
-                              String total,
                               Model  model){
 //        Message message = new Message();
         try {
@@ -106,7 +104,7 @@ public class OrderController extends BaseController {
                 orderInfo.setOrderNo("No"+TimeUtils.generateSequenceNo());
                 orderInfo.setDeliveryChg("0");
                 orderInfo.setCCHandelingFees("0");
-                orderInfo.setTotal(total);
+
                 orderInfo.setCustomerType("5");
                 orderInfo.setCustomerName(customerName);
                 orderInfo.setCustomerAddress(customerAddress);
@@ -117,14 +115,17 @@ public class OrderController extends BaseController {
                 orderInfo.setRemark(remark);
                 orderInfo.setDatas(items);
 
-                model.addAttribute("no",orderInfo.getOrderNo());
+
+                int total =0 ;
+
+
+                orderInfo.setTotal(String.valueOf(total));
+
                 if (socket1!=null)SocketPool.sendMessageToAll(responsePostResult(orderInfo));
                 if (webSocket!=null)WsPool.sendMessageToUser(webSocket,responseResult(orderInfo));
-
-                return "order_success";
+                return responseSuccess(orderInfo.getOrderNo());
             }else {
-                model.addAttribute("error","Businesses are not online");
-                return  "order_error";
+                return  responseFail("Businesses are not online");
             }
 
 
@@ -168,8 +169,7 @@ public class OrderController extends BaseController {
 //            }
 
         }catch (Exception e){
-            model.addAttribute("error","Please enter the correct data");
-            return  "order_error";
+            return  responseFail("Please enter the correct data");
         }
     }
 
@@ -184,6 +184,16 @@ public class OrderController extends BaseController {
 
     }
 
+    @RequestMapping("success")
+    public String success(String no,Model model){
+        model.addAttribute("no",orderInfo.getOrderNo());
+        return "order_success";
+    }
+    @RequestMapping("error")
+    public String errot(String error,Model model){
+        model.addAttribute("error","Please enter the correct data");
+        return  "order_error";
+    }
 
     @RequestMapping("/getOrder")
     @ResponseBody

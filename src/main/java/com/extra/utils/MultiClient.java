@@ -17,35 +17,37 @@ public   class MultiClient {
 
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        try {
-            ServerSocket ss = new ServerSocket(PORT);
-            Socket s = ss.accept();
-            System.out.println("这是服务端，监听本机"+PORT+"端口");
-            byte[] recData = null;
-            InputStream in = s.getInputStream();
-            OutputStream out = s.getOutputStream();
-            while(true) {
-                recData = new byte[BUFFER_SIZE];
-                int r = in.read(recData);
-                //int r = in.read(recData);
-                if(r>-1) {
-                    String data = new String(recData);
-                    if(data.trim().equals("over")) {
-                        s.close();
-                    }
-                    System.out.println("读取到客户端发送的来数据："+data);
-                    out.write("这是服务端发给客户端的数据：".getBytes());
-                    out.write(recData);
-                }else {
-                    System.out.println("数据读取完毕！");
-                    s.close();
-                    //ss.close();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println(DataUtils.toMap("http://192.168.1.118:8080/printer/test?").toString());
+
+//        // TODO Auto-generated method stub
+//        try {
+//            ServerSocket ss = new ServerSocket(PORT);
+//            Socket s = ss.accept();
+//            System.out.println("这是服务端，监听本机"+PORT+"端口");
+//            byte[] recData = null;
+//            InputStream in = s.getInputStream();
+//            OutputStream out = s.getOutputStream();
+//            while(true) {
+//                recData = new byte[BUFFER_SIZE];
+//                int r = in.read(recData);
+//                //int r = in.read(recData);
+//                if(r>-1) {
+//                    String data = new String(recData);
+//                    if(data.trim().equals("over")) {
+//                        s.close();
+//                    }
+//                    System.out.println("读取到客户端发送的来数据："+data);
+//                    out.write("这是服务端发给客户端的数据：".getBytes());
+//                    out.write(recData);
+//                }else {
+//
+//                    s.close();
+//                    //ss.close();
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
     public void  startAction(){
             ServerSocket serverSocket=null;

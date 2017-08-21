@@ -151,7 +151,6 @@
              var customerAddress =$("#customerAddress").val();
              var customerPhone =$("#customerPhone").val();
              var remark =$("#remark").val();
-             var total=$("#total").val();
 
 
              if(customerName==""||customerAddress=="" ||customerPhone==""||remark==""){
@@ -164,19 +163,25 @@
              }else {
                  var reqParmes ={"datas":JSON.stringify(arr),"customerName":customerName,
                      "customerAddress":customerAddress,"customerPhone"
-                         :customerPhone,"remark":remark ,"total":total}
+                         :customerPhone,"remark":remark}
 //                    window.location.href='/order/submit?datas='+JSON.stringify(arr)+
 //                        '&customerName='+customerName+
 //                        '&customerAddress='+customerAddress+
 //                        '&customerPhone='+customerPhone+
-//                        '&total='+total+
 //                        '&remark='+remark;
                      $.ajax({
                          type:"get",
                          url:"/order/submit",
                          data:reqParmes,
                          dataType:'json',
-                         async:true
+                         async:true,
+                         success:function (data) {
+                             if (data.code ==1){
+                                 window.location.href='/order/success?no='+data.msg;
+                             }else {
+                                 window.location.href='/order/error?error='+data.msg;
+                             }
+                         }
                      })
              }
          }
