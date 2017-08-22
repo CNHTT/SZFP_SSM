@@ -33,7 +33,7 @@ public class WsPool {
         synchronized (keySet) {
             for (WebSocket conn : keySet) {
                 String cuser = wsUserMap.get(conn);
-                if (cuser==adminID) {
+                if (cuser.equals(adminID)) {
                     return conn;
                 }
             }

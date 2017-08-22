@@ -82,6 +82,9 @@ public class ServerThread extends Thread {
                     }
                     System.out.println("读取到POS发送的来数据：" + data);
 
+                    WebSocket webSocket = WsPool.getWsByUser("console");
+                    if (webSocket!=null) WsPool.sendMessageToUser(webSocket,data.trim());
+
                     if (data.length()>6){
 
                         try {
@@ -89,60 +92,61 @@ public class ServerThread extends Thread {
                             switch (map.get("type")){
                                 case "/printer/printer":
                                     if (map.get("ak").equals("Accepted"))
-//                                    {
-//                                        Message message = new Message();
-//                                        message.setType("6");
-//                                        message.setData(map.get("m"));
-//                                        WebSocket socket = WsPool.getWsByUser(map.get("o"));
-//                                        WsPool.sendMessageToUser(socket, new GsonUtils().toJson(message));
-//                                    }
-//
-//                                    if (map.get("ak").equals("Rejected"))
-//                                    {
-//                                        Message message = new Message();
-//                                        message.setType("4");
-//                                        message.setData(map.get("m"));
-//                                        WebSocket socket = WsPool.getWsByUser(map.get("o"));
-//                                        WsPool.sendMessageToUser(socket, new GsonUtils().toJson(message));
-//                                    }
+                                    {
+                                        Message message = new Message();
+                                        message.setType("6");
+                                        message.setData(map.get("m"));
+                                        WebSocket socket = WsPool.getWsByUser(map.get("o"));
+                                        WsPool.sendMessageToUser(socket, new GsonUtils().toJson(message));
+                                    }
+
+                                    if (map.get("ak").equals("Rejected"))
+                                    {
+                                        Message message = new Message();
+                                        message.setType("4");
+                                        message.setData(map.get("m"));
+                                        WebSocket socket = WsPool.getWsByUser(map.get("o"));
+                                        WsPool.sendMessageToUser(socket, new GsonUtils().toJson(message));
+                                    }
                                     out.write("DONE".getBytes());
                                     break;
                                 case  "/printer/verify":
                                     String sn = map.get("sn");
                                     SocketPool.addUser(sn,s);
-                                    out.write("[NOORDER /]".getBytes());
+//                                    out.write("[NOORDER /]".getBytes());
                                     break;
                                 case  "/printer/getOrder":
-                                    out.write("[NOORDER /]".getBytes());
+//                                    out.write("[NOORDER /]".getByt/es());
                                     break;
                                 case  "/printer/test":
                                     //
-                                    OrderInfo
-                                            orderInfo = new OrderInfo();
-                                    orderInfo.setOrderType("2");
-                                    orderInfo.setOrderNo("000000000000001");
-                                    orderInfo.setDeliveryChg("0");
-                                    orderInfo.setCCHandelingFees("0");
-                                    orderInfo.setTotal("52RMB");
-                                    orderInfo.setCustomerType("5");
-                                    orderInfo.setCustomerName("SZFP");
-                                    orderInfo.setCustomerAddress("SHEN ZHEN   TO GUANGZHOU ");
-                                    orderInfo.setPreviousNumberoforders("0");
-                                    orderInfo.setPaymentStatus("7");
-                                    orderInfo.setPaymentCardNo("8880000001");
-                                    orderInfo.setCustomerPhone("755-8659731");
-                                    orderInfo.setEquestedFor("Faster delivery");
-                                    List<OrderItemInfo> list = new ArrayList<>();
-                                    for (int i = 0; i <4 ; i++) {
-                                        OrderItemInfo orderItemInfo=  new OrderItemInfo();
-                                        orderItemInfo.setFood("Strawberry" +i);
-                                        orderItemInfo.setQuantity("1");
-                                        orderItemInfo.setAmount("10");
-                                        list.add(orderItemInfo);
-                                    }
-                                    orderInfo.setDatas(list);
-                                    orderInfo.setTime(new Date());
-                                    out.write(responsePostResult(orderInfo).getBytes());
+//                                    OrderInfo
+//                                            orderInfo = new OrderInfo();
+//                                    orderInfo.setOrderType("2");
+//                                    orderInfo.setOrderNo("000000000000001");
+//                                    orderInfo.setDeliveryChg("0");
+//                                    orderInfo.setCCHandelingFees("0");
+//                                    orderInfo.setTotal("52RMB");
+//                                    orderInfo.setCustomerType("5");
+//                                    orderInfo.setCustomerName("SZFP");
+//                                    orderInfo.setCustomerAddress("SHEN ZHEN   TO GUANGZHOU ");
+//                                    orderInfo.setPreviousNumberoforders("0");
+//                                    orderInfo.setPaymentStatus("7");
+//                                    orderInfo.setPaymentCardNo("8880000001");
+//                                    orderInfo.setCustomerPhone("755-8659731");
+//                                    orderInfo.setEquestedFor("Faster delivery");
+//                                    List<OrderItemInfo> list = new ArrayList<>();
+//                                    for (int i = 0; i <4 ; i++) {
+//                                        OrderItemInfo orderItemInfo=  new OrderItemInfo();
+//                                        orderItemInfo.setFood("Strawberry" +i);
+//                                        orderItemInfo.setQuantity("1");
+//                                        orderItemInfo.setAmount("10");
+//                                        list.add(orderItemInfo);
+//                                    }
+//                                    orderInfo.setDatas(list);
+//                                    orderInfo.setTime(new Date());
+//                                    out.write(responsePostResult(orderInfo).getBytes());
+//                                    out.write("[NOORDER /]".getBytes());
                                     break;
                             }
                         }catch (Exception e){

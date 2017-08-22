@@ -50,7 +50,7 @@
                 <div class="form-inline">  <ul id="bottomTab"></ul>
                     <button type="button" class="btn btn-primary" data-toggle="collapse"
                             data-target="#shoppingCart">
-                        SHOPPING CART
+                        OPEN SHOPPING CART
                     </button> </div>
 
 
@@ -85,23 +85,23 @@
                         <div >
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"  >CustomerName</label><div class="col-sm-10">
-                                <input id="customerName" type="text" class="form-control" placeholder="文本输入"></div>
+                                <input id="customerName" type="text" class="form-control" placeholder="input"></div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"  >CustomerAddress</label><div class="col-sm-10">
-                                <input id="customerAddress"  type="text" class="form-control" placeholder="文本输入"></div>
+                                <input id="customerAddress"  type="text" class="form-control" placeholder="input"></div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"  >customerPhone</label><div class="col-sm-10">
-                                <input id="customerPhone"  type="text" class="form-control" placeholder="文本输入"></div>
+                                <input id="customerPhone"  type="text" class="form-control" placeholder="input"></div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"  >REMARK</label><div class="col-sm-10">
-                                <input id="remark"  type="text" class="form-control" placeholder="文本输入"></div>
+                                <input id="remark"  type="text" class="form-control" placeholder="input"></div>
                             </div>
 
 
-                            <input type="button" class="btn btn-danger" value="加入购物车" onclick="submitOrder();">
+                            <input type="button" class="btn btn-danger" value="confirm order" onclick="submitOrder();">
 
                         </div>
                     </div>

@@ -48,8 +48,8 @@ public class OrderInfo {
         private  String CCHandelingFees;
         private String total;
         private String customerType;
-        private String  rise ="Online Order WebSite";
-        private String sellerAddress="bread  Guangzhou shenzhen 123 South Road";
+        private String  rise ="pert Technologies";
+        private String sellerAddress="Office No 09, IT Park, Mansehra Road, Mandian, Abbottabad";
         private String customerName;
         private String customerAddress;
         private String remark;

@@ -115,6 +115,9 @@ public class SocketPool {
         return null;
     }
 
+    public static Map<Socket, String> getWsUserMap() {
+        return wsUserMap;
+    }
 
     /**
      * 移除连接池中的连接

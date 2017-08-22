@@ -71,8 +71,8 @@ function buildTable(c, a, b) {
                                 '<td> </i> <span class="label label-danger">' + this.className + '</span></td>' +
                                 '<td>' + this.foodName +' </td>' +
                                 '<td>' + this.foodPrice + '</td>' +
-                                '<td><span class="label label-info btn btn-default" data-toggle="tooltip" data-placement="top" title='+this.foodInfo+'>' + "详情" + '</span></td>' +
-                                '<td align="center"> <input type="button" class="btn btn-danger" value="加入购物车" onclick="add_shoppingcart(this);"/> </td>' +
+                                '<td><span class="label label-info btn btn-default" data-toggle="tooltip" data-placement="top" title='+this.foodInfo+'>' + "info" + '</span></td>' +
+                                '<td align="center"> <input type="button" class="btn btn-danger" value="ADD SHOPPING CART" onclick="add_shoppingcart(this);"/> </td>' +
                                 '</tr>';
                             $("#itemTableBody").append(html);
                         });

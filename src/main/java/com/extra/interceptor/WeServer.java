@@ -68,12 +68,12 @@ public class WeServer extends WebSocketServer {
                         break;
                     case "2":// adminLogo
                         String adminID = msg.getType();
-                        userJoin(conn, adminID);
+                        userJoin(conn, "console");
                         conn.send(new BaseController().responseSuccess("land successfully"));
                         break;
-                    case "3":// Operator_Logo
+                    case "3":
                         String operatorUUID = (String) msg.getData();
-                        userJoin(conn, "MMMMMMM");
+                        userJoin(conn, operatorUUID);
                         conn.send("[OK]");
                         break;
                     case "5":

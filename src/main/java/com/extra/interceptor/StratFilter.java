@@ -14,7 +14,6 @@ public class StratFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         startWebSocketInstantMsg();
     }
-
     private void startWebSocketInstantMsg() {
         WebSocketImpl.DEBUG  =false;
         WeServer s;

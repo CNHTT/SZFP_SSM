@@ -6,6 +6,7 @@ import com.extra.model.*;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.OrderService;
 import com.extra.utils.*;
+import com.google.gson.reflect.TypeToken;
 import org.java_websocket.WebSocket;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,19 +93,17 @@ public class OrderController extends BaseController {
                               Model  model){
 //        Message message = new Message();
         try {
-
 //            message = new  GsonUtils().toBean(data,Message.class);
-            Socket socket1 = SocketPool.getWsByUser("MMMM");
+//            Socket socket1 = SocketPool.getWsByUser("MMMM");
+            int  socketsize =  SocketPool.getWsUserMap().size();
             WebSocket webSocket = WsPool.getWsByUser("MMMMM");
-            List<OrderItemInfo> items = (List<OrderItemInfo>) new GsonUtils().toBean(datas, List.class);
-
-            if (socket1!=null||webSocket!=null){
+            List<OrderItemInfo> items = (List<OrderItemInfo>) new GsonUtils().fromJson(datas, new TypeToken<List<OrderItemInfo>>(){}.getType());
+            if (socketsize>0||webSocket!=null){
                 orderInfo = new OrderInfo();
                 orderInfo.setOrderType("2");
                 orderInfo.setOrderNo("No"+TimeUtils.generateSequenceNo());
                 orderInfo.setDeliveryChg("0");
                 orderInfo.setCCHandelingFees("0");
-
                 orderInfo.setCustomerType("5");
                 orderInfo.setCustomerName(customerName);
                 orderInfo.setCustomerAddress(customerAddress);
@@ -114,21 +113,19 @@ public class OrderController extends BaseController {
                 orderInfo.setCustomerPhone(customerPhone);
                 orderInfo.setRemark(remark);
                 orderInfo.setDatas(items);
-
-
                 int total =0 ;
-
-
+                for (int i = 0; i <items.size() ; i++) {
+                    int aa =Integer.valueOf(items.get(i).getQuantity())*Integer.valueOf(items.get(i).getAmount());
+                    items.get(i).setAmount(String.valueOf(aa));
+                    total=+Integer.valueOf(items.get(i).getAmount());
+                }
                 orderInfo.setTotal(String.valueOf(total));
-
-                if (socket1!=null)SocketPool.sendMessageToAll(responsePostResult(orderInfo));
-                if (webSocket!=null)WsPool.sendMessageToUser(webSocket,responseResult(orderInfo));
+                if (socketsize>0)SocketPool.sendMessageToAll(responsePostResult(orderInfo));
+//                if (webSocket!=null)WsPool.sendMessageToUser(webSocket,responseResult(orderInfo));
                 return responseSuccess(orderInfo.getOrderNo());
             }else {
                 return  responseFail("Businesses are not online");
             }
-
-
 //            switch (message.getType()){
 //                case "1":   //数据提交
 //                    socket = WsPool.getWsByUser("MMMMM");
@@ -169,7 +166,7 @@ public class OrderController extends BaseController {
 //            }
 
         }catch (Exception e){
-            return  responseFail("Please enter the correct data");
+            return  responseFail("Please enter correct data");
         }
     }
 
@@ -177,7 +174,7 @@ public class OrderController extends BaseController {
         String str = "[END] \n" +
                 "[ORDERNO]"+orderInfo.getOrderNo()+"[/ORDERNO]  \n" +
                 "[SURNAME]"+orderInfo.getOrderNo()+"[/SURNAME]   \n" +
-                "[MESSAGE]"+orderInfo.toString()+"[/MESSAGE]  \n" +
+                "[MESSAGE]"+new GsonUtils().toJson(orderInfo)+"[/MESSAGE]  \n" +
                 "[COPY]1[/COPY]";
 
         return  str;
@@ -191,7 +188,7 @@ public class OrderController extends BaseController {
     }
     @RequestMapping("error")
     public String errot(String error,Model model){
-        model.addAttribute("error","Please enter the correct data");
+        model.addAttribute("error",error);
         return  "order_error";
     }
 
