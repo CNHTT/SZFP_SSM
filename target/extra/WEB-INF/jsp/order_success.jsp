@@ -22,7 +22,8 @@
 </head>
 <body>
 
-<input   type="text" disabled="disabled" value="<%=request.getAttribute("no")%>" id="orderNo"><div id="show"></div>
+<input   type="text" disabled="disabled" value="<%=request.getAttribute("no")%>" id="orderNo">
+<p id="show"></p>
 <script>
     var socket;
 
@@ -38,8 +39,10 @@
                 }))
             };
 
+            var data ={};
             socket.onmessage =function (message) {  {
-                $("#show").html(message)
+                $("#show").text(message.data);
+
                 console.log('message', message)
             }
 

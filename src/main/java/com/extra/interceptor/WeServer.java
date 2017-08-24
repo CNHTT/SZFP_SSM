@@ -64,17 +64,20 @@ public class WeServer extends WebSocketServer {
                     msg = new GsonUtils().toBean(message,Message.class);
                 switch (msg.getType()) {
                     case "1":   //心跳包
-                        conn.send(new BaseController().responseSuccess("OK"));
+                        msg.setData("OK");
+                        conn.send(new GsonUtils().toJson(msg));
                         break;
                     case "2":// adminLogo
                         String adminID = msg.getType();
                         userJoin(conn, "console");
-                        conn.send(new BaseController().responseSuccess("land successfully"));
+                        msg.setData("land successfully");
+                        conn.send(new GsonUtils().toJson(msg));
                         break;
                     case "3":
                         String operatorUUID = (String) msg.getData();
                         userJoin(conn, operatorUUID);
-                        conn.send("[OK]");
+                        msg.setData("[OK]");
+                        conn.send(new GsonUtils().toJson(msg));
                         break;
                     case "5":
                         userLeave(conn);
