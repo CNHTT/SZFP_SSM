@@ -22,6 +22,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -112,7 +113,9 @@ public class OrderController extends BaseController {
                 orderInfo.setPaymentCardNo("000000000000");
                 orderInfo.setCustomerPhone(customerPhone);
                 orderInfo.setRemark(remark);
+                orderInfo.setRequestedfor(new Date());
                 orderInfo.setDatas(items);
+                orderInfo.setTime(new Date());
                 int total =0 ;
                 for (int i = 0; i <items.size() ; i++) {
                     int aa =Integer.valueOf(items.get(i).getQuantity())*Integer.valueOf(items.get(i).getAmount());

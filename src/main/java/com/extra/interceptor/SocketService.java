@@ -10,6 +10,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -84,7 +85,7 @@ public class SocketService {
                 orderInfo.setPaymentCardNo("8880000001");
                 orderInfo.setCustomerPhone("755-8659731");
                 orderInfo.setCustomerComments("GOOD NICE ");
-                orderInfo.setEquestedFor("Faster delivery");
+                orderInfo.setRequestedfor(new Date());
                 List<OrderItemInfo> list = new ArrayList<>();
                 for (int i = 0; i <4 ; i++) {
                     OrderItemInfo orderItemInfo=  new OrderItemInfo();

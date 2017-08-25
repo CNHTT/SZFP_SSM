@@ -48,13 +48,14 @@ public class OrderInfo {
         private  String CCHandelingFees;
         private String total;
         private String customerType;
-        private String  rise ="pert Technologies";
+        private String  rise ="Xpert Technologies";
         private String sellerAddress="Office No 09, IT Park, Mansehra Road, Mandian, Abbottabad";
         private String customerName;
         private String customerAddress;
         private String remark;
         private String Discount="1";
-        private String equestedFor;
+private String phone = "86276295";
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")        private Date Requestedfor;
         private String previousNumberoforders;
         private String  paymentStatus;
         private String  paymentCardNo;
@@ -188,12 +189,12 @@ public class OrderInfo {
         this.customerAddress = customerAddress;
     }
 
-    public String getEquestedFor() {
-        return equestedFor;
+    public Date getRequestedfor() {
+        return Requestedfor;
     }
 
-    public void setEquestedFor(String equestedFor) {
-        this.equestedFor = equestedFor;
+    public void setRequestedfor(Date requestedfor) {
+        Requestedfor = requestedfor;
     }
 
     public String getPreviousNumberoforders() {
