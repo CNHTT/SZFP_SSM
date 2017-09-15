@@ -99,22 +99,68 @@ public class OrderController extends BaseController {
             int  socketsize =  SocketPool.getWsUserMap().size();
             WebSocket webSocket = WsPool.getWsByUser("MMMMM");
             List<OrderItemInfo> items = (List<OrderItemInfo>) new GsonUtils().fromJson(datas, new TypeToken<List<OrderItemInfo>>(){}.getType());
+            List<OrderFoodGroups> foodGroupsList = new ArrayList<>();
+
+            OrderFoodGroups orderFoodGroups;
+            if (items!=null){//正常开发zhong不建议这样做
+                for (int i = 0; i <items.size() ; i++) {
+
+                    OrderItemInfo  item = items.get(i);
+                    if (i==0)
+                    {
+                        orderFoodGroups = new OrderFoodGroups();
+                        orderFoodGroups.setClassName(item.getClassName());
+                        orderFoodGroups.setId(orderService.getClassNameId(item.getClassName()));
+                        List<OrderItemInfo>    foodItems1=new ArrayList<>();
+                        for (OrderItemInfo info:items) {
+                            if (info.getClassName().equals(orderFoodGroups.getClassName()))
+                                foodItems1.add(info);
+
+
+                        }
+                        orderFoodGroups.setItem(foodItems1);
+                        foodGroupsList.add(orderFoodGroups);
+                    }
+
+                    boolean in =false;
+                    for (int j = 0; j <foodGroupsList.size() ; j++) {
+                        OrderFoodGroups groups =foodGroupsList.get(j);
+                        if (groups.getClassName().equals(item.getClassName()))in=true;
+                    }
+
+                    if (!in){
+                            orderFoodGroups = new OrderFoodGroups();
+                            orderFoodGroups.setClassName(item.getClassName());
+                            orderFoodGroups.setId(orderService.getClassNameId(item.getClassName()));
+                            List<OrderItemInfo>     foodItems2=new ArrayList<>();
+                            for (OrderItemInfo info:items) {
+                                if (info.getClassName().equals(orderFoodGroups.getClassName())){
+                                    foodItems2.add(info);
+                                }
+
+                            }
+                            orderFoodGroups.setItem(foodItems2);
+                            foodGroupsList.add(orderFoodGroups);
+                    }
+                }
+
+            }
             if (socketsize>0||webSocket!=null){
                 orderInfo = new OrderInfo();
                 orderInfo.setOrderType("2");
                 orderInfo.setOrderNo("No"+TimeUtils.generateSequenceNo());
                 orderInfo.setDeliveryChg("0");
                 orderInfo.setCCHandelingFees("0");
-                orderInfo.setCustomerType("5");
+                orderInfo.setCustomerType("Not Verified");
                 orderInfo.setCustomerName(customerName);
                 orderInfo.setCustomerAddress(customerAddress);
                 orderInfo.setPreviousNumberoforders("0");
-                orderInfo.setPaymentStatus("7");
-                orderInfo.setPaymentCardNo("000000000000");
+                orderInfo.setPaymentStatus("Order paid");
+                orderInfo.setPaymentMethod("Cash On");
                 orderInfo.setCustomerPhone(customerPhone);
                 orderInfo.setRemark(remark);
                 orderInfo.setRequestedfor(new Date());
-                orderInfo.setDatas(items);
+                orderInfo.setDatas(foodGroupsList);
                 orderInfo.setTime(new Date());
                 int total =0 ;
                 for (int i = 0; i <items.size() ; i++) {

@@ -30,6 +30,9 @@ public interface OrderService {
 
     ResponsePage<FoodItem> queryByPage(Integer pageNumber, Integer pageSize, Long adminID);
 
+
+    long getClassNameId(String className);
+
 }
 
 

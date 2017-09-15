@@ -94,7 +94,7 @@ public class SocketService {
                     orderItemInfo.setAmount("10");
                     list.add(orderItemInfo);
                 }
-                orderInfo.setDatas(list);
+//                orderInfo.setDatas(list);
 
                 //向客户端写入数据
                 writeMsgToClient(connection.getOutputStream(),"[END]");

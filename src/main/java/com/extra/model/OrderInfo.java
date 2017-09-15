@@ -43,7 +43,7 @@ public class OrderInfo {
         private String id;
         private String orderType;   //1-3
         private String orderNo;
-        private List<OrderItemInfo>   datas;
+        private List<OrderFoodGroups>   datas;
         private  String deliveryChg;//运费
         private  String CCHandelingFees;
         private String total;
@@ -52,9 +52,10 @@ public class OrderInfo {
         private String sellerAddress="Office No 09, IT Park, Mansehra Road, Mandian, Abbottabad";
         private String customerName;
         private String customerAddress;
+        private String paymentMethod;
         private String remark;
         private String Discount="1";
-private String phone = "86276295";
+        private String phone = "86276295";
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")        private Date Requestedfor;
         private String previousNumberoforders;
         private String  paymentStatus;
@@ -62,6 +63,22 @@ private String phone = "86276295";
         private String  customerPhone;
         private String  customerComments;
 
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
 
     public String getDiscount() {
         return Discount;
@@ -124,11 +141,11 @@ private String phone = "86276295";
         this.orderNo = orderNo;
     }
 
-    public List<OrderItemInfo> getDatas() {
+    public List<OrderFoodGroups> getDatas() {
         return datas;
     }
 
-    public void setDatas(List<OrderItemInfo> datas) {
+    public void setDatas(List<OrderFoodGroups> datas) {
         this.datas = datas;
     }
 

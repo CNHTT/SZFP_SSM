@@ -23,4 +23,5 @@ public interface OrderDao {
     List<FoodItem>      getFoodItemForGroups(Long groupID);
 
     ArrayList<FoodItem> getShopItem(Long adminID);
+    long getShopClassID(String className);
 }

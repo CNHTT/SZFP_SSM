@@ -12,6 +12,15 @@ public class OrderItemInfo {
     private String food;
     private String amount;
 
+    private String className;
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
 
     public Long getId() {
         return id;

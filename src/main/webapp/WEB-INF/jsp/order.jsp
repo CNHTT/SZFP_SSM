@@ -60,6 +60,7 @@
                         <thead>
                         <tr>
                             <th>NUMBER</th>
+                            <th>CLASS NAME</th>
                             <th>NAME</th>
                             <th>UNIT PRICE</th>
                             <th>AMOUNT</th>
@@ -137,13 +138,15 @@
                  var item={};
                  //获取每一行下第4个td的内容(金额)
                  var number = trs[i].getElementsByTagName("td")[0].innerHTML;
-                 var name = trs[i].getElementsByTagName("td")[1].innerHTML;
-                 var price = trs[i].getElementsByTagName("td")[2].innerHTML;
-                 var AMOUNT = trs[i].getElementsByTagName("td")[3].getElementsByTagName("input")[1].value;
+                 var className = trs[i].getElementsByTagName("td")[1].innerHTML;
+                 var name = trs[i].getElementsByTagName("td")[2].innerHTML;
+                 var price = trs[i].getElementsByTagName("td")[3].innerHTML;
+                 var AMOUNT = trs[i].getElementsByTagName("td")[4].getElementsByTagName("input")[1].value;
                  item.id =number;
                  item.Quantity =AMOUNT;
                  item.food = name;
                  item.amount =price;
+                 item.className = className;
                  arr.push(item)
              }
 

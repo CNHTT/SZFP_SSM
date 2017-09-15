@@ -68,7 +68,7 @@ function buildTable(c, a, b) {
                             var html =
                                 '<tr> ' +
                                 '<td>' + this.id+ '</td>' +
-                                '<td> </i> <span class="label label-danger">' + this.className + '</span></td>' +
+                                '<td>' + this.className + '</td>' +
                                 '<td>' + this.foodName +' </td>' +
                                 '<td>' + this.foodPrice + '</td>' +
                                 '<td><span class="label label-info btn btn-default" data-toggle="tooltip" data-placement="top" title='+this.foodInfo+'>' + "info" + '</span></td>' +
@@ -109,6 +109,7 @@ function add_shoppingcart(btn){
     var tds = tr.getElementsByTagName("td");
     //获取第1个td的内容(商品名)
     var number = tds[0].innerHTML;
+    var className = tds[1].innerHTML;
     var name = tds[2].innerHTML;
     //获取第2个td的内容(单价)
     var price = tds[3].innerHTML;
@@ -116,6 +117,7 @@ function add_shoppingcart(btn){
     var newtr = document.createElement("tr");
     newtr.innerHTML =
         '<td>'+number+'</td>'+
+        '<td>'+className+'</td>'+
         '<td>'+name+'</td>'+
         '<td>'+price+'</td>' +
         '<td align="center" >'+
@@ -139,12 +141,12 @@ function increase(btn){
     var amount = text.value;
     text.value = ++amount;
     //获取td2的哥哥td1,从中取出单价
-    var td1 = td2.parentNode.getElementsByTagName("td")[2];
+    var td1 = td2.parentNode.getElementsByTagName("td")[3];
     var price = td1.innerHTML;
     //计算金额
     var mny = price*amount;
     //获取td2的弟弟td3,将金额写回td3
-    var td3 = td2.parentNode.getElementsByTagName("td")[4];
+    var td3 = td2.parentNode.getElementsByTagName("td")[5];
     td3.innerHTML = mny;
     sum();
 }
@@ -163,12 +165,12 @@ function decrease(btn){
         text.value = --amount;
     }
     //获取td2的哥哥td1,从中取回单价
-    var td1 = td2.parentNode.getElementsByTagName("td")[2];
+    var td1 = td2.parentNode.getElementsByTagName("td")[3];
     var price = td1.innerHTML;
     //计算金额
     var mny = price*amount;
     //获取td2的弟弟td3,将金额写入td3
-    var td3 = td2.parentNode.getElementsByTagName("td")[4];
+    var td3 = td2.parentNode.getElementsByTagName("td")[5];
     td3.innerHTML = mny;
     sum();
 }
@@ -191,7 +193,7 @@ function sum() {
     for(var i=0;i<trs.length;i++) {
         //获取每一行下第4个td的内容(金额)
         var mny =
-            trs[i].getElementsByTagName("td")[4].innerHTML;
+            trs[i].getElementsByTagName("td")[5].innerHTML;
         //累加
         s += parseFloat(mny);
     }

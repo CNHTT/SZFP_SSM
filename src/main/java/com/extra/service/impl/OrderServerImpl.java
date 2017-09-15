@@ -67,4 +67,9 @@ public class OrderServerImpl implements OrderService {
         PageHelper.startPage(pageNo,pageSize);
         return BeanUtils.toResponseResult(orderDao.getShopItem(adminID));
     }
+
+    @Override
+    public long getClassNameId(String className) {
+        return orderDao.getShopClassID(className);
+    }
 }

@@ -33,7 +33,9 @@
         FROM food_item
         WHERE  FOODGROUPSID =#{groupID}
     </select>
-
+    <select id="getShopClassID" resultType="java.lang.Long">
+        SELECT  ID FROM  food_groups WHERE CLASSNAME = #{className}
+    </select>
     <select id="getShopItem" resultType="com.extra.model.FoodItem">
         SELECT
           I.ID AS  id,
@@ -46,5 +48,8 @@
            WHERE  I.ADMIN_ID=#{adminID}
 
     </select>
+
+
+
 
 </mapper>
