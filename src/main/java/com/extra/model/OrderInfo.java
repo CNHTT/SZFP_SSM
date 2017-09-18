@@ -64,6 +64,16 @@ public class OrderInfo {
         private String  customerComments;
 
 
+        private List<MeunItems> menu_items;
+
+    public List<MeunItems> getMeun_items() {
+        return menu_items;
+    }
+
+    public void setMeun_items(List<MeunItems> meun_items) {
+        this.menu_items = meun_items;
+    }
+
     public String getPaymentMethod() {
         return paymentMethod;
     }

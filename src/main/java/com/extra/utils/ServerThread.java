@@ -22,44 +22,6 @@ public class ServerThread extends Thread {
         this.s = socket;
     }
 
-    String sssss="[END] \n" +
-            "[ORDERNO]000000000000001[/ORDERNO]  \n" +
-            "[SURNAME]000000000000001[/SURNAME]   \n" +
-            "[MESSAGE] \n" +
-            "[orderType]2[orderType]\n" +
-            "[ orderNo]000000000000001[ orderNo]\n" +
-            "[ datas][[DATA]\n" +
-            "[Quantity]AAA[Quantity]\n" +
-            "[food]Strawberry0[food]\n" +
-            "[amount]10[amount]\n" +
-            "[DATA], [DATA]\n" +
-            "[Quantity]AAA[Quantity]\n" +
-            "[food]Strawberry1[food]\n" +
-            "[amount]10[amount]\n" +
-            "[DATA], [DATA]\n" +
-            "[Quantity]AAA[Quantity]\n" +
-            "[food]Strawberry2[food]\n" +
-            "[amount]10[amount]\n" +
-            "[DATA], [DATA]\n" +
-            "[Quantity]AAA[Quantity]\n" +
-            "[food]Strawberry3[food]\n" +
-            "[amount]10[amount]\n" +
-            "[DATA]][ datas]\n" +
-            "[ deliveryChg]10RMB[ deliveryChg]\n" +
-            "[ CCHandelingFees]12RMB[ CCHandelingFees]\n" +
-            "[ total]52RMB[ total]\n" +
-            "[ customerType]5[ customerType]\n" +
-            "[ CustomerName]SZFP[ CustomerName]\n" +
-            "[ CustomerAddress]SHEN ZHEN   TO GUANGZHOU [ CustomerAddress]\n" +
-            "[ equestedFor]Faster delivery[ equestedFor]\n" +
-            "[ previousNumberoforders]0[ previousNumberoforders]\n" +
-            "[ paymentStatus]7[ paymentStatus]\n" +
-            "[ paymentCardNo]8880000001\n" +
-            "[ customerPhone]755-8659731[ customerPhone]\n" +
-            "[ customerComments]GOOD NICE [ customerComments]\n" +
-            "[/MESSAGE]  \n" +
-            "[COPY]1[/COPY]";
-
     public void run() {
         PrintWriter pw = null;
         Calendar c;
@@ -111,7 +73,7 @@ public class ServerThread extends Thread {
                                     out.write("DONE".getBytes());
                                     break;
                                 case  "/printer/verify":
-                                    String sn = map.get("sn");
+                                    String sn = map.get("sn"); //正常使用时判断
                                     SocketPool.addUser(sn,s);
 //                                    out.write("[NOORDER /]".getBytes());
                                     break;

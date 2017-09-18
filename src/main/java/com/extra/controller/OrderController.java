@@ -160,15 +160,92 @@ public class OrderController extends BaseController {
                 orderInfo.setCustomerPhone(customerPhone);
                 orderInfo.setRemark(remark);
                 orderInfo.setRequestedfor(new Date());
-                orderInfo.setDatas(foodGroupsList);
+
                 orderInfo.setTime(new Date());
                 int total =0 ;
-                for (int i = 0; i <items.size() ; i++) {
-                    int aa =Integer.valueOf(items.get(i).getQuantity())*Integer.valueOf(items.get(i).getAmount());
-                    items.get(i).setAmount(String.valueOf(aa));
-                    total=+Integer.valueOf(items.get(i).getAmount());
-                }
-                orderInfo.setTotal(String.valueOf(total));
+
+//                orderInfo.setDatas(foodGroupsList);
+
+                List<MeunItems> meunItemsList= new ArrayList<>();
+                MeunItems meunItems1 = new MeunItems();
+                 meunItems1.setId(1);
+                 meunItems1.setItemName("Chicken Pizza");
+                 meunItems1.setDescription("Large");
+                 meunItems1.setQuantity("2");
+                 meunItems1.setPrice("30");
+                 List<Choices> choicesList =  new ArrayList<>();
+
+                Choices choices1 = new Choices();
+                choices1.setId(1);
+                choices1.setName("Extra Cheese(2)");
+                choicesList.add(choices1);
+                Choices choices2 = new Choices();
+                choices2.setId(2);
+                choices2.setName("Onions");
+                choicesList.add(choices2);
+                Choices choices3 = new Choices();
+                choices3.setId(3);
+                choices3.setName("Pepsi(2)");
+                choicesList.add(choices3);
+                Choices choices4 = new Choices();
+                choices4.setId(4);
+                choices4.setName("Coke(2)");
+                choicesList.add(choices4);
+                meunItems1.setChoices(choicesList);
+
+                meunItemsList.add(meunItems1);
+                MeunItems meunItems2= new MeunItems();
+                meunItems2.setId(2);
+                meunItems2.setItemName("Chicken Roast");
+                meunItems2.setDescription("Full Chicken");
+                meunItems2.setQuantity("1");
+                meunItems2.setPrice("10");
+                List<Choices> choicesList2 =  new ArrayList<>();
+
+                Choices choices5 = new Choices();
+                choices5.setId(1);
+                choices5.setName("Extra Cheese(1)");
+                choicesList2.add(choices5);
+                Choices choice6 = new Choices();
+                choice6.setId(2);
+                choice6.setName("MayoSauce");
+                choicesList2.add(choice6);
+                Choices choices7 = new Choices();
+                choices7.setId(3);
+                choices7.setName("Pepsi(2)");
+                choicesList2.add(choices7);
+                Choices choices8= new Choices();
+                choices8.setId(4);
+                choices8.setName("Coke(2)");
+                choicesList2.add(choices8);
+                meunItems2.setChoices(choicesList);
+                meunItemsList.add(meunItems2);
+
+                MeunItems meunItems3= new MeunItems();
+                meunItems3.setId(2);
+                meunItems3.setItemName("age");
+                meunItems3.setDescription("chicken");
+                meunItems3.setQuantity("1");
+                meunItems3.setPrice("10");
+                meunItems3.setChoices(new ArrayList<Choices>());
+                meunItemsList.add(meunItems3);
+
+                orderInfo.setMeun_items(meunItemsList);
+
+
+
+
+
+
+
+
+
+//                for (int i = 0; i <items.size() ; i++) {
+//                    int aa =Integer.valueOf(items.get(i).getQuantity())*Integer.valueOf(items.get(i).getAmount());
+//                    items.get(i).setAmount(String.valueOf(aa));
+//                    total=+Integer.valueOf(items.get(i).getAmount());
+//                }
+                orderInfo.setTotal(String.valueOf(50));
                 if (socketsize>0)SocketPool.sendMessageToAll(responsePostResult(orderInfo));
 //                if (webSocket!=null)WsPool.sendMessageToUser(webSocket,responseResult(orderInfo));
                 return responseSuccess(orderInfo.getOrderNo());
