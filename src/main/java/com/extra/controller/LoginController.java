@@ -47,7 +47,8 @@ public class LoginController
 
 
     @RequestMapping(value = "/singin" )
-    private String userLogin(String username, ModelMap model, String password, HttpServletRequest req, HttpSession sessions){
+    private String userLogin(String username, ModelMap model, String password,
+                             HttpServletRequest req, HttpSession sessions){
         User user =null;
         ResponseObj<User> responseObj = new ResponseObj<User>();
 

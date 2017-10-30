@@ -48,8 +48,8 @@ public class OrderInfo {
         private  String CCHandelingFees;
         private String total;
         private String customerType;
-        private String  rise ="Xpert Technologies";
-        private String sellerAddress="Office No 09, IT Park, Mansehra Road, Mandian, Abbottabad";
+        private String  rise ="SZFP TECHNOLOGY LIMITED ";//Xpert Technologies
+        private String sellerAddress="Room 506-507,HuaTong Business Building,XinGao Road,XiLi Town,NanShan District,ShenZhen,China";//Office No 09, IT Park, Mansehra Road, Mandian, Abbottabad
         private String customerName;
         private String customerAddress;
         private String paymentMethod;
